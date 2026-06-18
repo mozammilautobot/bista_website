@@ -20,7 +20,7 @@ export default function Footer() {
         <div>
           <div className="flex items-center gap-2.5">
             <img src="/Bista.png" alt="Bista AI logo" className="h-9 w-9 object-contain" />
-            <span className="font-display text-lg font-bold">
+            <span className="font-display text-[30px] font-bold">
               Bista <span className="text-neon-cyan">AI</span>
             </span>
           </div>
