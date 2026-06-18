@@ -1,4 +1,4 @@
-# Bista AI — Marketing Website
+# Bista AI — Website
 
 A futuristic, conversion-focused single-page site for an AI & Automation company, centered around **Bista Doc AI + AI Agents + Enterprise Automation**.
 
