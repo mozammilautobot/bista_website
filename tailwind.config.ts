@@ -22,11 +22,22 @@ const config: Config = {
           800: "#0a0f2c",
           700: "#111634",
         },
+        // Sprouts.ai-style green ramp. Names kept (cyan/blue/violet) so existing
+        // utility usages across sections re-skin to green without per-file edits.
         neon: {
-          DEFAULT: "#38bdf8",
-          cyan: "#22d3ee",
-          blue: "#4f7cff",
-          violet: "#8b5cf6",
+          DEFAULT: "#22c55e",
+          cyan: "#22c55e", // primary vivid green (accent dots, suffixes, eyebrow)
+          blue: "#16a34a", // deeper green (gradient end, links)
+          violet: "#10b981", // emerald/teal secondary
+        },
+        brand: {
+          DEFAULT: "#16a34a",
+          50: "#f0fdf4",
+          100: "#dcfce7",
+          400: "#4ade80",
+          500: "#22c55e",
+          600: "#16a34a",
+          700: "#15803d",
         },
       },
       fontFamily: {
@@ -34,8 +45,8 @@ const config: Config = {
         display: ["var(--font-display)", "var(--font-sans)", "sans-serif"],
       },
       boxShadow: {
-        glow: "0 0 40px -10px rgba(56,189,248,0.55)",
-        "glow-violet": "0 0 40px -8px rgba(139,92,246,0.55)",
+        glow: "0 0 40px -10px rgba(34,197,94,0.5)",
+        "glow-violet": "0 0 40px -8px rgba(16,185,129,0.5)",
       },
       backgroundImage: {
         "grid-faint":

@@ -57,6 +57,11 @@ export default function NetworkBackground({
     const draw = () => {
       ctx.clearRect(0, 0, width, height);
       const maxDist = 130;
+      // Darker, denser green on light mode; subtler bright green on dark mode.
+      const isDark = document.documentElement.classList.contains("dark");
+      const lineRgb = isDark ? "34,197,94" : "21,128,61";
+      const lineAlphaMul = isDark ? 0.5 : 0.8;
+      const nodeFill = isDark ? "rgba(34,197,94,0.85)" : "rgba(21,128,61,0.95)";
 
       for (const n of nodes) {
         n.x += n.vx;
@@ -79,8 +84,8 @@ export default function NetworkBackground({
           const b = nodes[j];
           const dist = Math.hypot(a.x - b.x, a.y - b.y);
           if (dist < maxDist) {
-            const alpha = (1 - dist / maxDist) * 0.5;
-            ctx.strokeStyle = `rgba(56,189,248,${alpha})`;
+            const alpha = (1 - dist / maxDist) * lineAlphaMul;
+            ctx.strokeStyle = `rgba(${lineRgb},${alpha})`;
             ctx.lineWidth = 1;
             ctx.beginPath();
             ctx.moveTo(a.x, a.y);
@@ -93,7 +98,7 @@ export default function NetworkBackground({
       for (const n of nodes) {
         ctx.beginPath();
         ctx.arc(n.x, n.y, 1.8, 0, Math.PI * 2);
-        ctx.fillStyle = "rgba(125,211,252,0.9)";
+        ctx.fillStyle = nodeFill;
         ctx.fill();
       }
 
