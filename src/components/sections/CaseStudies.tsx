@@ -57,7 +57,18 @@ export default function CaseStudies() {
       <div className="mt-14 grid gap-5 lg:grid-cols-3">
         {CASES.map((c, i) => (
           <Reveal key={c.client} delay={i * 0.1}>
-            <div className="flex h-full flex-col overflow-hidden rounded-3xl glass p-7">
+            <motion.div
+              whileHover={{ y: -8 }}
+              transition={{ type: "spring", stiffness: 300, damping: 22 }}
+              className="group relative flex h-full flex-col overflow-hidden rounded-3xl glass p-7 transition-shadow duration-500 hover:shadow-glow"
+            >
+              <motion.div
+                aria-hidden
+                className="pointer-events-none absolute -right-10 -top-10 h-28 w-28 rounded-full bg-[conic-gradient(from_0deg,rgba(34,197,94,0.45),transparent_60%)] blur-md opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+                animate={{ rotate: 360 }}
+                transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
+              />
+              <div className="relative flex h-full flex-col">
               <div className="flex items-center justify-between">
                 <span className="rounded-full border border-neon-cyan/30 bg-neon-cyan/10 px-3 py-1 text-[11px] font-medium text-neon-cyan">
                   {c.tag}
@@ -102,7 +113,8 @@ export default function CaseStudies() {
                   </div>
                 ))}
               </div>
-            </div>
+              </div>
+            </motion.div>
           </Reveal>
         ))}
       </div>

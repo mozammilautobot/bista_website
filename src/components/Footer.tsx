@@ -19,7 +19,7 @@ export default function Footer() {
       <div className="mx-auto grid w-full max-w-7xl gap-10 px-5 py-16 sm:px-8 lg:grid-cols-[1.4fr_1fr_1fr_1fr]">
         <div>
           <div className="flex items-center gap-2.5">
-            <img src="/Bista.png" alt="Bista AI logo" className="h-9 w-9 object-contain" />
+            <img src="/Bista.png" alt="Bista AI logo" className="h-9 w-9 animate-float object-contain" />
             <span className="font-display text-[30px] font-bold">
               Bista <span className="text-neon-cyan">AI</span>
             </span>
@@ -39,7 +39,10 @@ export default function Footer() {
             <ul className="mt-4 space-y-3">
               {col.links.map((l) => (
                 <li key={l}>
-                  <a href="#" className="text-sm text-fg/50 transition-colors hover:text-neon-cyan">
+                  <a
+                    href="#"
+                    className="relative inline-block text-sm text-fg/50 transition-colors after:absolute after:-bottom-0.5 after:left-0 after:h-px after:w-0 after:bg-neon-cyan after:transition-all after:duration-300 hover:text-neon-cyan hover:after:w-full"
+                  >
                     {l}
                   </a>
                 </li>

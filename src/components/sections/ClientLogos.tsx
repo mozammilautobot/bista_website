@@ -27,19 +27,20 @@ function LogoRow({ ariaHidden = false }: { ariaHidden?: boolean }) {
   return (
     <ul
       aria-hidden={ariaHidden || undefined}
-      // Increased the gap slightly more to accommodate the larger logo sizes
-      className="flex shrink-0 items-center gap-12 md:gap-16 pr-12 md:pr-16"
+      className="flex shrink-0 items-center gap-5 pr-5 md:gap-6 md:pr-6"
     >
       {LOGOS.map((logo) => (
         <li key={logo.file} className="flex items-center justify-center">
-          <img
-            src={`/logos/${logo.file}`}
-            alt={`${logo.name} logo`}
-            loading="lazy"
-            // Increased height to h-16 (mobile) and h-20 (desktop) to make them bigger. 
-            // object-contain ensures the raw aspect ratio is preserved without cutting.
-            className="h-16 md:h-20 w-auto object-contain transition-transform duration-300 hover:-translate-y-0.5"
-          />
+          {/* Uniform white chip neutralizes the varied screenshot backgrounds so
+              every logo sits on one clean, consistent surface. */}
+          <div className="group/chip flex h-16 w-36 items-center justify-center rounded-2xl bg-white px-5 shadow-sm ring-1 ring-black/[0.06] transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-md hover:ring-neon-cyan/30 md:h-20 md:w-44">
+            <img
+              src={`/logos/${logo.file}`}
+              alt={`${logo.name} logo`}
+              loading="lazy"
+              className="max-h-10 w-auto object-contain opacity-95 transition-all duration-300 ease-out group-hover/chip:scale-105 group-hover/chip:opacity-100 md:max-h-12"
+            />
+          </div>
         </li>
       ))}
     </ul>
@@ -49,11 +50,14 @@ function LogoRow({ ariaHidden = false }: { ariaHidden?: boolean }) {
 export default function ClientLogos() {
   return (
     <div className="relative z-10 w-full border-t border-fg/10 bg-fg/[0.02] py-8 backdrop-blur-sm">
-      <p className="mb-5 text-center text-xl font-large uppercase tracking-[0.25em] text-fg/40">
-        Our Happy Clients
+      <p className="mb-5 text-center text-xm font-large uppercase tracking-[0.25em] text-fg/40">
+        Trusted by leading brands across industries
       </p>
       <div className="group mask-fade-x relative overflow-hidden">
-        <div className="flex w-max animate-marquee group-hover:[animation-play-state:paused]">
+        <div
+          className="flex w-max animate-marquee group-hover:[animation-play-state:paused]"
+          style={{ animationDuration: "30s" }}
+        >
           <LogoRow />
           <LogoRow ariaHidden />
         </div>

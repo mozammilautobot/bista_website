@@ -36,7 +36,9 @@ export default function TechStack() {
         {TECH.map((t, i) => (
           <Reveal key={t} delay={i * 0.04}>
             <motion.div
-              whileHover={{ y: -5 }}
+              animate={{ y: [0, -7, 0] }}
+              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: (i % 6) * 0.35 }}
+              whileHover={{ y: -12, scale: 1.05 }}
               className="group relative flex items-center justify-center gap-3 overflow-hidden rounded-2xl glass px-4 py-6 text-center"
             >
               <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-neon-cyan/0 to-neon-blue/0 opacity-0 transition-opacity duration-500 group-hover:from-neon-cyan/10 group-hover:to-neon-blue/[0.06] group-hover:opacity-100" />

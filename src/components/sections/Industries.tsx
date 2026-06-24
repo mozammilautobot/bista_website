@@ -1,18 +1,29 @@
 "use client";
 
 import { motion } from "framer-motion";
+import {
+  Building2,
+  Truck,
+  Ship,
+  Factory,
+  Landmark,
+  ShieldCheck,
+  ShoppingBag,
+  Scale,
+  type LucideIcon,
+} from "lucide-react";
 import SectionHeading from "@/components/ui/SectionHeading";
 import Reveal from "@/components/ui/Reveal";
 
-const INDUSTRIES = [
-  { name: "ERP", icon: "🈺" },
-  { name: "Logistics", icon: "🚚" },
-  { name: "Shipping", icon: "🚢" },
-  { name: "Manufacturing", icon: "🏭" },
-  { name: "Banking", icon: "🏦" },
-  { name: "Insurance", icon: "🛡️" },
-  { name: "Retail", icon: "🛍️" },
-  { name: "Legal", icon: "⚖️" },
+const INDUSTRIES: { name: string; icon: LucideIcon }[] = [
+  { name: "ERP", icon: Building2 },
+  { name: "Logistics", icon: Truck },
+  { name: "Shipping", icon: Ship },
+  { name: "Manufacturing", icon: Factory },
+  { name: "Banking", icon: Landmark },
+  { name: "Insurance", icon: ShieldCheck },
+  { name: "Retail", icon: ShoppingBag },
+  { name: "Legal", icon: Scale },
 ];
 
 export default function Industries() {
@@ -29,21 +40,40 @@ export default function Industries() {
         subtitle="Domain-tuned AI that understands the vocabulary, compliance and edge cases of your sector."
       />
 
-      <div className="mt-14 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
-        {INDUSTRIES.map((ind, i) => (
-          <Reveal key={ind.name} delay={i * 0.05}>
-            <motion.div
-              whileHover={{ y: -6, rotate: -1 }}
-              className="group relative flex items-center gap-4 overflow-hidden rounded-2xl glass p-5 transition-shadow hover:shadow-glow"
-            >
-              <div className="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-fg/5 text-2xl ring-1 ring-fg/10 transition-transform group-hover:scale-110">
-                {ind.icon}
-              </div>
-              <span className="font-display font-semibold">{ind.name}</span>
-              <div className="pointer-events-none absolute -right-6 -top-6 h-20 w-20 rounded-full bg-neon-cyan/10 blur-xl opacity-0 transition-opacity group-hover:opacity-100" />
-            </motion.div>
-          </Reveal>
-        ))}
+      <div className="mt-14 grid items-center gap-8 lg:grid-cols-2">
+        <Reveal>
+          <div className="overflow-hidden rounded-3xl border border-fg/10 bg-white p-3 shadow-sm">
+            <img
+              src="/images/industries-visual.png"
+              alt="Domain-tuned Bista AI connected to banking, manufacturing, shipping, retail, legal and insurance"
+              className="w-full rounded-2xl"
+              loading="lazy"
+            />
+          </div>
+        </Reveal>
+
+        <div className="grid grid-cols-2 gap-4">
+          {INDUSTRIES.map((ind, i) => (
+            <Reveal key={ind.name} delay={i * 0.05}>
+              <motion.div
+                whileHover={{ y: -6, rotate: -1 }}
+                className="group relative flex items-center gap-4 overflow-hidden rounded-2xl glass p-5 transition-shadow hover:shadow-glow"
+              >
+                <div className="relative grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-neon-cyan/10 text-neon-blue ring-1 ring-neon-cyan/20 transition-transform group-hover:scale-110">
+                  <motion.span
+                    aria-hidden
+                    className="pointer-events-none absolute inset-0 rounded-xl ring-2 ring-neon-cyan/30"
+                    animate={{ opacity: [0.15, 0.6, 0.15], scale: [1, 1.18, 1] }}
+                    transition={{ duration: 2.6, repeat: Infinity, ease: "easeInOut", delay: i * 0.15 }}
+                  />
+                  <ind.icon className="relative h-6 w-6" strokeWidth={1.75} />
+                </div>
+                <span className="font-display font-semibold">{ind.name}</span>
+                <div className="pointer-events-none absolute -right-6 -top-6 h-20 w-20 rounded-full bg-neon-cyan/10 blur-xl opacity-0 transition-opacity group-hover:opacity-100" />
+              </motion.div>
+            </Reveal>
+          ))}
+        </div>
       </div>
     </section>
   );

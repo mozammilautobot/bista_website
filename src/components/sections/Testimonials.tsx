@@ -4,10 +4,6 @@ import { motion } from "framer-motion";
 import SectionHeading from "@/components/ui/SectionHeading";
 import Reveal from "@/components/ui/Reveal";
 
-const LOGOS = [
-  ,
-];
-
 const QUOTES = [
   {
     quote:
@@ -50,38 +46,41 @@ export default function Testimonials() {
         }
       />
 
-      <div className="relative mt-12 overflow-hidden mask-fade-x">
-        <div className="flex w-max animate-marquee gap-4">
-          {[...LOGOS, ...LOGOS].map((logo, i) => (
-            <div
-              key={i}
-              className="flex items-center gap-2 whitespace-nowrap rounded-2xl glass px-6 py-3 text-sm font-semibold text-fg/55"
-            >
-              <span className="h-2 w-2 rounded-full bg-neon-cyan/70" />
-              {logo}
-            </div>
-          ))}
-        </div>
-      </div>
-
       <div className="mt-12 grid gap-5 lg:grid-cols-3">
         {QUOTES.map((q, i) => (
           <Reveal key={q.name} delay={i * 0.1}>
             <motion.div
-              whileHover={{ y: -6 }}
-              className="flex h-full flex-col rounded-3xl glass p-7"
+              whileHover={{ y: -8 }}
+              transition={{ type: "spring", stiffness: 300, damping: 22 }}
+              className="group relative flex h-full flex-col overflow-hidden rounded-3xl glass p-7 transition-[box-shadow,border-color] duration-500 hover:border-neon-cyan/30 hover:shadow-glow"
             >
-              <div className="text-3xl leading-none text-neon-cyan/60">&ldquo;</div>
-              <p className="mt-2 flex-1 text-sm leading-relaxed text-fg/75">
+              {/* hover wash */}
+              <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-neon-cyan/0 to-neon-blue/0 opacity-0 transition-opacity duration-500 group-hover:from-neon-cyan/[0.06] group-hover:to-neon-blue/[0.04] group-hover:opacity-100" />
+              {/* animated top accent */}
+              <span className="pointer-events-none absolute left-0 top-0 h-1 w-0 bg-gradient-to-r from-neon-cyan to-neon-blue transition-all duration-500 group-hover:w-full" />
+              {/* oversized decorative quote */}
+              <span className="pointer-events-none absolute -right-1 -top-8 select-none font-display text-[7rem] leading-none text-neon-cyan/[0.06] transition-all duration-500 group-hover:-top-5 group-hover:text-neon-cyan/[0.13]">
+                &rdquo;
+              </span>
+
+              <div className="relative text-3xl leading-none text-neon-cyan/60">&ldquo;</div>
+              <p className="relative mt-2 flex-1 text-sm leading-relaxed text-fg/75">
                 {q.quote}
               </p>
 
-              <div className="mt-5 flex items-center gap-3 rounded-2xl bg-fg/[0.03] p-3">
+              <div className="relative mt-5 flex items-center gap-3 rounded-2xl bg-fg/[0.03] p-3 ring-1 ring-transparent transition-all duration-500 group-hover:bg-neon-cyan/[0.05] group-hover:ring-neon-cyan/20">
                 <div className="text-center">
                   <div className="text-[10px] uppercase text-fg/40">Before</div>
                   <div className="font-display font-bold text-fg/70">{q.before}</div>
                 </div>
-                <div className="text-neon-cyan">→</div>
+                <motion.div
+                  aria-hidden
+                  className="text-neon-cyan"
+                  animate={{ x: [0, 4, 0] }}
+                  transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
+                >
+                  →
+                </motion.div>
                 <div className="text-center">
                   <div className="text-[10px] uppercase text-neon-cyan/80">After</div>
                   <div className="font-display font-bold text-fg">{q.after}</div>
@@ -91,10 +90,11 @@ export default function Testimonials() {
                 </div>
               </div>
 
-              <div className="mt-5 flex items-center gap-3">
-                <div className="grid h-10 w-10 place-items-center rounded-full bg-gradient-to-br from-neon-cyan to-neon-blue font-display text-sm font-bold text-ink-950">
+              <div className="relative mt-5 flex items-center gap-3">
+                <span className="relative grid h-10 w-10 shrink-0 place-items-center rounded-full bg-gradient-to-br from-neon-cyan to-neon-blue font-display text-sm font-bold text-ink-950 transition-transform duration-500 group-hover:scale-110">
                   {q.name.charAt(0)}
-                </div>
+                  <span className="pointer-events-none absolute inset-0 rounded-full bg-neon-cyan/40 opacity-0 blur-md transition-opacity duration-500 group-hover:opacity-100" />
+                </span>
                 <div>
                   <div className="text-sm font-semibold">{q.name}</div>
                   <div className="text-xs text-fg/45">{q.role}</div>

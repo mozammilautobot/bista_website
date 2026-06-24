@@ -5,6 +5,7 @@ import NetworkBackground from "@/components/ui/NetworkBackground";
 import Counter from "@/components/ui/Counter";
 import ClientLogos from "@/components/sections/ClientLogos";
 import RotatingText from "@/components/ui/RotatingText";
+import BeforeAfterSlider from "@/components/ui/BeforeAfterSlider";
 
 const ROTATING_WORDS = [
   "Document Processing",
@@ -14,10 +15,10 @@ const ROTATING_WORDS = [
 ];
 
 const STATS = [
-  { value: 98, suffix: "%", label: "Accuracy" },
-  { value: 85, suffix: "%", label: "Time Saved" },
-  { value: 3, suffix: "X", label: "Productivity" },
-  { value: 100, suffix: "+", label: "Customers" },
+  { value: 98, suffix: "%", label: "Accuracy", bar: 98 },
+  { value: 85, suffix: "%", label: "Time Saved", bar: 85 },
+  { value: 3, suffix: "X", label: "Productivity", bar: 72 },
+  { value: 100, suffix: "+", label: "Customers", bar: 92 },
 ];
 
 export default function Hero() {
@@ -28,8 +29,18 @@ export default function Hero() {
     >
       <div className="absolute inset-0 bg-grid-faint bg-[size:46px_46px] [mask-image:radial-gradient(ellipse_at_center,#000_80%,transparent_75%)]" />
       <NetworkBackground className="opacity-[0.35]" />
-      <div className="pointer-events-none absolute -left-40 top-20 h-96 w-96 rounded-full bg-neon-cyan/15 blur-[120px]" />
-      <div className="pointer-events-none absolute -right-40 bottom-10 h-96 w-96 rounded-full bg-neon-violet/15 blur-[120px]" />
+      <motion.div
+        aria-hidden
+        className="pointer-events-none absolute -left-40 top-20 h-96 w-96 rounded-full bg-neon-cyan/15 blur-[120px]"
+        animate={{ x: [0, 60, 0], y: [0, 30, 0], scale: [1, 1.15, 1] }}
+        transition={{ duration: 16, repeat: Infinity, ease: "easeInOut" }}
+      />
+      <motion.div
+        aria-hidden
+        className="pointer-events-none absolute -right-40 bottom-10 h-96 w-96 rounded-full bg-neon-violet/15 blur-[120px]"
+        animate={{ x: [0, -50, 0], y: [0, -40, 0], scale: [1.1, 1, 1.1] }}
+        transition={{ duration: 19, repeat: Infinity, ease: "easeInOut" }}
+      />
 
       <div className="section relative z-10 grid flex-1 items-center gap-4 py-0.5 lg:grid-cols-[1.5fr_1.3fr]">
         <div>
@@ -91,34 +102,43 @@ export default function Hero() {
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.35 + i * 0.08 }}
-                className="glass card-hover rounded-3xl p-4"
+                whileHover={{ y: -6, scale: 1.03 }}
+                className="group relative overflow-hidden rounded-3xl glass p-4 transition-shadow duration-300 hover:shadow-glow"
               >
-                <div className="font-display text-2xl font-bold text-fg sm:text-3xl">
+                {/* hover sheen sweep */}
+                <span className="pointer-events-none absolute inset-y-0 -left-1/2 w-1/2 -skew-x-12 bg-gradient-to-r from-transparent via-white/30 to-transparent opacity-0 transition-all duration-700 ease-out group-hover:left-[140%] group-hover:opacity-100" />
+                {/* corner glow */}
+                <span className="pointer-events-none absolute -right-6 -top-6 h-16 w-16 rounded-full bg-neon-cyan/25 blur-xl opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+
+                <div className="relative origin-left font-display text-2xl font-bold text-fg transition-transform duration-300 group-hover:scale-110 sm:text-3xl">
                   <Counter to={s.value} />
                   <span className="text-neon-cyan">{s.suffix}</span>
                 </div>
-                <div className="mt-1 text-xs text-fg/55">{s.label}</div>
+                <div className="relative mt-1 text-xs text-fg/55">{s.label}</div>
+
+                {/* animated fill meter */}
+                <div className="relative mt-3 h-1 w-full overflow-hidden rounded-full bg-fg/10">
+                  <motion.div
+                    className="h-full rounded-full bg-gradient-to-r from-neon-cyan to-neon-blue"
+                    initial={{ width: 0 }}
+                    animate={{ width: `${s.bar}%` }}
+                    transition={{ duration: 1.4, ease: "easeOut", delay: 0.5 + i * 0.12 }}
+                  >
+                    <span className="block h-full w-full animate-shimmer bg-[linear-gradient(110deg,transparent,rgba(255,255,255,0.6),transparent)] bg-[length:200%_100%]" />
+                  </motion.div>
+                </div>
               </motion.div>
             ))}
           </div>
         </div>
 
         <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
+          initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="relative mx-auto hidden w-full max-w-none lg:block lg:-mt-40 xl:-mr-10"
+          className="relative mx-auto hidden w-full max-w-none lg:block"
         >
-          <div className="relative h-auto w-full overflow-hidden rounded-3xl">
-            <video
-              className="block h-auto w-full"
-              src="/idp_document_processing_centered.mp4"
-              autoPlay
-              loop
-              muted
-              playsInline
-            />
-          </div>
+          <BeforeAfterSlider />
         </motion.div>
       </div>
 

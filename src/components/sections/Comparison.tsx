@@ -89,8 +89,9 @@ export default function Comparison() {
             <div className="px-5 py-5 text-center text-xs font-semibold uppercase tracking-[0.15em] text-fg/55 sm:px-7 sm:text-sm">
               Other Platforms
             </div>
-            <div className="relative px-5 py-5 text-center text-xs font-semibold uppercase tracking-[0.15em] text-ink-950 sm:px-7 sm:text-sm">
+            <div className="relative overflow-hidden px-5 py-5 text-center text-xs font-semibold uppercase tracking-[0.15em] text-ink-950 sm:px-7 sm:text-sm">
               <div className="absolute inset-0 bg-gradient-to-b from-neon-cyan to-neon-blue" />
+              <div className="absolute inset-0 animate-shimmer bg-[linear-gradient(110deg,transparent,rgba(255,255,255,0.45),transparent)] bg-[length:200%_100%]" />
               <span className="relative flex items-center justify-center gap-2">
                 <img
                   src="/Bista.png"
@@ -110,7 +111,7 @@ export default function Comparison() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-40px" }}
               transition={{ duration: 0.45, delay: i * 0.05 }}
-              className="grid grid-cols-[1.1fr_1fr_1.2fr] items-stretch border-t border-fg/10"
+              className="group grid grid-cols-[1.1fr_1fr_1.2fr] items-stretch border-t border-fg/10 transition-colors duration-300 hover:bg-fg/[0.03]"
             >
               <div className="flex items-center px-5 py-4 text-sm font-semibold text-fg sm:px-7">
                 {row.feature}

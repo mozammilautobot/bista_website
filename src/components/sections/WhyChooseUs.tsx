@@ -1,16 +1,25 @@
 "use client";
 
 import { motion } from "framer-motion";
+import {
+  BrainCircuit,
+  ShieldCheck,
+  Zap,
+  Puzzle,
+  Layers,
+  TrendingUp,
+  type LucideIcon,
+} from "lucide-react";
 import SectionHeading from "@/components/ui/SectionHeading";
 import Reveal from "@/components/ui/Reveal";
 
-const REASONS = [
-  { title: "AI Automation Expert", desc: "A team that builds AI products daily — not a generalist agency dabbling in ML.", icon: "🧠" },
-  { title: "Enterprise Security", desc: "SOC2-aligned practices, data isolation, on-prem & VPC deployment options.", icon: "🔒" },
-  { title: "Rapid Deployment", desc: "Production pilots in weeks, not quarters, with reusable accelerators.", icon: "⚡" },
-  { title: "Custom Development", desc: "Solutions shaped to your workflows and systems — never one-size-fits-all.", icon: "🧩" },
-  { title: "Scalable Architecture", desc: "Cloud-native, event-driven systems that scale from pilot to millions of docs.", icon: "📐" },
-  { title: "ROI Focused", desc: "We commit to measurable outcomes and track value from day one.", icon: "💰" },
+const REASONS: { title: string; desc: string; icon: LucideIcon }[] = [
+  { title: "AI Automation Expert", desc: "A team that builds AI products daily — not a generalist agency dabbling in ML.", icon: BrainCircuit },
+  { title: "Enterprise Security", desc: "SOC2-aligned practices, data isolation, on-prem & VPC deployment options.", icon: ShieldCheck },
+  { title: "Rapid Deployment", desc: "Production pilots in weeks, not quarters, with reusable accelerators.", icon: Zap },
+  { title: "Custom Development", desc: "Solutions shaped to your workflows and systems — never one-size-fits-all.", icon: Puzzle },
+  { title: "Scalable Architecture", desc: "Cloud-native, event-driven systems that scale from pilot to millions of docs.", icon: Layers },
+  { title: "ROI Focused", desc: "We commit to measurable outcomes and track value from day one.", icon: TrendingUp },
 ];
 
 export default function WhyChooseUs() {
@@ -27,18 +36,23 @@ export default function WhyChooseUs() {
         }
       />
 
-      <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
         {REASONS.map((r, i) => (
           <Reveal key={r.title} delay={i * 0.07}>
             <motion.div
               whileHover={{ y: -6 }}
               className="group relative h-full overflow-hidden rounded-3xl glass p-7 transition-shadow hover:shadow-glow-violet"
             >
-              <div className="grid h-12 w-12 place-items-center rounded-2xl bg-gradient-to-br from-fg/10 to-fg/[0.02] text-2xl ring-1 ring-fg/10">
-                {r.icon}
+              <r.icon
+                aria-hidden
+                className="pointer-events-none absolute -bottom-7 -right-7 h-40 w-40 text-neon-violet/[0.04] transition-all duration-500 ease-out group-hover:-bottom-3 group-hover:-right-3 group-hover:-rotate-6 group-hover:scale-110 group-hover:text-neon-violet/[0.16]"
+                strokeWidth={1}
+              />
+              <div className="relative grid h-12 w-12 place-items-center rounded-2xl bg-neon-cyan/10 text-neon-blue ring-1 ring-neon-cyan/20">
+                <r.icon className="h-6 w-6" strokeWidth={1.75} />
               </div>
-              <h3 className="mt-5 font-display text-lg font-semibold">{r.title}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-fg/55">{r.desc}</p>
+              <h3 className="relative mt-5 font-display text-lg font-semibold">{r.title}</h3>
+              <p className="relative mt-2 text-sm leading-relaxed text-fg/55">{r.desc}</p>
             </motion.div>
           </Reveal>
         ))}

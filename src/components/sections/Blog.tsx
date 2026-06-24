@@ -1,45 +1,66 @@
 "use client";
 
 import { motion } from "framer-motion";
+import {
+  Bot,
+  Workflow,
+  FileText,
+  Database,
+  ShieldCheck,
+  GitBranch,
+  type LucideIcon,
+} from "lucide-react";
 import SectionHeading from "@/components/ui/SectionHeading";
 import Reveal from "@/components/ui/Reveal";
 
-const POSTS = [
+const POSTS: {
+  category: string;
+  title: string;
+  read: string;
+  gradient: string;
+  icon: LucideIcon;
+}[] = [
   {
     category: "AI Agents",
     title: "Designing multi-agent systems that actually ship value",
     read: "7 min read",
     gradient: "from-neon-cyan/30 to-neon-blue/20",
+    icon: Bot,
   },
   {
     category: "Agentic Automation",
     title: "When to use a single agent vs. an orchestrated crew",
     read: "5 min read",
     gradient: "from-neon-blue/30 to-neon-violet/20",
+    icon: Workflow,
   },
   {
     category: "Document AI",
     title: "Beyond OCR: extracting meaning from messy enterprise docs",
     read: "6 min read",
     gradient: "from-emerald-400/30 to-neon-cyan/20",
+    icon: FileText,
   },
   {
     category: "RAG",
     title: "Retrieval pipelines that don't hallucinate in production",
     read: "8 min read",
     gradient: "from-neon-violet/30 to-fuchsia-400/20",
+    icon: Database,
   },
   {
     category: "Enterprise AI",
     title: "A pragmatic security checklist for deploying LLMs",
     read: "9 min read",
     gradient: "from-amber-400/30 to-neon-cyan/20",
+    icon: ShieldCheck,
   },
   {
     category: "Workflow Automation",
     title: "Mapping a business process before you automate it",
     read: "4 min read",
     gradient: "from-sky-400/30 to-neon-blue/20",
+    icon: GitBranch,
   },
 ];
 
@@ -64,8 +85,13 @@ export default function Blog() {
               whileHover={{ y: -6 }}
               className="group flex h-full flex-col overflow-hidden rounded-3xl glass"
             >
-              <div className={`relative h-36 bg-gradient-to-br ${p.gradient}`}>
+              <div className={`relative h-36 overflow-hidden bg-gradient-to-br ${p.gradient}`}>
                 <div className="absolute inset-0 bg-grid-faint bg-[size:24px_24px] opacity-40" />
+                <p.icon
+                  aria-hidden
+                  strokeWidth={1.25}
+                  className="absolute left-1/2 top-1/2 h-14 w-14 -translate-x-1/2 -translate-y-1/2 animate-float text-fg/25 drop-shadow-sm transition-all duration-500 group-hover:scale-125 group-hover:text-fg/45"
+                />
                 <span className="absolute left-4 top-4 rounded-full bg-ink-950/60 px-3 py-1 text-[11px] font-medium text-white/90 backdrop-blur">
                   {p.category}
                 </span>

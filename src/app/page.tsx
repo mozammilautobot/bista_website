@@ -22,9 +22,9 @@ export default function Home() {
     <main className="relative">
       <Navbar />
       <Hero />
+      <ProductShowcase />
       <AgentShowcase />
       <Solutions />
-      <ProductShowcase />
       <Comparison />
       <HowItWorks />
       <Industries />

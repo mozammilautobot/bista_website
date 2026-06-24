@@ -16,7 +16,7 @@ type Plan = {
 const PLANS: Plan[] = [
   {
     name: "Light",
-    price: "$99",
+    price: "$49",
     period: "/mo",
     features: ["Up to 1,000 pages/mo", "Basic analytics", "Email support"],
     cta: "Get Started",
@@ -24,7 +24,7 @@ const PLANS: Plan[] = [
   },
   {
     name: "Standard",
-    price: "$199",
+    price: "$99",
     period: "/mo",
     features: [
       "10,000 pages/mo",
@@ -39,7 +39,7 @@ const PLANS: Plan[] = [
   },
   {
     name: "Premium",
-    price: "$499",
+    price: "$199",
     period: "/mo",
     features: [
       "Unlimited documents",
@@ -55,6 +55,7 @@ const PLANS: Plan[] = [
     name: "Custom",
     price: "Let's talk",
     features: [
+      "Multi AI Agents",
       "Volume pricing",
       "On-premise option",
       "Custom AI models",
@@ -101,6 +102,7 @@ export default function Pricing() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-60px" }}
             transition={{ duration: 0.5, delay: i * 0.08 }}
+            whileHover={{ y: -10 }}
             className={`relative flex flex-col rounded-3xl p-7 ${
               plan.popular
                 ? "bg-gradient-to-b from-neon-cyan/[0.12] to-neon-blue/[0.06] ring-2 ring-neon-cyan/50 shadow-glow lg:-mt-4 lg:mb-0"
@@ -108,9 +110,21 @@ export default function Pricing() {
             }`}
           >
             {plan.popular && (
-              <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-gradient-to-r from-neon-cyan to-neon-blue px-3 py-1 text-[11px] font-semibold uppercase tracking-wider text-ink-950">
-                Most Popular
-              </span>
+              <>
+                <motion.span
+                  aria-hidden
+                  className="pointer-events-none absolute inset-0 rounded-3xl ring-2 ring-neon-cyan/50"
+                  animate={{ opacity: [0.35, 0.9, 0.35], boxShadow: [
+                    "0 0 0px rgba(34,197,94,0)",
+                    "0 0 36px -6px rgba(34,197,94,0.55)",
+                    "0 0 0px rgba(34,197,94,0)",
+                  ] }}
+                  transition={{ duration: 2.6, repeat: Infinity, ease: "easeInOut" }}
+                />
+                <span className="absolute -top-3 left-1/2 z-10 -translate-x-1/2 rounded-full bg-gradient-to-r from-neon-cyan to-neon-blue px-3 py-1 text-[11px] font-semibold uppercase tracking-wider text-ink-950">
+                  Most Purchased
+                </span>
+              </>
             )}
 
             <h3 className="font-display text-sm font-semibold uppercase tracking-wider text-fg/70">

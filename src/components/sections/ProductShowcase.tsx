@@ -2,14 +2,24 @@
 
 import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import {
+  Upload,
+  Bot,
+  BarChart3,
+  Database,
+  Receipt,
+  Check,
+  type LucideIcon,
+} from "lucide-react";
 import SectionHeading from "@/components/ui/SectionHeading";
 import Reveal from "@/components/ui/Reveal";
+import AnimatedIcon from "@/components/ui/AnimatedIcon";
 
-const PIPELINE = [
-  { icon: "📄", label: "Upload Document" },
-  { icon: "🤖", label: "AI Analysis" },
-  { icon: "📊", label: "Structured Data" },
-  { icon: "💾", label: "ERP / CRM Integration" },
+const PIPELINE: { icon: LucideIcon; label: string }[] = [
+  { icon: Upload, label: "Upload Document" },
+  { icon: Bot, label: "AI Analysis" },
+  { icon: BarChart3, label: "Structured Data" },
+  { icon: Database, label: "ERP / CRM Integration" },
 ];
 
 const EXTRACTED = [
@@ -40,24 +50,35 @@ export default function ProductShowcase() {
       />
 
       <Reveal delay={0.05}>
-        <div className="mx-auto mt-12 grid max-w-4xl grid-cols-2 gap-3 sm:grid-cols-4">
+        <div className="mx-auto mt-10 grid max-w-3xl grid-cols-2 gap-3 sm:grid-cols-4">
           {PIPELINE.map((step, i) => (
             <div key={step.label} className="relative">
-              <div className="glass flex h-full flex-col items-center gap-2 rounded-2xl px-3 py-5 text-center">
-                <span className="text-2xl">{step.icon}</span>
+              <div className="glass flex h-full flex-col items-center gap-2.5 rounded-2xl px-3 py-4 text-center">
+                <AnimatedIcon icon={step.icon} size="sm" delay={i * 0.18} />
                 <span className="text-xs font-medium text-fg/70">{step.label}</span>
               </div>
               {i < PIPELINE.length - 1 && (
-                <span className="absolute -right-2 top-1/2 z-10 hidden -translate-y-1/2 text-neon-cyan sm:block">
+                <motion.span
+                  aria-hidden
+                  className="absolute -right-2 top-1/2 z-10 hidden text-neon-cyan sm:block"
+                  style={{ y: "-50%" }}
+                  animate={{ x: [0, 6, 0], opacity: [0.4, 1, 0.4] }}
+                  transition={{
+                    duration: 1.6,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                    delay: i * 0.25,
+                  }}
+                >
                   →
-                </span>
+                </motion.span>
               )}
             </div>
           ))}
         </div>
       </Reveal>
 
-      <div className="mt-10">
+      <div className="mx-auto mt-10 max-w-4xl">
         <Reveal delay={0.1}>
           <LiveDemo />
         </Reveal>
@@ -121,15 +142,15 @@ function LiveDemo() {
   return (
     <div className="grid gap-5 lg:grid-cols-2">
       {/* Left: document */}
-      <div className="relative overflow-hidden rounded-3xl glass p-6">
-        <div className="mb-4 flex items-center justify-between">
+      <div className="relative overflow-hidden rounded-3xl glass p-5">
+        <div className="mb-3 flex items-center justify-between">
           <span className="text-sm font-medium text-fg/70">Sample invoice</span>
           <span className="rounded-full border border-fg/10 bg-fg/5 px-2.5 py-1 text-[11px] text-fg/50">
             invoice_skyline.pdf
           </span>
         </div>
 
-        <div className="relative mx-auto aspect-[1/1.2] w-full max-w-xs rounded-2xl bg-white/90 p-5 text-ink-900 shadow-2xl">
+        <div className="relative mx-auto aspect-[1/1.15] w-full max-w-[220px] rounded-2xl bg-white/90 p-4 text-ink-900 shadow-2xl">
           <div className="flex items-center justify-between border-b border-ink-900/10 pb-3">
             <div>
               <div className="text-[13px] font-bold">Skyline Logistics</div>
@@ -198,8 +219,8 @@ function LiveDemo() {
       </div>
 
       {/* Right: extracted data */}
-      <div className="relative overflow-hidden rounded-3xl glass p-6">
-        <div className="mb-4 flex items-center justify-between">
+      <div className="relative overflow-hidden rounded-3xl glass p-5">
+        <div className="mb-3 flex items-center justify-between">
           <span className="text-sm font-medium text-fg/70">Structured output</span>
           <span
             className={`flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] ${
@@ -218,9 +239,9 @@ function LiveDemo() {
         </div>
 
         {stage === "idle" && (
-          <div className="grid h-[320px] place-items-center text-center">
+          <div className="grid h-[240px] place-items-center text-center">
             <div className="text-fg/40">
-              <div className="mb-2 text-4xl">🧾</div>
+              <AnimatedIcon icon={Receipt} size="lg" className="mx-auto mb-3" />
               <p className="text-sm">
                 Click <span className="text-neon-cyan">Process sample invoice</span> to
                 see live extraction.
@@ -257,7 +278,7 @@ function LiveDemo() {
                 animate={{ opacity: 1, y: 0 }}
                 className="mt-4 flex items-center gap-2 rounded-xl border border-emerald-400/20 bg-emerald-400/10 px-4 py-3 text-sm text-emerald-200"
               >
-                <span>✓</span> Pushed to ERP/CRM — entry created in 1.8s
+                <Check className="h-4 w-4 shrink-0" strokeWidth={2.5} /> Pushed to ERP/CRM — entry created in 1.8s
               </motion.div>
             )}
           </div>

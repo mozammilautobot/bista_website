@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
+import { Check } from "lucide-react";
 import NetworkBackground from "@/components/ui/NetworkBackground";
 import Reveal from "@/components/ui/Reveal";
 
@@ -15,7 +16,14 @@ export default function FinalCta() {
       <div className="pointer-events-none absolute left-1/2 top-1/2 h-[420px] w-[420px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-neon-blue/20 blur-[140px]" />
 
       <div className="section relative z-10">
-        <div className="mx-auto max-w-5xl overflow-hidden rounded-[2rem] glass-strong p-8 shadow-glow sm:p-12">
+        <div className="relative mx-auto max-w-5xl">
+          <motion.div
+            aria-hidden
+            className="pointer-events-none absolute -inset-[2px] rounded-[2.15rem] bg-[conic-gradient(from_0deg,#22c55e,#10b981,#16a34a,#4ade80,#22c55e)] opacity-40 blur-[2px]"
+            animate={{ rotate: 360 }}
+            transition={{ duration: 14, repeat: Infinity, ease: "linear" }}
+          />
+          <div className="relative overflow-hidden rounded-[2rem] glass-strong p-8 shadow-glow sm:p-12">
           <div className="grid items-center gap-10 lg:grid-cols-[1.1fr_0.9fr]">
             <Reveal>
               <span className="eyebrow">
@@ -51,9 +59,14 @@ export default function FinalCta() {
                 {sent ? (
                   <div className="grid h-64 place-items-center text-center">
                     <div>
-                      <div className="mx-auto mb-3 grid h-14 w-14 place-items-center rounded-full bg-emerald-400/15 text-2xl text-emerald-300">
-                        ✓
-                      </div>
+                      <motion.div
+                        initial={{ scale: 0, rotate: -90 }}
+                        animate={{ scale: 1, rotate: 0 }}
+                        transition={{ type: "spring", stiffness: 260, damping: 16 }}
+                        className="mx-auto mb-3 grid h-14 w-14 place-items-center rounded-full bg-emerald-400/15 text-emerald-300 ring-1 ring-emerald-400/30"
+                      >
+                        <Check className="h-7 w-7" strokeWidth={2.5} />
+                      </motion.div>
                       <h3 className="font-display text-lg font-semibold">Request received</h3>
                       <p className="mt-1 text-sm text-fg/55">
                         An AI specialist will reach out within one business day.
@@ -86,6 +99,7 @@ export default function FinalCta() {
                 )}
               </motion.form>
             </Reveal>
+          </div>
           </div>
         </div>
       </div>
