@@ -3,42 +3,33 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Check } from "lucide-react";
-import NetworkBackground from "@/components/ui/NetworkBackground";
+import PhenomFlow from "@/components/ui/PhenomFlow";
 import Reveal from "@/components/ui/Reveal";
 
 export default function FinalCta() {
   const [sent, setSent] = useState(false);
 
   return (
-    <section id="contact" className="relative overflow-hidden py-28">
-      <div className="absolute inset-0 bg-aurora" />
-      <NetworkBackground className="opacity-50" density={0.00007} />
-      <div className="pointer-events-none absolute left-1/2 top-1/2 h-[420px] w-[420px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-neon-blue/20 blur-[140px]" />
+    <section id="contact" className="band band-black">
+      <PhenomFlow variant="dark" />
 
       <div className="section relative z-10">
-        <div className="relative mx-auto max-w-5xl">
-          <motion.div
-            aria-hidden
-            className="pointer-events-none absolute -inset-[2px] rounded-[2.15rem] bg-[conic-gradient(from_0deg,#22c55e,#10b981,#16a34a,#4ade80,#22c55e)] opacity-40 blur-[2px]"
-            animate={{ rotate: 360 }}
-            transition={{ duration: 14, repeat: Infinity, ease: "linear" }}
-          />
-          <div className="relative overflow-hidden rounded-[2rem] glass-strong p-8 shadow-glow sm:p-12">
-          <div className="grid items-center gap-10 lg:grid-cols-[1.1fr_0.9fr]">
+        <div className="relative">
+          <div className="grid items-center gap-14 lg:grid-cols-[1.1fr_0.9fr]">
             <Reveal>
               <span className="eyebrow">
-                <span className="h-1.5 w-1.5 rounded-full bg-neon-cyan animate-pulseGlow" />
+                <span className="h-1.5 w-1.5 rounded-full bg-neon-violet animate-pulseGlow" />
                 Let&apos;s build
               </span>
-              <h2 className="font-display text-3xl font-bold leading-tight tracking-tight sm:text-4xl md:text-5xl">
+              <h2 className="font-display text-[2.4rem] font-medium leading-[1.02] tracking-[-0.035em] sm:text-5xl md:text-6xl">
                 Ready to transform your business with{" "}
-                <span className="text-gradient">Bista AI</span>?
+                <span className="text-gradient-pastel">Bista AI</span>?
               </h2>
-              <p className="mt-4 max-w-md text-fg/60">
+              <p className="mt-6 max-w-md text-lg leading-relaxed text-white/60">
                 Book a 30-minute demo and we&apos;ll show you a live document and agent
                 workflow tailored to your use case.
               </p>
-              <div className="mt-7 flex flex-wrap gap-4">
+              <div className="mt-8 flex flex-wrap gap-4">
                 <a href="https://calendly.com/mozammilrizwan/agentic-automation" className="btn-primary">
                   Schedule Demo
                 </a>
@@ -63,7 +54,7 @@ export default function FinalCta() {
                         initial={{ scale: 0, rotate: -90 }}
                         animate={{ scale: 1, rotate: 0 }}
                         transition={{ type: "spring", stiffness: 260, damping: 16 }}
-                        className="mx-auto mb-3 grid h-14 w-14 place-items-center rounded-full bg-emerald-400/15 text-emerald-300 ring-1 ring-emerald-400/30"
+                        className="mx-auto mb-3 grid h-14 w-14 place-items-center rounded-full bg-neon-cyan/15 text-neon-cyan ring-1 ring-neon-cyan/30"
                       >
                         <Check className="h-7 w-7" strokeWidth={2.5} />
                       </motion.div>
@@ -81,7 +72,7 @@ export default function FinalCta() {
                       <label className="mb-1.5 block text-xs text-fg/55">
                         What do you want to automate?
                       </label>
-                      <select className="w-full rounded-xl border border-fg/10 bg-fg/[0.04] px-4 py-3 text-sm text-fg outline-none focus:border-neon-cyan/60">
+                      <select className="w-full rounded-xl border border-fg/10 bg-fg/[0.04] px-4 py-3 text-sm text-fg outline-none focus:border-neon-cyan/60 [&>option]:bg-white [&>option]:text-ink-900">
                         <option>Document processing (Bista Doc AI)</option>
                         <option>AI agents (research / SDR / support)</option>
                         <option>Business process automation</option>
@@ -99,7 +90,6 @@ export default function FinalCta() {
                 )}
               </motion.form>
             </Reveal>
-          </div>
           </div>
         </div>
       </div>

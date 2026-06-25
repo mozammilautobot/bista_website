@@ -173,7 +173,7 @@ export default function Comparison() {
                   </div>
                   <div className="text-sm font-medium text-fg">{row.bista}</div>
                 </div>
-                <span className="pointer-events-none absolute inset-0 animate-shimmer bg-[linear-gradient(110deg,transparent,rgba(34,197,94,0.14),transparent)] bg-[length:200%_100%]" />
+                <span className="pointer-events-none absolute inset-0 animate-shimmer bg-[linear-gradient(110deg,transparent,rgba(69,67,217,0.14),transparent)] bg-[length:200%_100%]" />
               </div>
             </div>
           </motion.div>

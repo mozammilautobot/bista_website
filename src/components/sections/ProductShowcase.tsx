@@ -225,13 +225,13 @@ function LiveDemo() {
           <span
             className={`flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] ${
               stage === "done"
-                ? "bg-emerald-400/15 text-emerald-300"
+                ? "bg-neon-cyan/15 text-neon-cyan"
                 : "border border-fg/10 bg-fg/5 text-fg/50"
             }`}
           >
             <span
               className={`h-1.5 w-1.5 rounded-full ${
-                stage === "done" ? "bg-emerald-300" : "bg-fg/40 animate-pulseGlow"
+                stage === "done" ? "bg-neon-cyan" : "bg-fg/40 animate-pulseGlow"
               }`}
             />
             {stage === "done" ? "99.4% confidence" : "awaiting input"}
@@ -276,7 +276,7 @@ function LiveDemo() {
               <motion.div
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="mt-4 flex items-center gap-2 rounded-xl border border-emerald-400/20 bg-emerald-400/10 px-4 py-3 text-sm text-emerald-200"
+                className="mt-4 flex items-center gap-2 rounded-xl border border-neon-cyan/20 bg-neon-cyan/10 px-4 py-3 text-sm text-neon-blue"
               >
                 <Check className="h-4 w-4 shrink-0" strokeWidth={2.5} /> Pushed to ERP/CRM — entry created in 1.8s
               </motion.div>

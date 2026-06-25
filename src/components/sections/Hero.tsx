@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import NetworkBackground from "@/components/ui/NetworkBackground";
+import PhenomFlow from "@/components/ui/PhenomFlow";
 import Counter from "@/components/ui/Counter";
 import ClientLogos from "@/components/sections/ClientLogos";
 import RotatingText from "@/components/ui/RotatingText";
@@ -25,24 +25,11 @@ export default function Hero() {
   return (
     <section
       id="top"
-      className="relative flex min-h-screen flex-col overflow-hidden bg-aurora pt-28"
+      className="relative flex min-h-screen flex-col overflow-hidden pt-28"
     >
-      <div className="absolute inset-0 bg-grid-faint bg-[size:46px_46px] [mask-image:radial-gradient(ellipse_at_center,#000_80%,transparent_75%)]" />
-      <NetworkBackground className="opacity-[0.35]" />
-      <motion.div
-        aria-hidden
-        className="pointer-events-none absolute -left-40 top-20 h-96 w-96 rounded-full bg-neon-cyan/15 blur-[120px]"
-        animate={{ x: [0, 60, 0], y: [0, 30, 0], scale: [1, 1.15, 1] }}
-        transition={{ duration: 16, repeat: Infinity, ease: "easeInOut" }}
-      />
-      <motion.div
-        aria-hidden
-        className="pointer-events-none absolute -right-40 bottom-10 h-96 w-96 rounded-full bg-neon-violet/15 blur-[120px]"
-        animate={{ x: [0, -50, 0], y: [0, -40, 0], scale: [1.1, 1, 1.1] }}
-        transition={{ duration: 19, repeat: Infinity, ease: "easeInOut" }}
-      />
+      <PhenomFlow variant="hero" />
 
-      <div className="section relative z-10 grid flex-1 items-center gap-4 py-0.5 lg:grid-cols-[1.5fr_1.3fr]">
+      <div className="section relative z-10 grid flex-1 items-center gap-12 py-0.5 lg:grid-cols-[1.4fr_1fr]">
         <div>
           <motion.span
             initial={{ opacity: 0, y: 14 }}
@@ -58,12 +45,12 @@ export default function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.05 }}
-            className="font-display text-[1.7rem] font-bold leading-[1.12] tracking-[-0.02em] xs:text-4xl sm:text-5xl md:text-6xl"
+            className="font-display text-[2.6rem] font-medium leading-[1.0] tracking-[-0.035em] xs:text-6xl sm:text-7xl md:text-[5.25rem] lg:text-[5.75rem]"
           >
             <span className="block">AI Powered</span>
             <RotatingText
               words={ROTATING_WORDS}
-              className="h-1.05 w-1.05 text-gradient glow-text"
+              className="h-1.05 w-1.05 text-gradient-pastel"
             />
           </motion.h1>
 
@@ -71,7 +58,7 @@ export default function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.15 }}
-            className="mt-6 max-w-xl text-base leading-relaxed text-fg/70 sm:text-lg"
+            className="mt-7 max-w-lg text-lg leading-relaxed text-fg/60"
           >
             We build AI-powered products, intelligent document processing solutions,
             AI agents, and workflow automation systems that reduce manual effort and
@@ -95,38 +82,19 @@ export default function Hero() {
             </a>
           </motion.div>
 
-          <div className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-4">
+          <div className="mt-14 grid max-w-lg grid-cols-2 gap-x-8 gap-y-8 sm:grid-cols-4">
             {STATS.map((s, i) => (
               <motion.div
                 key={s.label}
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.35 + i * 0.08 }}
-                whileHover={{ y: -6, scale: 1.03 }}
-                className="group relative overflow-hidden rounded-3xl glass p-4 transition-shadow duration-300 hover:shadow-glow"
               >
-                {/* hover sheen sweep */}
-                <span className="pointer-events-none absolute inset-y-0 -left-1/2 w-1/2 -skew-x-12 bg-gradient-to-r from-transparent via-white/30 to-transparent opacity-0 transition-all duration-700 ease-out group-hover:left-[140%] group-hover:opacity-100" />
-                {/* corner glow */}
-                <span className="pointer-events-none absolute -right-6 -top-6 h-16 w-16 rounded-full bg-neon-cyan/25 blur-xl opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-
-                <div className="relative origin-left font-display text-2xl font-bold text-fg transition-transform duration-300 group-hover:scale-110 sm:text-3xl">
+                <div className="font-display text-3xl font-semibold tracking-tight text-fg sm:text-4xl">
                   <Counter to={s.value} />
-                  <span className="text-neon-cyan">{s.suffix}</span>
+                  <span className="text-gradient-pastel">{s.suffix}</span>
                 </div>
-                <div className="relative mt-1 text-xs text-fg/55">{s.label}</div>
-
-                {/* animated fill meter */}
-                <div className="relative mt-3 h-1 w-full overflow-hidden rounded-full bg-fg/10">
-                  <motion.div
-                    className="h-full rounded-full bg-gradient-to-r from-neon-cyan to-neon-blue"
-                    initial={{ width: 0 }}
-                    animate={{ width: `${s.bar}%` }}
-                    transition={{ duration: 1.4, ease: "easeOut", delay: 0.5 + i * 0.12 }}
-                  >
-                    <span className="block h-full w-full animate-shimmer bg-[linear-gradient(110deg,transparent,rgba(255,255,255,0.6),transparent)] bg-[length:200%_100%]" />
-                  </motion.div>
-                </div>
+                <div className="mt-1.5 text-sm text-fg/50">{s.label}</div>
               </motion.div>
             ))}
           </div>

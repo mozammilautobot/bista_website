@@ -10,20 +10,20 @@ import {
 } from "lucide-react";
 import SectionHeading from "@/components/ui/SectionHeading";
 import Reveal from "@/components/ui/Reveal";
-import NetworkBackground from "@/components/ui/NetworkBackground";
+import PhenomFlow from "@/components/ui/PhenomFlow";
+import AIEngineViz from "@/components/ui/AIEngineViz";
 
 const FEATURES: { title: string; desc: string; icon: LucideIcon }[] = [
-  { title: "Neural Networks", desc: "Deep models tuned to your domain data.", icon: BrainCircuit },
+  { title: "Own Developed Model", desc: "Deep models tuned to your domain data.", icon: BrainCircuit },
   { title: "Floating Data Streams", desc: "Real-time pipelines feeding live agents.", icon: Waves },
-  { title: "Holographic Dashboards", desc: "See every agent decision as it happens.", icon: LayoutDashboard },
+  { title: "Customizable Dashboards", desc: "See every agent decision as it happens.", icon: LayoutDashboard },
   { title: "Global AI Activity", desc: "Agents operating across regions, 24/7.", icon: Globe },
 ];
 
 export default function Innovation() {
   return (
     <section id="innovation" className="relative overflow-hidden">
-      <div className="absolute inset-0 bg-aurora" />
-      <NetworkBackground className="opacity-40" density={0.00006} />
+      <PhenomFlow variant="page" />
       <div className="section relative z-10">
         <SectionHeading
           eyebrow="AI Innovation"
@@ -37,52 +37,22 @@ export default function Innovation() {
 
         <div className="mt-10 grid items-center gap-10 lg:grid-cols-[0.85fr_1.15fr]">
           <Reveal>
-            <div className="relative mx-auto flex aspect-square max-w-[300px] items-center justify-center">
-              {/* rotating conic glow */}
+            <div className="relative mx-auto w-full max-w-[440px]">
+              {/* rotating pastel glow behind the video (phenom hero feel) */}
               <motion.div
                 aria-hidden
-                className="absolute inset-0 rounded-full bg-[conic-gradient(from_0deg,transparent,rgba(34,197,94,0.28),transparent_55%)] blur-2xl"
+                className="pointer-events-none absolute -inset-4 rounded-[2.25rem] bg-[conic-gradient(from_0deg,#ff8045,#7bd3cf,#ab9cee,#4543d9,#ff8045)] opacity-40 blur-2xl"
                 animate={{ rotate: 360 }}
-                transition={{ duration: 16, repeat: Infinity, ease: "linear" }}
-              />
-              {/* pulsing halo rings */}
-              <motion.div
-                aria-hidden
-                className="absolute h-[88%] w-[88%] rounded-full border border-neon-cyan/25"
-                animate={{ scale: [1, 1.08, 1], opacity: [0.55, 0.2, 0.55] }}
-                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
               />
               <motion.div
-                aria-hidden
-                className="absolute h-[72%] w-[72%] rounded-full border border-neon-violet/20"
-                animate={{ scale: [1.05, 1, 1.05], opacity: [0.4, 0.6, 0.4] }}
-                transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-              />
-              {/* floating globe */}
-              <motion.img
-                src="/images/innovation-globe.png"
-                alt="Global, always-on Bista AI activity across regions"
-                className="relative w-[82%] drop-shadow-[0_12px_40px_rgba(34,197,94,0.25)]"
-                animate={{ y: [0, -10, 0] }}
+                className="relative overflow-hidden rounded-[1.85rem] ring-1 ring-white/15 shadow-[0_34px_90px_-32px_rgba(69,67,217,0.55)]"
+                animate={{ y: [0, -8, 0] }}
                 transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-                loading="lazy"
-              />
-              {/* orbiting node */}
-              <motion.div
-                aria-hidden
-                className="absolute h-full w-full"
-                animate={{ rotate: 360 }}
-                transition={{ duration: 11, repeat: Infinity, ease: "linear" }}
               >
-                <span className="absolute left-1/2 top-1 h-2.5 w-2.5 -translate-x-1/2 rounded-full bg-neon-cyan shadow-[0_0_14px_rgba(34,197,94,0.9)]" />
-              </motion.div>
-              <motion.div
-                aria-hidden
-                className="absolute h-full w-full"
-                animate={{ rotate: -360 }}
-                transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
-              >
-                <span className="absolute bottom-2 left-1/2 h-2 w-2 -translate-x-1/2 rounded-full bg-neon-violet shadow-[0_0_12px_rgba(16,185,129,0.9)]" />
+                <AIEngineViz />
+                {/* subtle veil for depth */}
+                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink-950/25 via-transparent to-transparent" />
               </motion.div>
             </div>
           </Reveal>
@@ -116,8 +86,8 @@ function HoloDashboard() {
     <div className="relative overflow-hidden rounded-2xl glass-strong p-5">
       <div className="mb-3 flex items-center justify-between">
         <span className="text-sm font-medium text-fg/75">Live agent throughput</span>
-        <span className="flex items-center gap-1.5 text-xs text-emerald-300">
-          <span className="h-1.5 w-1.5 animate-pulseGlow rounded-full bg-emerald-300" />
+        <span className="flex items-center gap-1.5 text-xs text-neon-cyan">
+          <span className="h-1.5 w-1.5 animate-pulseGlow rounded-full bg-neon-cyan" />
           streaming
         </span>
       </div>

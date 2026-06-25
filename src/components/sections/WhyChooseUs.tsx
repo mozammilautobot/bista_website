@@ -36,12 +36,12 @@ export default function WhyChooseUs() {
         }
       />
 
-      <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {REASONS.map((r, i) => (
           <Reveal key={r.title} delay={i * 0.07}>
             <motion.div
               whileHover={{ y: -6 }}
-              className="group relative h-full overflow-hidden rounded-3xl glass p-7 transition-shadow hover:shadow-glow-violet"
+              className="group relative h-full overflow-hidden rounded-[1.75rem] glass p-8 transition-shadow hover:shadow-glow-violet"
             >
               <r.icon
                 aria-hidden

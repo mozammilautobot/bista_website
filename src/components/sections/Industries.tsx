@@ -14,6 +14,7 @@ import {
 } from "lucide-react";
 import SectionHeading from "@/components/ui/SectionHeading";
 import Reveal from "@/components/ui/Reveal";
+import IndustriesMap from "@/components/ui/IndustriesMap";
 
 const INDUSTRIES: { name: string; icon: LucideIcon }[] = [
   { name: "ERP", icon: Building2 },
@@ -40,15 +41,10 @@ export default function Industries() {
         subtitle="Domain-tuned AI that understands the vocabulary, compliance and edge cases of your sector."
       />
 
-      <div className="mt-9 grid items-center gap-8 lg:grid-cols-2">
+      <div className="mt-14 grid items-center gap-10 lg:grid-cols-2">
         <Reveal>
-          <div className="overflow-hidden rounded-3xl border border-fg/10 bg-white p-3 shadow-sm">
-            <img
-              src="/images/industries-visual.png"
-              alt="Domain-tuned Bista AI connected to banking, manufacturing, shipping, retail, legal and insurance"
-              className="w-full rounded-2xl"
-              loading="lazy"
-            />
+          <div className="overflow-hidden rounded-3xl border border-fg/10 bg-white p-4 shadow-sm sm:p-6">
+            <IndustriesMap />
           </div>
         </Reveal>
 

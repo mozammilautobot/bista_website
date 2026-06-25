@@ -28,7 +28,7 @@ export default function AnimatedIcon({
 }) {
   return (
     <motion.div
-      className={`relative grid ${TILE[size]} place-items-center bg-gradient-to-br from-neon-cyan to-neon-blue text-white shadow-[0_12px_30px_-8px_rgba(34,197,94,0.65)] ring-1 ring-white/25 ${className}`}
+      className={`relative grid ${TILE[size]} place-items-center bg-gradient-to-br from-neon-cyan to-neon-blue text-white shadow-[0_12px_30px_-8px_rgba(69,67,217,0.65)] ring-1 ring-white/25 ${className}`}
       animate={{ y: [0, -5, 0] }}
       transition={{ duration: 3.2, repeat: Infinity, ease: "easeInOut", delay }}
       whileHover={{ scale: 1.1, rotate: -5 }}

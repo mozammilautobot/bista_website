@@ -34,7 +34,9 @@ export default function Navbar() {
     >
       <nav
         className={`flex w-full max-w-7xl items-center justify-between rounded-2xl px-4 py-3 transition-all duration-300 sm:px-6 ${
-          scrolled ? "glass-strong shadow-glow" : "border border-transparent"
+          scrolled
+            ? "glass-strong shadow-[0_10px_40px_-16px_rgba(20,24,60,0.25)]"
+            : "border border-transparent"
         }`}
       >
         <a href="#top" className="flex items-center gap-2.5">
@@ -44,7 +46,7 @@ export default function Navbar() {
             className="h-9 w-9 object-contain"
           />
           <span className="font-display text-2xl font-bold tracking-tight sm:text-[32px]">
-            Bista <span className="text-neon-cyan">AI</span>
+            Bista <span className="text-gradient-pastel">AI</span>
           </span>
         </a>
 

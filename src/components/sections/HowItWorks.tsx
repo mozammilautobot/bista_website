@@ -5,6 +5,7 @@ import { Search, PenLine, Wrench, Rocket, TrendingUp, type LucideIcon } from "lu
 import SectionHeading from "@/components/ui/SectionHeading";
 import Reveal from "@/components/ui/Reveal";
 import AnimatedIcon from "@/components/ui/AnimatedIcon";
+import PhenomFlow from "@/components/ui/PhenomFlow";
 
 const STEPS: { n: string; title: string; desc: string; icon: LucideIcon }[] = [
   { n: "01", title: "Discover", desc: "Understand the business process, data, and goals.", icon: Search },
@@ -16,9 +17,12 @@ const STEPS: { n: string; title: string; desc: string; icon: LucideIcon }[] = [
 
 export default function HowItWorks() {
   return (
-    <section id="how" className="section">
+    <section id="how" className="band band-black">
+      <PhenomFlow variant="dark" />
+      <div className="section relative z-10">
       <SectionHeading
         eyebrow="How It Works"
+        tone="dark"
         title={
           <>
             From idea to <span className="text-gradient">deployed AI</span> in five steps
@@ -32,7 +36,7 @@ export default function HowItWorks() {
         {/* energy pulse traveling along the timeline */}
         <motion.span
           aria-hidden
-          className="absolute top-7 hidden h-2.5 w-2.5 -translate-y-1/2 rounded-full bg-neon-cyan shadow-[0_0_14px_rgba(34,197,94,0.9)] lg:block"
+          className="absolute top-7 hidden h-2.5 w-2.5 -translate-y-1/2 rounded-full bg-neon-cyan shadow-[0_0_14px_rgba(69,67,217,0.9)] lg:block"
           animate={{ left: ["1%", "99%"], opacity: [0, 1, 1, 0] }}
           transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut", times: [0, 0.1, 0.9, 1] }}
         />
@@ -50,6 +54,7 @@ export default function HowItWorks() {
             </Reveal>
           ))}
         </div>
+      </div>
       </div>
     </section>
   );

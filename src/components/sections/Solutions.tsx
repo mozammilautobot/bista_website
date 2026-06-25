@@ -51,12 +51,12 @@ export default function Solutions() {
         subtitle="Every engagement starts from a measurable business outcome — cost saved, hours returned, revenue unlocked."
       />
 
-      <div className="mt-8 grid gap-5 md:grid-cols-2">
+      <div className="mt-14 grid gap-6 md:grid-cols-2">
         {SOLUTIONS.map((s, i) => (
           <Reveal key={s.title} delay={i * 0.08}>
             <motion.div
               whileHover={{ y: -6 }}
-              className="group relative h-full overflow-hidden rounded-3xl glass p-7"
+              className="group relative h-full overflow-hidden rounded-[1.75rem] glass p-8 sm:p-9"
             >
               <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-neon-cyan/0 to-neon-blue/0 opacity-0 transition-opacity duration-500 group-hover:from-neon-cyan/[0.06] group-hover:to-neon-blue/[0.04] group-hover:opacity-100" />
               <s.icon

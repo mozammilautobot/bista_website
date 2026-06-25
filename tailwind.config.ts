@@ -26,22 +26,22 @@ const config: Config = {
           800: "#0a0f2c",
           700: "#111634",
         },
-        // Sprouts.ai-style green ramp. Names kept (cyan/blue/violet) so existing
-        // utility usages across sections re-skin to green without per-file edits.
+        // phenom.com indigo ramp. Names kept (cyan/blue/violet) so existing
+        // utility usages across sections re-skin to indigo without per-file edits.
         neon: {
-          DEFAULT: "#22c55e",
-          cyan: "#22c55e", // primary vivid green (accent dots, suffixes, eyebrow)
-          blue: "#16a34a", // deeper green (gradient end, links)
-          violet: "#10b981", // emerald/teal secondary
+          DEFAULT: "#4543d9",
+          cyan: "#4543d9", // primary indigo (accent dots, suffixes, eyebrow)
+          blue: "#1f2aac", // deep indigo (gradient end, links, hover)
+          violet: "#7172da", // light indigo secondary
         },
         brand: {
-          DEFAULT: "#16a34a",
-          50: "#f0fdf4",
-          100: "#dcfce7",
-          400: "#4ade80",
-          500: "#22c55e",
-          600: "#16a34a",
-          700: "#15803d",
+          DEFAULT: "#4543d9",
+          50: "#eef0fc",
+          100: "#ceddfb",
+          400: "#7172da",
+          500: "#4543d9",
+          600: "#2f2fc4",
+          700: "#1f2aac",
         },
       },
       fontFamily: {
@@ -49,8 +49,8 @@ const config: Config = {
         display: ["var(--font-display)", "var(--font-sans)", "sans-serif"],
       },
       boxShadow: {
-        glow: "0 0 40px -10px rgba(34,197,94,0.5)",
-        "glow-violet": "0 0 40px -8px rgba(16,185,129,0.5)",
+        glow: "0 0 40px -10px rgba(69,67,217,0.5)",
+        "glow-violet": "0 0 40px -8px rgba(113,114,218,0.5)",
       },
       backgroundImage: {
         "grid-faint":

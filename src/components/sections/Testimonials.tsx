@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import SectionHeading from "@/components/ui/SectionHeading";
 import Reveal from "@/components/ui/Reveal";
+import PhenomFlow from "@/components/ui/PhenomFlow";
 
 const QUOTES = [
   {
@@ -36,23 +37,28 @@ const QUOTES = [
 
 export default function Testimonials() {
   return (
-    <section id="testimonials" className="section">
+    <section id="testimonials" className="band band-black">
+      <PhenomFlow variant="dark" />
+      <div className="section relative z-10">
       <SectionHeading
+        align="left"
+        tone="dark"
         eyebrow="Testimonials"
         title={
           <>
-            What our  <span className="text-gradient">Partners Say About Us</span> 
+            What our customers are{" "}
+            <span className="text-gradient-pastel">saying</span>
           </>
         }
       />
 
-      <div className="mt-8 grid gap-5 lg:grid-cols-3">
+      <div className="mt-14 grid gap-6 lg:grid-cols-3">
         {QUOTES.map((q, i) => (
           <Reveal key={q.name} delay={i * 0.1}>
             <motion.div
               whileHover={{ y: -8 }}
               transition={{ type: "spring", stiffness: 300, damping: 22 }}
-              className="group relative flex h-full flex-col overflow-hidden rounded-3xl glass p-7 transition-[box-shadow,border-color] duration-500 hover:border-neon-cyan/30 hover:shadow-glow"
+              className="group relative flex h-full flex-col overflow-hidden rounded-[1.75rem] glass p-8 transition-[box-shadow,border-color] duration-500 hover:border-white/20"
             >
               {/* hover wash */}
               <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-neon-cyan/0 to-neon-blue/0 opacity-0 transition-opacity duration-500 group-hover:from-neon-cyan/[0.06] group-hover:to-neon-blue/[0.04] group-hover:opacity-100" />
@@ -103,6 +109,7 @@ export default function Testimonials() {
             </motion.div>
           </Reveal>
         ))}
+      </div>
       </div>
     </section>
   );

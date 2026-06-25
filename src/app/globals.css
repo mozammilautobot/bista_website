@@ -1,41 +1,41 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&display=swap");
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
-  --font-display: "Space Grotesk", var(--font-sans);
+  --font-sans: "Hanken Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Hanken Grotesk", var(--font-sans);
 
-  /* Light theme (default) — sprouts.ai-style bright white canvas */
-  --fg: 13 27 24; /* deep green-ink text */
+  /* Light theme (default) — phenom.com-style white canvas, near-black ink */
+  --fg: 20 20 30; /* near-black ink */
   --bg: 255 255 255; /* pure white page */
-  --sunken: 246 249 246; /* footer / sunken surface (faint green-gray) */
+  --sunken: 248 248 248; /* graySuperLight footer / sunken surface */
 
-  --grid-line: rgba(13, 27, 24, 0.045);
+  --grid-line: rgba(31, 42, 172, 0.05);
 
-  --glass-bg: rgba(255, 255, 255, 0.82);
-  --glass-border: rgba(13, 27, 24, 0.08);
-  --glass-strong-bg: rgba(255, 255, 255, 0.92);
-  --glass-strong-border: rgba(13, 27, 24, 0.1);
-  --card-shadow: 0 1px 2px rgba(13, 27, 24, 0.05),
-    0 14px 34px -18px rgba(13, 27, 24, 0.16);
+  --glass-bg: rgba(255, 255, 255, 0.85);
+  --glass-border: rgba(20, 24, 60, 0.09);
+  --glass-strong-bg: rgba(255, 255, 255, 0.94);
+  --glass-strong-border: rgba(20, 24, 60, 0.12);
+  --card-shadow: 0 1px 2px rgba(20, 24, 60, 0.04),
+    0 18px 56px -26px rgba(20, 24, 60, 0.18);
 
-  --scrollbar-track: #eef3ee;
+  --scrollbar-track: #eeeff2;
 
-  /* Heading gradient (sprouts green, readable on white) */
-  --grad-from: #16a34a;
-  --grad-via: #22c55e;
-  --grad-to: #10b981;
+  /* Heading gradient (phenom indigo, readable on white) */
+  --grad-from: #4543d9;
+  --grad-via: #7172da;
+  --grad-to: #1f2aac;
 }
 
 .dark {
-  --fg: 230 240 234;
-  --bg: 6 14 11;
-  --sunken: 3 8 6;
+  --fg: 234 236 246;
+  --bg: 9 10 24;
+  --sunken: 5 6 16;
 
-  --grid-line: rgba(255, 255, 255, 0.04);
+  --grid-line: rgba(255, 255, 255, 0.045);
 
   --glass-bg: rgba(255, 255, 255, 0.04);
   --glass-border: rgba(255, 255, 255, 0.1);
@@ -43,11 +43,11 @@
   --glass-strong-border: rgba(255, 255, 255, 0.15);
   --card-shadow: none;
 
-  --scrollbar-track: #060e0b;
+  --scrollbar-track: #090a18;
 
   --grad-from: #ffffff;
-  --grad-via: #4ade80;
-  --grad-to: #22c55e;
+  --grad-via: #ab9cee;
+  --grad-to: #7172da;
 }
 
 * {
@@ -85,8 +85,8 @@ canvas {
 }
 
 ::selection {
-  background: rgba(34, 197, 94, 0.25);
-  color: rgb(13, 27, 24);
+  background: rgba(69, 67, 217, 0.22);
+  color: rgb(20, 20, 30);
 }
 
 /* Slightly tighter, more confident display headings (sprouts.ai-style) */
@@ -104,7 +104,7 @@ h3 {
   background: var(--scrollbar-track);
 }
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(#22c55e, #16a34a);
+  background: linear-gradient(#4543d9, #1f2aac);
   border-radius: 999px;
 }
 
@@ -126,21 +126,45 @@ h3 {
     @apply transition duration-300 ease-out hover:-translate-y-1;
   }
   .card-hover:hover {
-    border-color: rgba(34, 197, 94, 0.35);
-    box-shadow: 0 18px 48px -22px rgba(34, 197, 94, 0.4),
+    border-color: rgba(69, 67, 217, 0.35);
+    box-shadow: 0 18px 48px -22px rgba(69, 67, 217, 0.4),
       var(--card-shadow);
   }
   .glow-text {
-    text-shadow: 0 0 26px rgba(34, 197, 94, 0.35);
+    text-shadow: 0 0 26px rgba(69, 67, 217, 0.32);
   }
   .section {
-    @apply relative mx-auto w-full max-w-7xl px-4 py-6 sm:px-6 sm:py-8 lg:px-8 2xl:max-w-[1440px] min-[1920px]:max-w-[1600px];
+    @apply relative mx-auto w-full max-w-7xl px-4 py-7 sm:px-6 sm:py-9 lg:px-8 lg:py-11 2xl:max-w-[1440px] min-[1920px]:max-w-[1600px];
+  }
+  /* phenom.com-style full-bleed band wrapper. Pair `.band` (outer, full width)
+     with an inner `.section` for constrained content. */
+  .band {
+    @apply relative w-full overflow-hidden;
+  }
+  /* Pure-black band: locally re-points the theme tokens so every child that uses
+     text-fg / border-fg / glass / grid-line automatically flips to a clean
+     white-on-black treatment — works identically in light AND dark site modes. */
+  .band-black {
+    --fg: 245 246 255;
+    --bg: 0 0 0;
+    --grid-line: rgba(255, 255, 255, 0.05);
+    --glass-bg: rgba(255, 255, 255, 0.045);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --glass-strong-bg: rgba(255, 255, 255, 0.06);
+    --glass-strong-border: rgba(255, 255, 255, 0.14);
+    --card-shadow: none;
+    background-color: #000;
+    color: rgb(var(--fg));
+  }
+  /* Eyebrow tuned for dark bands (brighter, pastel-leaning). */
+  .band-black .eyebrow {
+    @apply border-white/15 bg-white/[0.06] text-white/75;
   }
   .eyebrow {
     @apply mb-4 inline-flex max-w-full flex-wrap items-center gap-2 rounded-full border border-neon-cyan/20 bg-neon-cyan/[0.06] px-3.5 py-1.5 text-[10px] font-semibold uppercase leading-tight tracking-[0.14em] text-neon-cyan sm:px-4 sm:text-[11px] sm:tracking-[0.22em];
   }
   .btn-primary {
-    @apply relative inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-neon-cyan to-neon-blue px-7 py-3.5 text-sm font-semibold text-white shadow-glow transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_18px_50px_-12px_rgba(34,197,94,0.55)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neon-cyan/60 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent active:scale-95;
+    @apply relative inline-flex items-center justify-center gap-2 rounded-full bg-neon-cyan px-7 py-3 text-sm font-semibold text-white shadow-[0_10px_30px_-10px_rgba(69,67,217,0.55)] transition-all duration-300 hover:scale-[1.03] hover:bg-neon-blue hover:shadow-[0_18px_50px_-12px_rgba(69,67,217,0.6)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neon-cyan/60 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent active:scale-95;
   }
   .btn-ghost {
     @apply inline-flex items-center justify-center gap-2 rounded-full border border-fg/15 bg-fg/[0.03] px-7 py-3.5 text-sm font-semibold text-fg/90 backdrop-blur-md transition-colors duration-300 hover:border-neon-cyan/60 hover:bg-fg/[0.07] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neon-cyan/50;
@@ -148,28 +172,64 @@ h3 {
 }
 
 @layer utilities {
-  .text-gradient {
+  /* phenom.com signature animated rainbow gradient (orange → teal → lavender → gold).
+     Used on every section heading accent + the brand. The gradient is wider than the
+     text and sweeps in on load, then drifts forever for a subtle living shimmer. */
+  .text-gradient,
+  .text-gradient-violet,
+  .text-gradient-pastel {
     background-image: linear-gradient(
-      to right,
-      var(--grad-from),
-      var(--grad-via),
-      var(--grad-to)
+      90deg,
+      #ff8045 0%,
+      #f5905e 9%,
+      #7bd3cf 30%,
+      #ab9cee 55%,
+      #ffbd45 78%,
+      #ff8045 100%
     );
+    background-size: 220% 100%;
+    background-position: 0% 0;
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
+    -webkit-text-fill-color: transparent;
+    animation: gradientReveal 1.3s cubic-bezier(0.22, 1, 0.36, 1) both,
+      gradientDrift 9s ease-in-out 1.3s infinite;
   }
-  .text-gradient-violet {
-    @apply bg-gradient-to-r from-neon-cyan via-neon-blue to-neon-violet bg-clip-text text-transparent;
+  @media (prefers-reduced-motion: reduce) {
+    .text-gradient,
+    .text-gradient-violet,
+    .text-gradient-pastel {
+      animation: none;
+    }
   }
   .bg-aurora {
     background:
-      radial-gradient(60% 60% at 12% 8%, rgba(34, 197, 94, 0.12), transparent 60%),
-      radial-gradient(50% 50% at 88% 18%, rgba(16, 185, 129, 0.1), transparent 60%),
-      radial-gradient(60% 60% at 50% 100%, rgba(74, 222, 128, 0.08), transparent 62%);
+      radial-gradient(60% 60% at 12% 8%, rgba(255, 128, 69, 0.1), transparent 60%),
+      radial-gradient(50% 50% at 88% 18%, rgba(123, 211, 207, 0.12), transparent 60%),
+      radial-gradient(60% 60% at 50% 100%, rgba(171, 156, 238, 0.13), transparent 62%);
   }
   .mask-fade-x {
     -webkit-mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
     mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
+  }
+}
+
+/* Rainbow heading: sweep the wide gradient in on load, then drift forever. */
+@keyframes gradientReveal {
+  from {
+    background-position: 135% 0;
+  }
+  to {
+    background-position: 0% 0;
+  }
+}
+@keyframes gradientDrift {
+  0%,
+  100% {
+    background-position: 0% 0;
+  }
+  50% {
+    background-position: 100% 0;
   }
 }

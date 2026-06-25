@@ -8,6 +8,7 @@ import HowItWorks from "@/components/sections/HowItWorks";
 import Industries from "@/components/sections/Industries";
 import WhyChooseUs from "@/components/sections/WhyChooseUs";
 import CaseStudies from "@/components/sections/CaseStudies";
+import ResultsBand from "@/components/sections/ResultsBand";
 import TechStack from "@/components/sections/TechStack";
 import RoiCalculator from "@/components/sections/RoiCalculator";
 import Innovation from "@/components/sections/Innovation";
@@ -16,10 +17,15 @@ import Blog from "@/components/sections/Blog";
 import Pricing from "@/components/sections/Pricing";
 import FinalCta from "@/components/sections/FinalCta";
 import Footer from "@/components/Footer";
+import PhenomFlow from "@/components/ui/PhenomFlow";
 
 export default function Home() {
   return (
     <main className="relative">
+      {/* phenom.com-style ambient: faint flowing pastel lines behind the whole page */}
+      <div className="pointer-events-none fixed inset-0 -z-10">
+        <PhenomFlow variant="page" />
+      </div>
       <Navbar />
       <Hero />
       <ProductShowcase />
@@ -29,6 +35,7 @@ export default function Home() {
       <HowItWorks />
       <Industries />
       <WhyChooseUs />
+      <ResultsBand />
       <CaseStudies />
       <TechStack />
       <RoiCalculator />

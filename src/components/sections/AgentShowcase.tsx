@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { Search, Mail, MessageSquare, Cog, type LucideIcon } from "lucide-react";
 import SectionHeading from "@/components/ui/SectionHeading";
 import Reveal from "@/components/ui/Reveal";
+import PhenomFlow from "@/components/ui/PhenomFlow";
 
 const AGENTS: {
   name: string;
@@ -24,9 +25,9 @@ const AGENTS: {
     points: ["Personalized Outreach", "Automated Follow-ups", "Meeting Booking"],
   },
   {
-    name: "AI Customer Support Agent",
+    name: "Customer Support",
     icon: MessageSquare,
-    accent: "from-emerald-400/20 to-neon-cyan/10",
+    accent: "from-neon-violet/20 to-neon-cyan/10",
     points: ["24/7 Support", "Ticket Resolution", "Smart Escalation"],
   },
   {
@@ -39,9 +40,12 @@ const AGENTS: {
 
 export default function AgentShowcase() {
   return (
-    <section id="agents" className="section">
+    <section id="agents" className="band band-black">
+      <PhenomFlow variant="dark" />
+      <div className="section relative z-10">
       <SectionHeading
         eyebrow="Agentic AI"
+        tone="dark"
         title={
           <>
             A connected workforce of <span className="text-gradient">AI agents</span>
@@ -50,18 +54,16 @@ export default function AgentShowcase() {
         subtitle="Specialised autonomous agents that communicate, delegate, and complete real business tasks — working together around the clock."
       />
 
-      <div className="mt-9 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
         {AGENTS.map((agent, i) => (
           <Reveal key={agent.name} delay={i * 0.08}>
             <motion.div
               whileHover={{ y: -8 }}
-              className="group relative h-full overflow-hidden rounded-3xl glass p-6 transition-shadow duration-300 hover:shadow-glow"
+              className="group relative h-full overflow-hidden rounded-[1.75rem] glass p-7 transition-shadow duration-300 hover:shadow-glow"
             >
               <div
                 className={`pointer-events-none absolute -right-10 -top-10 h-40 w-40 rounded-full bg-gradient-to-br ${agent.accent} blur-2xl opacity-0 transition-opacity duration-500 group-hover:opacity-100`}
               />
-              {/* glossy sheen sweep */}
-              <span className="pointer-events-none absolute inset-y-0 -left-1/2 w-1/2 -skew-x-12 bg-gradient-to-r from-transparent via-white/25 to-transparent opacity-0 transition-all duration-700 ease-out group-hover:left-[120%] group-hover:opacity-100" />
               <div className="relative grid h-12 w-12 place-items-center rounded-2xl bg-neon-cyan/10 text-neon-blue ring-1 ring-neon-cyan/20">
                 <agent.icon className="h-6 w-6" strokeWidth={1.75} />
               </div>
@@ -88,7 +90,7 @@ export default function AgentShowcase() {
           </Reveal>
         ))}
       </div>
-
+      </div>
     </section>
   );
 }

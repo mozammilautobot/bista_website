@@ -127,7 +127,7 @@ export default function BeforeAfterSlider() {
         ref={wrapRef}
         className="relative h-[300px] touch-none select-none overflow-hidden rounded-3xl border border-fg/10 bg-white/40 mask-fade-x"
       >
-        {/* Subtle green wash on the automated (after) side */}
+        {/* Subtle indigo wash on the automated (after) side */}
         <div
           className="pointer-events-none absolute inset-y-0 right-0 bg-neon-cyan/[0.05]"
           style={{ left: `${pos}%` }}
@@ -174,7 +174,7 @@ export default function BeforeAfterSlider() {
             className="absolute left-1/2 top-3 flex -translate-x-1/2 cursor-ew-resize items-center gap-1 rounded-full border border-fg/10 bg-white px-2 py-1 text-[11px] font-semibold text-fg/60 shadow-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-neon-cyan/60"
           >
             <span className="px-1">Before</span>
-            <span className="grid h-7 w-7 place-items-center rounded-full bg-[#0d1b18] text-white">
+            <span className="grid h-7 w-7 place-items-center rounded-full bg-[#14141e] text-white">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
                 <path
                   d="M9 8l-4 4 4 4M15 8l4 4-4 4"
@@ -188,7 +188,7 @@ export default function BeforeAfterSlider() {
             <span className="px-1 text-neon-blue">After</span>
           </div>
 
-          <div className="absolute bottom-2 left-1/2 h-2.5 w-2.5 -translate-x-1/2 rounded-full bg-neon-cyan shadow-[0_0_0_4px_rgba(34,197,94,0.18)]" />
+          <div className="absolute bottom-2 left-1/2 h-2.5 w-2.5 -translate-x-1/2 rounded-full bg-neon-cyan shadow-[0_0_0_4px_rgba(69,67,217,0.18)]" />
         </div>
       </div>
     </div>

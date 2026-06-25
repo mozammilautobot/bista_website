@@ -57,11 +57,11 @@ export default function NetworkBackground({
     const draw = () => {
       ctx.clearRect(0, 0, width, height);
       const maxDist = 130;
-      // Darker, denser green on light mode; subtler bright green on dark mode.
+      // phenom indigo mesh: deeper indigo on light mode; brighter indigo on dark.
       const isDark = document.documentElement.classList.contains("dark");
-      const lineRgb = isDark ? "34,197,94" : "21,128,61";
-      const lineAlphaMul = isDark ? 0.5 : 0.8;
-      const nodeFill = isDark ? "rgba(34,197,94,0.85)" : "rgba(21,128,61,0.95)";
+      const lineRgb = isDark ? "113,114,218" : "31,42,172";
+      const lineAlphaMul = isDark ? 0.5 : 0.7;
+      const nodeFill = isDark ? "rgba(113,114,218,0.85)" : "rgba(31,42,172,0.9)";
 
       for (const n of nodes) {
         n.x += n.vx;
