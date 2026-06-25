@@ -46,7 +46,7 @@ export default function Testimonials() {
         }
       />
 
-      <div className="mt-12 grid gap-5 lg:grid-cols-3">
+      <div className="mt-8 grid gap-5 lg:grid-cols-3">
         {QUOTES.map((q, i) => (
           <Reveal key={q.name} delay={i * 0.1}>
             <motion.div

@@ -79,7 +79,7 @@ export default function RoiCalculator() {
       />
 
       <Reveal delay={0.05}>
-        <div className="mt-12 grid gap-6 rounded-3xl glass p-6 sm:p-8 lg:grid-cols-2">
+        <div className="mt-8 grid gap-6 rounded-3xl glass p-6 sm:p-8 lg:grid-cols-2">
           <div className="space-y-7">
             <Slider
               label="Monthly documents"

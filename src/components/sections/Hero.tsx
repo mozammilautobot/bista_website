@@ -58,7 +58,7 @@ export default function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.05 }}
-            className="font-display text-6xl font-bold leading-[1.08] tracking-[-0.02em] sm:text-6xl md:text-6xl"
+            className="font-display text-[1.7rem] font-bold leading-[1.12] tracking-[-0.02em] xs:text-4xl sm:text-5xl md:text-6xl"
           >
             <span className="block">AI Powered</span>
             <RotatingText
@@ -95,7 +95,7 @@ export default function Hero() {
             </a>
           </motion.div>
 
-          <div className="mt-14 grid grid-cols-2 gap-4 sm:grid-cols-4">
+          <div className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-4">
             {STATS.map((s, i) => (
               <motion.div
                 key={s.label}
@@ -136,7 +136,7 @@ export default function Hero() {
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="relative mx-auto hidden w-full max-w-none lg:block"
+          className="relative mx-auto mt-10 w-full max-w-xl lg:mt-0 lg:max-w-none"
         >
           <BeforeAfterSlider />
         </motion.div>

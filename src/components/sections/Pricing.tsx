@@ -94,7 +94,7 @@ export default function Pricing() {
         subtitle="Choose the plan that fits your document processing needs."
       />
 
-      <div className="mt-14 grid gap-6 lg:grid-cols-4">
+      <div className="mt-9 grid gap-6 lg:grid-cols-4">
         {PLANS.map((plan, i) => (
           <motion.div
             key={plan.name}

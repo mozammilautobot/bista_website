@@ -79,8 +79,9 @@ export default function Comparison() {
         subtitle="Lower cost. Faster deployment. Smarter integration."
       />
 
+      {/* Tablet / desktop: full comparison table */}
       <Reveal delay={0.05}>
-        <div className="mx-auto mt-12 max-w-5xl overflow-hidden rounded-3xl glass">
+        <div className="mx-auto mt-8 hidden max-w-5xl overflow-hidden rounded-3xl glass md:block">
           {/* Header row */}
           <div className="grid grid-cols-[1.1fr_1fr_1.2fr] items-stretch">
             <div className="px-5 py-5 text-xs font-semibold uppercase tracking-[0.15em] text-fg/55 sm:px-7 sm:text-sm">
@@ -133,6 +134,51 @@ export default function Comparison() {
           ))}
         </div>
       </Reveal>
+
+      {/* Mobile: stacked, fully-visible comparison cards (no horizontal scroll) */}
+      <div className="mt-10 grid gap-4 md:hidden">
+        {ROWS.map((row, i) => (
+          <motion.div
+            key={row.feature}
+            initial={{ opacity: 0, y: 18 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-40px" }}
+            transition={{ duration: 0.45, delay: i * 0.05 }}
+            whileHover={{ y: -4 }}
+            className="rounded-2xl glass p-4"
+          >
+            <div className="font-display text-base font-semibold text-fg">
+              {row.feature}
+            </div>
+            <div className="mt-3 space-y-2">
+              <div className="flex items-start gap-2.5 rounded-xl bg-fg/[0.03] p-3">
+                <span className="mt-0.5 text-fg/30">
+                  <CrossIcon />
+                </span>
+                <div>
+                  <div className="text-[10px] font-semibold uppercase tracking-wider text-fg/40">
+                    Other Platforms
+                  </div>
+                  <div className="text-sm text-fg/60">{row.others}</div>
+                </div>
+              </div>
+              <div className="relative flex items-start gap-2.5 overflow-hidden rounded-xl bg-neon-cyan/[0.08] p-3 ring-1 ring-neon-cyan/25">
+                <span className="mt-0.5 text-neon-cyan">
+                  <CheckIcon />
+                </span>
+                <div className="relative">
+                  <div className="flex items-center gap-1.5 text-[10px] font-semibold uppercase tracking-wider text-neon-blue">
+                    <img src="/Bista.png" alt="" className="h-3 w-3 object-contain" />
+                    Bista Doc AI
+                  </div>
+                  <div className="text-sm font-medium text-fg">{row.bista}</div>
+                </div>
+                <span className="pointer-events-none absolute inset-0 animate-shimmer bg-[linear-gradient(110deg,transparent,rgba(34,197,94,0.14),transparent)] bg-[length:200%_100%]" />
+              </div>
+            </div>
+          </motion.div>
+        ))}
+      </div>
 
       <Reveal delay={0.1}>
         <div className="mt-8 flex justify-center">

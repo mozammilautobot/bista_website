@@ -9,6 +9,10 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      screens: {
+        xs: "475px",
+        "3xl": "1920px",
+      },
       colors: {
         // Theme-aware foreground (flips between light/dark). Supports opacity,
         // e.g. text-fg/60, border-fg/10, bg-fg/[0.04].

@@ -77,7 +77,7 @@ export default function Blog() {
         subtitle="Practical, engineering-led perspectives — the kind that help you ship, not hype."
       />
 
-      <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="mt-9 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
         {POSTS.map((p, i) => (
           <Reveal key={p.title} delay={i * 0.07}>
             <motion.a

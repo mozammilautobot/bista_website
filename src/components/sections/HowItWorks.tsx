@@ -27,7 +27,7 @@ export default function HowItWorks() {
         subtitle="A proven delivery framework that de-risks AI adoption and ships measurable value fast."
       />
 
-      <div className="relative mt-16">
+      <div className="relative mt-10">
         <div className="absolute left-0 right-0 top-7 hidden h-px bg-gradient-to-r from-transparent via-neon-cyan/40 to-transparent lg:block" />
         {/* energy pulse traveling along the timeline */}
         <motion.span

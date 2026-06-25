@@ -51,7 +51,7 @@ export default function Solutions() {
         subtitle="Every engagement starts from a measurable business outcome — cost saved, hours returned, revenue unlocked."
       />
 
-      <div className="mt-12 grid gap-5 md:grid-cols-2">
+      <div className="mt-8 grid gap-5 md:grid-cols-2">
         {SOLUTIONS.map((s, i) => (
           <Reveal key={s.title} delay={i * 0.08}>
             <motion.div

@@ -50,7 +50,7 @@ export default function AgentShowcase() {
         subtitle="Specialised autonomous agents that communicate, delegate, and complete real business tasks — working together around the clock."
       />
 
-      <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="mt-9 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
         {AGENTS.map((agent, i) => (
           <Reveal key={agent.name} delay={i * 0.08}>
             <motion.div

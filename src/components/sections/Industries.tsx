@@ -40,7 +40,7 @@ export default function Industries() {
         subtitle="Domain-tuned AI that understands the vocabulary, compliance and edge cases of your sector."
       />
 
-      <div className="mt-14 grid items-center gap-8 lg:grid-cols-2">
+      <div className="mt-9 grid items-center gap-8 lg:grid-cols-2">
         <Reveal>
           <div className="overflow-hidden rounded-3xl border border-fg/10 bg-white p-3 shadow-sm">
             <img
@@ -52,14 +52,14 @@ export default function Industries() {
           </div>
         </Reveal>
 
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 gap-4 xs:grid-cols-2">
           {INDUSTRIES.map((ind, i) => (
             <Reveal key={ind.name} delay={i * 0.05}>
               <motion.div
                 whileHover={{ y: -6, rotate: -1 }}
-                className="group relative flex items-center gap-4 overflow-hidden rounded-2xl glass p-5 transition-shadow hover:shadow-glow"
+                className="group relative flex items-center gap-4 overflow-hidden rounded-2xl glass p-4 transition-shadow hover:shadow-glow sm:p-5"
               >
-                <div className="relative grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-neon-cyan/10 text-neon-blue ring-1 ring-neon-cyan/20 transition-transform group-hover:scale-110">
+                <div className="relative grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-neon-cyan/10 text-neon-blue ring-1 ring-neon-cyan/20 transition-transform group-hover:scale-110 sm:h-12 sm:w-12">
                   <motion.span
                     aria-hidden
                     className="pointer-events-none absolute inset-0 rounded-xl ring-2 ring-neon-cyan/30"

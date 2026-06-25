@@ -89,7 +89,7 @@ function Row({
 }
 
 export default function BeforeAfterSlider() {
-  const [pos, setPos] = useState(58);
+  const [pos, setPos] = useState(46);
   const wrapRef = useRef<HTMLDivElement>(null);
   const dragging = useRef(false);
 

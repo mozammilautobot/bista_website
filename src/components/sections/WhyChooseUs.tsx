@@ -36,7 +36,7 @@ export default function WhyChooseUs() {
         }
       />
 
-      <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
         {REASONS.map((r, i) => (
           <Reveal key={r.title} delay={i * 0.07}>
             <motion.div

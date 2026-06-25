@@ -43,7 +43,7 @@ export default function Navbar() {
             alt="Bista AI logo"
             className="h-9 w-9 object-contain"
           />
-          <span className="font-display text-[32px] font-bold tracking-tight">
+          <span className="font-display text-2xl font-bold tracking-tight sm:text-[32px]">
             Bista <span className="text-neon-cyan">AI</span>
           </span>
         </a>

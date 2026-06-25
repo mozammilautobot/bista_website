@@ -54,7 +54,7 @@ export default function CaseStudies() {
         subtitle="Outcomes our clients measured after going live with Bista AI."
       />
 
-      <div className="mt-14 grid gap-5 lg:grid-cols-3">
+      <div className="mt-9 grid gap-5 lg:grid-cols-3">
         {CASES.map((c, i) => (
           <Reveal key={c.client} delay={i * 0.1}>
             <motion.div

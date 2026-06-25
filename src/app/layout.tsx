@@ -1,5 +1,11 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import "./globals.css";
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+};
 
 export const metadata: Metadata = {
   title: "Bista AI — Autonomous AI Agents & Intelligent Automation",
@@ -13,6 +19,11 @@ export const metadata: Metadata = {
     "Bista Doc AI",
     "Enterprise Automation",
   ],
+  icons: {
+    icon: "/Bista.png",
+    shortcut: "/Bista.png",
+    apple: "/Bista.png",
+  },
 };
 
 const themeScript = `(function(){try{var t=localStorage.getItem('theme');if(t==='dark'){document.documentElement.classList.add('dark');}}catch(e){}})();`;
