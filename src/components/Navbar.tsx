@@ -64,7 +64,7 @@ export default function Navbar() {
 
         <div className="flex items-center gap-3">
           <ThemeToggle />
-          <a href="https://calendly.com/mozammilrizwan/agentic-automation" className="btn-primary hidden px-5 py-2.5 sm:inline-flex">
+          <a href="https://calendly.com/mozammilrizwan/agentic-automation" target="_blank" rel="noopener noreferrer" className="btn-primary hidden px-5 py-2.5 sm:inline-flex">
             Book a Demo
           </a>
           <button

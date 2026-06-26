@@ -118,14 +118,14 @@ export default function Comparison() {
                 {row.feature}
               </div>
               <div className="flex items-center justify-center gap-2 px-5 py-4 text-center text-sm text-fg/55 sm:px-7">
-                <span className="text-fg/30">
+                <span className="inline-flex text-fg/30 transition-transform duration-300 ease-out group-hover:rotate-90">
                   <CrossIcon />
                 </span>
                 <span>{row.others}</span>
               </div>
               <div className="relative flex items-center justify-center gap-2 px-5 py-4 text-center text-sm font-medium text-fg sm:px-7">
                 <div className="absolute inset-0 bg-neon-cyan/[0.07]" />
-                <span className="relative text-neon-cyan">
+                <span className="relative inline-flex text-neon-cyan transition-transform duration-300 ease-out group-hover:scale-125">
                   <CheckIcon />
                 </span>
                 <span className="relative">{row.bista}</span>

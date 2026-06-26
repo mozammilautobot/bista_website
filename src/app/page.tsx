@@ -4,7 +4,6 @@ import AgentShowcase from "@/components/sections/AgentShowcase";
 import Solutions from "@/components/sections/Solutions";
 import ProductShowcase from "@/components/sections/ProductShowcase";
 import Comparison from "@/components/sections/Comparison";
-import HowItWorks from "@/components/sections/HowItWorks";
 import Industries from "@/components/sections/Industries";
 import WhyChooseUs from "@/components/sections/WhyChooseUs";
 import CaseStudies from "@/components/sections/CaseStudies";
@@ -32,14 +31,13 @@ export default function Home() {
       <AgentShowcase />
       <Solutions />
       <Comparison />
-      <HowItWorks />
+      <Innovation />
       <Industries />
       <WhyChooseUs />
       <ResultsBand />
       <CaseStudies />
       <TechStack />
       <RoiCalculator />
-      <Innovation />
       <Testimonials />
       <Blog />
       <Pricing />

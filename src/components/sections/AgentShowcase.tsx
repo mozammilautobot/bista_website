@@ -5,6 +5,7 @@ import { Search, Mail, MessageSquare, Cog, type LucideIcon } from "lucide-react"
 import SectionHeading from "@/components/ui/SectionHeading";
 import Reveal from "@/components/ui/Reveal";
 import PhenomFlow from "@/components/ui/PhenomFlow";
+import AnimatedIcon from "@/components/ui/AnimatedIcon";
 
 const AGENTS: {
   name: string;
@@ -64,9 +65,7 @@ export default function AgentShowcase() {
               <div
                 className={`pointer-events-none absolute -right-10 -top-10 h-40 w-40 rounded-full bg-gradient-to-br ${agent.accent} blur-2xl opacity-0 transition-opacity duration-500 group-hover:opacity-100`}
               />
-              <div className="relative grid h-12 w-12 place-items-center rounded-2xl bg-neon-cyan/10 text-neon-blue ring-1 ring-neon-cyan/20">
-                <agent.icon className="h-6 w-6" strokeWidth={1.75} />
-              </div>
+              <AnimatedIcon icon={agent.icon} size="md" delay={i * 0.2} />
               <h3 className="relative mt-5 font-display text-lg font-semibold">
                 {agent.name}
               </h3>
@@ -74,16 +73,16 @@ export default function AgentShowcase() {
                 {agent.points.map((p) => (
                   <li
                     key={p}
-                    className="flex items-center gap-2 text-sm text-fg/60 transition-colors group-hover:text-fg/80"
+                    className="flex items-center gap-2 text-sm text-fg/70 transition-colors group-hover:text-fg/90"
                   >
-                    <span className="h-1.5 w-1.5 rounded-full bg-neon-cyan" />
+                    <span className="h-1.5 w-1.5 rounded-full bg-[#7bd3cf]" />
                     {p}
                   </li>
                 ))}
               </ul>
               <div className="relative mt-6 h-px w-full bg-gradient-to-r from-transparent via-fg/15 to-transparent" />
-              <div className="relative mt-4 flex items-center gap-2 text-xs text-neon-cyan/80">
-                <span className="h-1.5 w-1.5 animate-pulseGlow rounded-full bg-neon-cyan" />
+              <div className="relative mt-4 flex items-center gap-2 text-xs font-medium text-[#7bd3cf]">
+                <span className="h-1.5 w-1.5 animate-pulseGlow rounded-full bg-[#7bd3cf] shadow-[0_0_8px_rgba(123,211,207,0.9)]" />
                 Active · Autonomous
               </div>
             </motion.div>

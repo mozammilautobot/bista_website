@@ -103,7 +103,7 @@ export default function Pricing() {
             viewport={{ once: true, margin: "-60px" }}
             transition={{ duration: 0.5, delay: i * 0.08 }}
             whileHover={{ y: -10 }}
-            className={`relative flex flex-col rounded-[1.75rem] p-8 ${
+            className={`group relative flex flex-col rounded-[1.75rem] p-8 ${
               plan.popular
                 ? "bg-gradient-to-b from-neon-cyan/[0.12] to-neon-blue/[0.06] ring-2 ring-neon-cyan/50 shadow-glow lg:-mt-4 lg:mb-0"
                 : "glass"
@@ -143,7 +143,7 @@ export default function Pricing() {
             <ul className="mt-7 flex-1 space-y-3.5">
               {plan.features.map((f) => (
                 <li key={f} className="flex items-center gap-2.5 text-sm text-fg/70">
-                  <span className="text-neon-cyan">
+                  <span className="inline-flex text-neon-cyan transition-transform duration-300 ease-out group-hover:scale-125">
                     <CheckIcon />
                   </span>
                   {f}

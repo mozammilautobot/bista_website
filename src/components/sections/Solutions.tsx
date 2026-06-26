@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { FileText, Bot, RefreshCw, Rocket, type LucideIcon } from "lucide-react";
 import SectionHeading from "@/components/ui/SectionHeading";
 import Reveal from "@/components/ui/Reveal";
+import AnimatedIcon from "@/components/ui/AnimatedIcon";
 
 const SOLUTIONS: {
   title: string;
@@ -61,13 +62,11 @@ export default function Solutions() {
               <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-neon-cyan/0 to-neon-blue/0 opacity-0 transition-opacity duration-500 group-hover:from-neon-cyan/[0.06] group-hover:to-neon-blue/[0.04] group-hover:opacity-100" />
               <s.icon
                 aria-hidden
-                className="pointer-events-none absolute -bottom-7 -right-7 h-40 w-40 text-neon-cyan/[0.04] transition-all duration-500 ease-out group-hover:-bottom-3 group-hover:-right-3 group-hover:rotate-6 group-hover:scale-110 group-hover:text-neon-cyan/[0.16]"
+                className="pointer-events-none absolute -bottom-7 -right-7 h-40 w-40 text-fg/[0.04] transition-all duration-500 ease-out group-hover:-bottom-3 group-hover:-right-3 group-hover:rotate-6 group-hover:scale-110 group-hover:text-fg/[0.10]"
                 strokeWidth={1}
               />
               <div className="relative flex items-start justify-between">
-                <div className="grid h-12 w-12 place-items-center rounded-2xl bg-neon-cyan/10 text-neon-blue ring-1 ring-neon-cyan/20">
-                  <s.icon className="h-6 w-6" strokeWidth={1.75} />
-                </div>
+                <AnimatedIcon icon={s.icon} size="md" delay={i * 0.15} />
                 <span className="rounded-full border border-fg/10 bg-fg/5 px-3 py-1 text-[11px] text-fg/50">
                   Problem → Outcome
                 </span>

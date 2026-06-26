@@ -65,30 +65,30 @@ export default function Testimonials() {
               {/* animated top accent */}
               <span className="pointer-events-none absolute left-0 top-0 h-1 w-0 bg-gradient-to-r from-neon-cyan to-neon-blue transition-all duration-500 group-hover:w-full" />
               {/* oversized decorative quote */}
-              <span className="pointer-events-none absolute -right-1 -top-8 select-none font-display text-[7rem] leading-none text-neon-cyan/[0.06] transition-all duration-500 group-hover:-top-5 group-hover:text-neon-cyan/[0.13]">
+              <span className="pointer-events-none absolute -right-1 -top-8 select-none font-display text-[7rem] leading-none text-white/[0.07] transition-all duration-500 group-hover:-top-5 group-hover:text-white/[0.14]">
                 &rdquo;
               </span>
 
-              <div className="relative text-3xl leading-none text-neon-cyan/60">&ldquo;</div>
+              <div className="relative text-3xl leading-none text-[#7bd3cf]">&ldquo;</div>
               <p className="relative mt-2 flex-1 text-sm leading-relaxed text-fg/75">
                 {q.quote}
               </p>
 
-              <div className="relative mt-5 flex items-center gap-3 rounded-2xl bg-fg/[0.03] p-3 ring-1 ring-transparent transition-all duration-500 group-hover:bg-neon-cyan/[0.05] group-hover:ring-neon-cyan/20">
+              <div className="relative mt-5 flex items-center gap-3 rounded-2xl bg-fg/[0.03] p-3 ring-1 ring-transparent transition-all duration-500 group-hover:bg-[#7bd3cf]/[0.08] group-hover:ring-[#7bd3cf]/25">
                 <div className="text-center">
                   <div className="text-[10px] uppercase text-fg/40">Before</div>
                   <div className="font-display font-bold text-fg/70">{q.before}</div>
                 </div>
                 <motion.div
                   aria-hidden
-                  className="text-neon-cyan"
+                  className="text-[#7bd3cf]"
                   animate={{ x: [0, 4, 0] }}
                   transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
                 >
                   →
                 </motion.div>
                 <div className="text-center">
-                  <div className="text-[10px] uppercase text-neon-cyan/80">After</div>
+                  <div className="text-[10px] uppercase text-[#7bd3cf]">After</div>
                   <div className="font-display font-bold text-fg">{q.after}</div>
                 </div>
                 <div className="ml-auto text-right text-[11px] text-fg/45">
@@ -97,9 +97,9 @@ export default function Testimonials() {
               </div>
 
               <div className="relative mt-5 flex items-center gap-3">
-                <span className="relative grid h-10 w-10 shrink-0 place-items-center rounded-full bg-gradient-to-br from-neon-cyan to-neon-blue font-display text-sm font-bold text-ink-950 transition-transform duration-500 group-hover:scale-110">
+                <span className="relative grid h-10 w-10 shrink-0 place-items-center rounded-full bg-gradient-to-br from-[#7bd3cf] to-[#ab9cee] font-display text-sm font-bold text-ink-950 transition-transform duration-500 group-hover:scale-110">
                   {q.name.charAt(0)}
-                  <span className="pointer-events-none absolute inset-0 rounded-full bg-neon-cyan/40 opacity-0 blur-md transition-opacity duration-500 group-hover:opacity-100" />
+                  <span className="pointer-events-none absolute inset-0 rounded-full bg-[#7bd3cf]/40 opacity-0 blur-md transition-opacity duration-500 group-hover:opacity-100" />
                 </span>
                 <div>
                   <div className="text-sm font-semibold">{q.name}</div>

@@ -28,7 +28,7 @@ export default function Footer() {
             Autonomous AI agents, Intelligent Document Processing, and workflow
             automation for modern enterprises.
           </p>
-          <a href="https://calendly.com/mozammilrizwan/agentic-automation" className="btn-primary mt-6 inline-flex px-5 py-2.5">
+          <a href="https://calendly.com/mozammilrizwan/agentic-automation" target="_blank" rel="noopener noreferrer" className="btn-primary mt-6 inline-flex px-5 py-2.5">
             Book a Demo
           </a>
         </div>

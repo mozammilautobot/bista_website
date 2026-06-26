@@ -30,10 +30,10 @@ export default function FinalCta() {
                 workflow tailored to your use case.
               </p>
               <div className="mt-8 flex flex-wrap gap-4">
-                <a href="https://calendly.com/mozammilrizwan/agentic-automation" className="btn-primary">
+                <a href="https://calendly.com/mozammilrizwan/agentic-automation" target="_blank" rel="noopener noreferrer" className="btn-primary">
                   Schedule Demo
                 </a>
-                <a href="https://calendly.com/mozammilrizwan/agentic-automation" className="btn-ghost">
+                <a href="https://calendly.com/mozammilrizwan/agentic-automation" target="_blank" rel="noopener noreferrer" className="btn-ghost">
                   Talk to an AI Expert
                 </a>
               </div>
@@ -54,7 +54,7 @@ export default function FinalCta() {
                         initial={{ scale: 0, rotate: -90 }}
                         animate={{ scale: 1, rotate: 0 }}
                         transition={{ type: "spring", stiffness: 260, damping: 16 }}
-                        className="mx-auto mb-3 grid h-14 w-14 place-items-center rounded-full bg-neon-cyan/15 text-neon-cyan ring-1 ring-neon-cyan/30"
+                        className="mx-auto mb-3 grid h-14 w-14 place-items-center rounded-full bg-[#7bd3cf]/15 text-[#7bd3cf] ring-1 ring-[#7bd3cf]/35"
                       >
                         <Check className="h-7 w-7" strokeWidth={2.5} />
                       </motion.div>

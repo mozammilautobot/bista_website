@@ -1,12 +1,13 @@
-@import url("https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  --font-sans: "Hanken Grotesk", ui-sans-serif, system-ui, sans-serif;
-  --font-display: "Hanken Grotesk", var(--font-sans);
+  --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Display",
+    "SF Pro Text", "Inter", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-display: var(--font-sans);
 
   /* Light theme (default) — phenom.com-style white canvas, near-black ink */
   --fg: 20 20 30; /* near-black ink */
@@ -59,6 +60,7 @@ body {
   background-color: rgb(var(--bg));
   color: rgb(var(--fg));
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 html {
@@ -134,7 +136,7 @@ h3 {
     text-shadow: 0 0 26px rgba(69, 67, 217, 0.32);
   }
   .section {
-    @apply relative mx-auto w-full max-w-7xl px-4 py-7 sm:px-6 sm:py-9 lg:px-8 lg:py-11 2xl:max-w-[1440px] min-[1920px]:max-w-[1600px];
+    @apply relative mx-auto w-full max-w-7xl px-6 py-7 sm:px-10 sm:py-9 lg:px-16 lg:py-11 2xl:max-w-[1440px] min-[1920px]:max-w-[1600px];
   }
   /* phenom.com-style full-bleed band wrapper. Pair `.band` (outer, full width)
      with an inner `.section` for constrained content. */
@@ -159,6 +161,11 @@ h3 {
   /* Eyebrow tuned for dark bands (brighter, pastel-leaning). */
   .band-black .eyebrow {
     @apply border-white/15 bg-white/[0.06] text-white/75;
+  }
+  /* The eyebrow accent dot is indigo by default — too dark on a black band.
+     Re-point it to the bright teal so it stays clearly visible. */
+  .band-black .eyebrow span {
+    background-color: #7bd3cf;
   }
   .eyebrow {
     @apply mb-4 inline-flex max-w-full flex-wrap items-center gap-2 rounded-full border border-neon-cyan/20 bg-neon-cyan/[0.06] px-3.5 py-1.5 text-[10px] font-semibold uppercase leading-tight tracking-[0.14em] text-neon-cyan sm:px-4 sm:text-[11px] sm:tracking-[0.22em];

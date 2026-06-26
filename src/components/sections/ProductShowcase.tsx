@@ -3,11 +3,10 @@
 import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import {
-  Upload,
-  Bot,
-  BarChart3,
-  Database,
-  Receipt,
+  UploadCloud,
+  ScanText,
+  FileSpreadsheet,
+  Network,
   Check,
   type LucideIcon,
 } from "lucide-react";
@@ -16,10 +15,10 @@ import Reveal from "@/components/ui/Reveal";
 import AnimatedIcon from "@/components/ui/AnimatedIcon";
 
 const PIPELINE: { icon: LucideIcon; label: string }[] = [
-  { icon: Upload, label: "Upload Document" },
-  { icon: Bot, label: "AI Analysis" },
-  { icon: BarChart3, label: "Structured Data" },
-  { icon: Database, label: "ERP / CRM Integration" },
+  { icon: UploadCloud, label: "Upload Document" },
+  { icon: ScanText, label: "AI Analysis" },
+  { icon: FileSpreadsheet, label: "Structured Data" },
+  { icon: Network, label: "ERP / CRM Integration" },
 ];
 
 const EXTRACTED = [
@@ -53,8 +52,8 @@ export default function ProductShowcase() {
         <div className="mx-auto mt-10 grid max-w-3xl grid-cols-2 gap-3 sm:grid-cols-4">
           {PIPELINE.map((step, i) => (
             <div key={step.label} className="relative">
-              <div className="glass flex h-full flex-col items-center gap-2.5 rounded-2xl px-3 py-4 text-center">
-                <AnimatedIcon icon={step.icon} size="sm" delay={i * 0.18} />
+              <div className="glass flex h-full flex-col items-center gap-3 rounded-2xl px-3 py-5 text-center">
+                <AnimatedIcon icon={step.icon} size="md" delay={i * 0.28} />
                 <span className="text-xs font-medium text-fg/70">{step.label}</span>
               </div>
               {i < PIPELINE.length - 1 && (
@@ -241,7 +240,11 @@ function LiveDemo() {
         {stage === "idle" && (
           <div className="grid h-[240px] place-items-center text-center">
             <div className="text-fg/40">
-              <AnimatedIcon icon={Receipt} size="lg" className="mx-auto mb-3" />
+              <AnimatedIcon
+                icon={FileSpreadsheet}
+                size="lg"
+                className="mx-auto mb-4"
+              />
               <p className="text-sm">
                 Click <span className="text-neon-cyan">Process sample invoice</span> to
                 see live extraction.

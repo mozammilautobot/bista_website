@@ -11,7 +11,8 @@ import {
 import SectionHeading from "@/components/ui/SectionHeading";
 import Reveal from "@/components/ui/Reveal";
 import PhenomFlow from "@/components/ui/PhenomFlow";
-import AIEngineViz from "@/components/ui/AIEngineViz";
+import DeploymentSnake from "@/components/ui/DeploymentSnake";
+import AnimatedIcon from "@/components/ui/AnimatedIcon";
 
 const FEATURES: { title: string; desc: string; icon: LucideIcon }[] = [
   { title: "Own Developed Model", desc: "Deep models tuned to your domain data.", icon: BrainCircuit },
@@ -22,11 +23,12 @@ const FEATURES: { title: string; desc: string; icon: LucideIcon }[] = [
 
 export default function Innovation() {
   return (
-    <section id="innovation" className="relative overflow-hidden">
-      <PhenomFlow variant="page" />
+    <section id="innovation" className="band band-black">
+      <PhenomFlow variant="dark" />
       <div className="section relative z-10">
         <SectionHeading
           eyebrow="AI Innovation"
+          tone="dark"
           title={
             <>
               Where <span className="text-gradient-violet">futurism</span> meets function
@@ -37,22 +39,13 @@ export default function Innovation() {
 
         <div className="mt-10 grid items-center gap-10 lg:grid-cols-[0.85fr_1.15fr]">
           <Reveal>
-            <div className="relative mx-auto w-full max-w-[440px]">
-              {/* rotating pastel glow behind the video (phenom hero feel) */}
+            <div id="how" className="relative mx-auto w-full max-w-[340px] scroll-mt-28">
               <motion.div
-                aria-hidden
-                className="pointer-events-none absolute -inset-4 rounded-[2.25rem] bg-[conic-gradient(from_0deg,#ff8045,#7bd3cf,#ab9cee,#4543d9,#ff8045)] opacity-40 blur-2xl"
-                animate={{ rotate: 360 }}
-                transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-              />
-              <motion.div
-                className="relative overflow-hidden rounded-[1.85rem] ring-1 ring-white/15 shadow-[0_34px_90px_-32px_rgba(69,67,217,0.55)]"
-                animate={{ y: [0, -8, 0] }}
+                className="relative"
+                animate={{ y: [0, -6, 0] }}
                 transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
               >
-                <AIEngineViz />
-                {/* subtle veil for depth */}
-                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink-950/25 via-transparent to-transparent" />
+                <DeploymentSnake />
               </motion.div>
             </div>
           </Reveal>
@@ -61,9 +54,7 @@ export default function Innovation() {
             {FEATURES.map((f, i) => (
               <Reveal key={f.title} delay={i * 0.08}>
                 <div className="group h-full rounded-2xl glass p-4 transition-shadow hover:shadow-glow-violet">
-                  <div className="grid h-9 w-9 place-items-center rounded-xl bg-neon-cyan/10 text-neon-blue ring-1 ring-neon-cyan/20">
-                    <f.icon className="h-4 w-4" strokeWidth={1.75} />
-                  </div>
+                  <AnimatedIcon icon={f.icon} size="xs" delay={i * 0.18} />
                   <h3 className="mt-2.5 font-display text-sm font-semibold">{f.title}</h3>
                   <p className="mt-1 text-[13px] leading-snug text-fg/55">{f.desc}</p>
                 </div>
