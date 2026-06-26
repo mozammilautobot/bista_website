@@ -196,7 +196,7 @@ export default function DeploymentSnake() {
                     transition={{ duration: 2.8, repeat: Infinity, ease: "easeInOut", delay: i * 0.35 }}
                   />
                 )}
-                <s.icon className="relative h-3.5 w-3.5" strokeWidth={2} />
+                <s.icon className="relative h-3.5 w-3.5" strokeWidth={1.5} />
               </span>
               <span
                 className="font-display text-[10px] font-semibold tracking-[0.25em]"

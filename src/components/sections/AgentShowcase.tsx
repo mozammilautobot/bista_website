@@ -1,94 +1,162 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { Search, Mail, MessageSquare, Cog, type LucideIcon } from "lucide-react";
+import { useId, useState } from "react";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { Search, Mail, MessageSquare, Cog, Plus, type LucideIcon } from "lucide-react";
 import SectionHeading from "@/components/ui/SectionHeading";
 import Reveal from "@/components/ui/Reveal";
-import PhenomFlow from "@/components/ui/PhenomFlow";
-import AnimatedIcon from "@/components/ui/AnimatedIcon";
 
-const AGENTS: {
+type Agent = {
   name: string;
+  category: string;
   icon: LucideIcon;
-  accent: string;
+  description: string;
   points: string[];
-}[] = [
+  image: string;
+};
+
+const AGENTS: Agent[] = [
   {
     name: "AI Research Agent",
+    category: "Research",
     icon: Search,
-    accent: "from-neon-cyan/20 to-neon-blue/10",
+    description: "Company research, market intelligence and lead discovery — automated.",
     points: ["Company Research", "Market Intelligence", "Lead Discovery"],
+    image: "/images/agents/agent-research.jpg",
   },
   {
     name: "AI SDR Agent",
+    category: "Outreach",
     icon: Mail,
-    accent: "from-neon-blue/20 to-neon-violet/10",
+    description: "Personalised outreach, follow-ups and meeting booking that runs itself.",
     points: ["Personalized Outreach", "Automated Follow-ups", "Meeting Booking"],
+    image: "/images/agents/agent-sdr.jpg",
   },
   {
-    name: "Customer Support",
+    name: "AI Customer Support Agent",
+    category: "Support",
     icon: MessageSquare,
-    accent: "from-neon-violet/20 to-neon-cyan/10",
+    description: "Round-the-clock answers, ticket resolution and smart escalation.",
     points: ["24/7 Support", "Ticket Resolution", "Smart Escalation"],
+    image: "/images/agents/agent-support.jpg",
   },
   {
     name: "AI Operations Agent",
+    category: "Operations",
     icon: Cog,
-    accent: "from-neon-violet/20 to-fuchsia-400/10",
+    description: "Workflow automation, task orchestration and live system monitoring.",
     points: ["Workflow Automation", "Task Orchestration", "System Monitoring"],
+    image: "/images/agents/agent-operations.jpg",
   },
 ];
 
+function AgentCard({ agent, index }: { agent: Agent; index: number }) {
+  const reduce = useReducedMotion();
+  const [open, setOpen] = useState(false);
+  const panelId = useId();
+  const Icon = agent.icon;
+
+  return (
+    <Reveal delay={index * 0.08} className="h-full">
+      <motion.div
+        whileHover={reduce ? undefined : { y: -4 }}
+        transition={{ type: "spring", stiffness: 300, damping: 24 }}
+        className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-fg/[0.06] bg-white p-3.5 shadow-[0_1px_2px_rgba(20,24,60,0.04),0_18px_48px_-32px_rgba(20,24,60,0.22)] transition-shadow duration-300 hover:shadow-[0_1px_2px_rgba(20,24,60,0.05),0_24px_56px_-30px_rgba(69,67,217,0.28)]"
+      >
+        <div className="flex items-center gap-1.5 text-fg/55">
+          <Icon className="h-3 w-3" strokeWidth={1.5} aria-hidden />
+          <span className="text-[10px] font-semibold uppercase tracking-[0.16em]">
+            {agent.category}
+          </span>
+        </div>
+
+        <h3 className="mt-1.5 font-display text-sm font-semibold tracking-[-0.02em] text-fg">
+          {agent.name}
+        </h3>
+        <p className="mt-1 text-xs leading-relaxed text-fg/55">
+          {agent.description}
+        </p>
+
+        <AnimatePresence initial={false}>
+          {open && (
+            <motion.ul
+              id={panelId}
+              initial={reduce ? false : { height: 0, opacity: 0 }}
+              animate={{ height: "auto", opacity: 1 }}
+              exit={reduce ? { opacity: 0 } : { height: 0, opacity: 0 }}
+              transition={{ duration: 0.32, ease: [0.22, 1, 0.36, 1] }}
+              className="mt-3 space-y-1.5 overflow-hidden"
+            >
+              {agent.points.map((p) => (
+                <li key={p} className="flex items-center gap-2 text-xs text-fg/70">
+                  <span className="h-1.5 w-1.5 rounded-full bg-neon-cyan" />
+                  {p}
+                </li>
+              ))}
+            </motion.ul>
+          )}
+        </AnimatePresence>
+
+        <div className="relative mt-3 flex flex-1 items-end">
+          <div className="relative w-full overflow-hidden rounded-xl bg-fg/[0.02]">
+            <img
+              src={agent.image}
+              alt={`${agent.name} illustration`}
+              loading="lazy"
+              decoding="async"
+              onError={(e) => {
+                (e.currentTarget as HTMLImageElement).style.display = "none";
+              }}
+              className="aspect-[2/1] w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.03] motion-reduce:transition-none motion-reduce:group-hover:scale-100"
+            />
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink-950/30 via-transparent to-transparent" />
+          </div>
+
+          <button
+            type="button"
+            onClick={() => setOpen((v) => !v)}
+            aria-expanded={open}
+            aria-controls={panelId}
+            aria-label={
+              open
+                ? `Hide ${agent.name} capabilities`
+                : `Show ${agent.name} capabilities`
+            }
+            className="absolute bottom-3 right-3 grid h-7 w-7 place-items-center rounded-full bg-fg text-canvas shadow-[0_8px_20px_-8px_rgba(20,24,60,0.6)] transition-transform duration-300 hover:scale-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neon-cyan/60 focus-visible:ring-offset-2 focus-visible:ring-offset-white active:scale-95"
+          >
+            <motion.span
+              animate={{ rotate: open ? 45 : 0 }}
+              transition={{ duration: reduce ? 0 : 0.25, ease: "easeOut" }}
+              className="grid place-items-center"
+            >
+              <Plus className="h-4 w-4" strokeWidth={2} aria-hidden />
+            </motion.span>
+          </button>
+        </div>
+      </motion.div>
+    </Reveal>
+  );
+}
+
 export default function AgentShowcase() {
   return (
-    <section id="agents" className="band band-black">
-      <PhenomFlow variant="dark" />
+    <section id="agents" className="band bg-fg/[0.02]">
       <div className="section relative z-10">
-      <SectionHeading
-        eyebrow="Agentic AI"
-        tone="dark"
-        title={
-          <>
-            A connected workforce of <span className="text-gradient">AI agents</span>
-          </>
-        }
-        subtitle="Specialised autonomous agents that communicate, delegate, and complete real business tasks — working together around the clock."
-      />
+        <SectionHeading
+          eyebrow="Agentic AI"
+          title={
+            <>
+              A connected workforce of <span className="text-gradient">AI agents</span>
+            </>
+          }
+          subtitle="Specialised autonomous agents that communicate, delegate, and complete real business tasks — working together around the clock."
+        />
 
-      <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-        {AGENTS.map((agent, i) => (
-          <Reveal key={agent.name} delay={i * 0.08}>
-            <motion.div
-              whileHover={{ y: -8 }}
-              className="group relative h-full overflow-hidden rounded-[1.75rem] glass p-7 transition-shadow duration-300 hover:shadow-glow"
-            >
-              <div
-                className={`pointer-events-none absolute -right-10 -top-10 h-40 w-40 rounded-full bg-gradient-to-br ${agent.accent} blur-2xl opacity-0 transition-opacity duration-500 group-hover:opacity-100`}
-              />
-              <AnimatedIcon icon={agent.icon} size="md" delay={i * 0.2} />
-              <h3 className="relative mt-5 font-display text-lg font-semibold">
-                {agent.name}
-              </h3>
-              <ul className="relative mt-4 space-y-2.5">
-                {agent.points.map((p) => (
-                  <li
-                    key={p}
-                    className="flex items-center gap-2 text-sm text-fg/70 transition-colors group-hover:text-fg/90"
-                  >
-                    <span className="h-1.5 w-1.5 rounded-full bg-[#7bd3cf]" />
-                    {p}
-                  </li>
-                ))}
-              </ul>
-              <div className="relative mt-6 h-px w-full bg-gradient-to-r from-transparent via-fg/15 to-transparent" />
-              <div className="relative mt-4 flex items-center gap-2 text-xs font-medium text-[#7bd3cf]">
-                <span className="h-1.5 w-1.5 animate-pulseGlow rounded-full bg-[#7bd3cf] shadow-[0_0_8px_rgba(123,211,207,0.9)]" />
-                Active · Autonomous
-              </div>
-            </motion.div>
-          </Reveal>
-        ))}
-      </div>
+        <div className="mx-auto mt-8 grid max-w-6xl gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {AGENTS.map((agent, i) => (
+            <AgentCard key={agent.name} agent={agent} index={i} />
+          ))}
+        </div>
       </div>
     </section>
   );

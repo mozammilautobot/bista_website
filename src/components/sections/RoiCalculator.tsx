@@ -28,9 +28,9 @@ function Slider({
 }) {
   return (
     <div>
-      <div className="mb-2 flex items-center justify-between">
-        <label className="text-sm text-fg/60">{label}</label>
-        <span className="font-display text-sm font-semibold text-neon-cyan">
+      <div className="mb-1.5 flex items-center justify-between">
+        <label className="text-xs text-fg/60">{label}</label>
+        <span className="font-display text-xs font-semibold text-neon-cyan">
           {format(value)}
         </span>
       </div>
@@ -41,7 +41,7 @@ function Slider({
         step={step}
         value={value}
         onChange={(e) => onChange(Number(e.target.value))}
-        className="h-1.5 w-full cursor-pointer appearance-none rounded-full bg-fg/10 accent-neon-cyan"
+        className="h-1 w-full cursor-pointer appearance-none rounded-full bg-fg/10 accent-neon-cyan"
       />
     </div>
   );
@@ -79,8 +79,8 @@ export default function RoiCalculator() {
       />
 
       <Reveal delay={0.05}>
-        <div className="mt-8 grid gap-6 rounded-3xl glass p-6 sm:p-8 lg:grid-cols-2">
-          <div className="space-y-7">
+        <div className="mx-auto mt-6 grid max-w-4xl gap-5 rounded-2xl glass p-4 sm:p-5 lg:grid-cols-2">
+          <div className="space-y-4">
             <Slider
               label="Monthly documents"
               value={docs}
@@ -119,8 +119,8 @@ export default function RoiCalculator() {
             />
           </div>
 
-          <div className="grid grid-rows-2 gap-4">
-            <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-rows-2 gap-3">
+            <div className="grid grid-cols-2 gap-3">
               <Metric label="Current monthly cost" value={inr(currentCost)} muted />
               <Metric label="Hours saved / month" value={`${Math.round(hoursSaved).toLocaleString("en-IN")}h`} muted />
             </div>
@@ -128,26 +128,26 @@ export default function RoiCalculator() {
               key={Math.round(savings)}
               initial={{ scale: 0.98, opacity: 0.6 }}
               animate={{ scale: 1, opacity: 1 }}
-              className="relative flex flex-col justify-center overflow-hidden rounded-2xl bg-gradient-to-br from-neon-cyan/15 to-neon-blue/10 p-6 ring-1 ring-neon-cyan/30"
+              className="relative flex flex-col justify-center overflow-hidden rounded-xl bg-gradient-to-br from-neon-cyan/15 to-neon-blue/10 p-4 ring-1 ring-neon-cyan/30"
             >
-              <div className="text-xs uppercase tracking-wider text-neon-cyan/90">
+              <div className="text-[10px] uppercase tracking-wider text-neon-cyan/90">
                 Potential savings / month
               </div>
-              <div className="mt-1 font-display text-4xl font-bold text-fg sm:text-5xl">
+              <div className="mt-0.5 font-display text-3xl font-bold text-fg sm:text-4xl">
                 {inr(savings)}
               </div>
-              <div className="mt-2 text-sm text-fg/60">
+              <div className="mt-1.5 text-xs text-fg/60">
                 ≈ <span className="font-semibold text-fg">{inr(annualSavings)}</span> per
                 year
               </div>
-              <a href="#contact" className="btn-primary mt-5 w-fit">
+              <a href="#contact" className="btn-primary mt-4 w-fit">
                 Get a tailored ROI report
               </a>
             </motion.div>
           </div>
         </div>
       </Reveal>
-      <p className="mt-4 text-center text-xs text-fg/35">
+      <p className="mt-3 text-center text-xs text-fg/35">
         Illustrative estimate. Actual results depend on document complexity and process scope.
       </p>
     </section>
@@ -165,12 +165,12 @@ function Metric({
 }) {
   return (
     <div
-      className={`flex flex-col justify-center rounded-2xl p-5 ${
+      className={`flex flex-col justify-center rounded-xl p-3.5 ${
         muted ? "glass" : ""
       }`}
     >
-      <div className="text-xs text-fg/45">{label}</div>
-      <div className="mt-1 font-display text-2xl font-bold text-fg">{value}</div>
+      <div className="text-[11px] text-fg/45">{label}</div>
+      <div className="mt-0.5 font-display text-xl font-bold text-fg">{value}</div>
     </div>
   );
 }

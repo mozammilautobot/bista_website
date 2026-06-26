@@ -27,11 +27,11 @@ export default function Hero() {
   return (
     <section
       id="top"
-      className="relative flex min-h-screen flex-col overflow-hidden pt-28"
+      className="relative flex min-h-[88vh] flex-col overflow-hidden pt-32 sm:pt-36"
     >
       <PhenomFlow variant="hero" />
 
-      <div className="section relative z-10 grid flex-1 items-center gap-12 py-0.5 lg:grid-cols-[1.4fr_1fr]">
+      <div className="section relative z-10 grid flex-1 items-center gap-10 py-0.5 sm:!px-14 lg:!px-24 lg:grid-cols-[1.4fr_1fr]">
         <div>
           <motion.span
             initial={{ opacity: 0, y: 14 }}
@@ -47,12 +47,12 @@ export default function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.05 }}
-            className="font-display text-[2.6rem] font-medium leading-[1.0] tracking-[-0.035em] xs:text-6xl sm:text-7xl md:text-[5.25rem] lg:text-[5.75rem]"
+            className="font-display text-[clamp(1.5rem,7vw,2.15rem)] font-medium leading-[1.05] tracking-[-0.035em] sm:text-5xl md:text-[3.75rem] lg:text-[4.25rem]"
           >
             <span className="block">AI Powered</span>
             <RotatingText
               words={ROTATING_WORDS}
-              className="h-1.05 w-1.05 text-gradient-pastel"
+              className="text-gradient-pastel"
             />
           </motion.h1>
 
@@ -84,7 +84,7 @@ export default function Hero() {
             </a>
           </motion.div>
 
-          <div className="mt-14 grid max-w-lg grid-cols-2 gap-x-8 gap-y-8 sm:grid-cols-4">
+          <div className="mt-10 grid max-w-lg grid-cols-2 gap-x-8 gap-y-6 sm:grid-cols-4">
             {STATS.map((s, i) => {
               const fill = `${s.bar}%`;
               return (
@@ -97,22 +97,9 @@ export default function Hero() {
                   className="group relative isolate"
                 >
                   <motion.div
-                    animate={reduce ? undefined : { y: [0, -6, 0] }}
-                    transition={
-                      reduce
-                        ? undefined
-                        : {
-                            duration: 4 + i * 0.4,
-                            repeat: Infinity,
-                            ease: "easeInOut",
-                            delay: i * 0.5,
-                          }
-                    }
-                  >
-                    <motion.div
-                      initial="rest"
-                      animate="rest"
-                      whileHover={reduce ? undefined : "hover"}
+                    initial="rest"
+                    animate="rest"
+                    whileHover={reduce ? undefined : "hover"}
                       variants={{ rest: { y: 0, scale: 1 }, hover: { y: -5, scale: 1.03 } }}
                       transition={{ type: "spring", stiffness: 280, damping: 18 }}
                       className="relative cursor-default"
@@ -214,7 +201,6 @@ export default function Hero() {
                         </motion.div>
                       </div>
                     </motion.div>
-                  </motion.div>
                 </motion.div>
               );
             })}

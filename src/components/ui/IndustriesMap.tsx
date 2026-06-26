@@ -73,7 +73,7 @@ export default function IndustriesMap() {
   const reduced = useReducedMotion();
 
   return (
-    <div className="relative aspect-[10/7] w-full select-none">
+    <div className="relative aspect-[10/7] min-h-[260px] w-full select-none sm:min-h-[320px]">
       {/* faint floating pastel decorations */}
       {DECOR.map((d, i) => (
         <motion.span
@@ -204,7 +204,7 @@ export default function IndustriesMap() {
             <span className="pointer-events-none absolute left-2 top-1.5 h-2.5 w-2.5 rounded-full bg-white/80 blur-[1px]" />
             <BrainCircuit
               className="relative h-7 w-7 text-white drop-shadow-[0_2px_6px_rgba(31,42,172,0.9)] sm:h-8 sm:w-8"
-              strokeWidth={1.75}
+              strokeWidth={1.5}
             />
           </div>
         </div>
@@ -232,7 +232,7 @@ export default function IndustriesMap() {
             title={n.name}
           >
             <span className="pointer-events-none absolute inset-x-1.5 top-1.5 h-1/2 rounded-2xl bg-gradient-to-b from-white/55 to-transparent opacity-70" />
-            <n.icon className="relative h-6 w-6 sm:h-7 sm:w-7" strokeWidth={1.75} />
+            <n.icon className="relative h-6 w-6 sm:h-7 sm:w-7" strokeWidth={1.5} />
           </div>
         </div>
       ))}

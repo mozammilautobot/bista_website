@@ -1,42 +1,119 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { FileText, Bot, RefreshCw, Rocket, type LucideIcon } from "lucide-react";
 import SectionHeading from "@/components/ui/SectionHeading";
 import Reveal from "@/components/ui/Reveal";
-import AnimatedIcon from "@/components/ui/AnimatedIcon";
 
-const SOLUTIONS: {
+type Solution = {
   title: string;
-  problem: string;
+  category: string;
   icon: LucideIcon;
-  points: string[];
-}[] = [
+  description: string;
+  image: string;
+};
+
+const SOLUTIONS: Solution[] = [
   {
     title: "Intelligent Document Processing",
-    problem: "Teams drowning in PDFs, invoices & forms.",
+    category: "Documents",
     icon: FileText,
-    points: ["OCR & Classification", "Data Extraction", "Invoice Processing", "KYC Verification"],
+    description:
+      "OCR, classification and data extraction that turn PDFs, invoices and forms into clean, structured data.",
+    image: "/images/solutions/solution-idp.jpg",
   },
   {
     title: "Agentic AI Solutions",
-    problem: "Repetitive knowledge work that scales poorly.",
+    category: "Autonomous Agents",
     icon: Bot,
-    points: ["Autonomous Agents", "Multi-Agent Systems", "AI Assistants", "Tool Use & RAG"],
+    description:
+      "Multi-agent systems, AI assistants and RAG that take on repetitive knowledge work end to end.",
+    image: "/images/solutions/solution-agentic.jpg",
   },
   {
     title: "Business Process Automation",
-    problem: "Manual handoffs across departments.",
+    category: "Automation",
     icon: RefreshCw,
-    points: ["HR Automation", "Finance Automation", "Email Automation", "Excel Automation"],
+    description:
+      "HR, finance, email and Excel workflows automated to remove manual handoffs across teams.",
+    image: "/images/solutions/solution-automation.jpg",
   },
   {
     title: "AI Product Development",
-    problem: "Ideas stuck without AI engineering muscle.",
+    category: "Engineering",
     icon: Rocket,
-    points: ["Custom AI SaaS", "API Platforms", "Enterprise AI", "MLOps & Deployment"],
+    description:
+      "Custom AI SaaS, API platforms and MLOps — taken from idea to production-grade deployment.",
+    image: "/images/solutions/solution-product.jpg",
   },
 ];
+
+function CardImage({
+  src,
+  alt,
+  Icon,
+}: {
+  src: string;
+  alt: string;
+  Icon: LucideIcon;
+}) {
+  return (
+    <div className="relative aspect-[2/1] w-full overflow-hidden">
+      <div className="absolute inset-0 bg-gradient-to-br from-[#7172da]/15 via-[#7bd3cf]/10 to-[#ab9cee]/15">
+        <div className="absolute -right-6 -top-6 h-20 w-20 rounded-full bg-white/30 blur-2xl" />
+        <Icon
+          aria-hidden
+          strokeWidth={1.25}
+          className="absolute bottom-2.5 right-2.5 h-8 w-8 text-fg/[0.10]"
+        />
+      </div>
+      <img
+        src={src}
+        alt={alt}
+        loading="lazy"
+        decoding="async"
+        onError={(e) => {
+          e.currentTarget.style.display = "none";
+        }}
+        className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.03] motion-reduce:transition-none motion-reduce:group-hover:scale-100"
+      />
+    </div>
+  );
+}
+
+function SolutionCard({ solution, index }: { solution: Solution; index: number }) {
+  const reduce = useReducedMotion();
+  const Icon = solution.icon;
+
+  return (
+    <Reveal delay={index * 0.08} className="h-full">
+      <motion.article
+        whileHover={reduce ? undefined : { y: -4 }}
+        transition={{ type: "spring", stiffness: 300, damping: 24 }}
+        className="group flex h-full flex-col overflow-hidden rounded-2xl border border-fg/[0.06] bg-white shadow-[0_1px_2px_rgba(20,24,60,0.04),0_18px_48px_-32px_rgba(20,24,60,0.22)] transition-shadow duration-300 hover:shadow-[0_1px_2px_rgba(20,24,60,0.05),0_24px_56px_-30px_rgba(69,67,217,0.28)]"
+      >
+        <CardImage src={solution.image} alt={`${solution.title} illustration`} Icon={Icon} />
+
+        <div className="flex flex-1 flex-col p-3.5">
+          <div className="flex items-center gap-1.5 text-fg/55">
+            <Icon className="h-3 w-3" strokeWidth={1.5} aria-hidden />
+            <span className="text-[10px] font-semibold uppercase tracking-[0.16em]">
+              {solution.category}
+            </span>
+          </div>
+
+          <h3 className="mt-1.5 font-display text-sm font-semibold tracking-[-0.02em] text-fg">
+            {solution.title}
+          </h3>
+
+          <p className="mt-1 text-xs leading-relaxed text-fg/55">
+            {solution.description}
+          </p>
+        </div>
+      </motion.article>
+    </Reveal>
+  );
+}
 
 export default function Solutions() {
   return (
@@ -52,41 +129,9 @@ export default function Solutions() {
         subtitle="Every engagement starts from a measurable business outcome — cost saved, hours returned, revenue unlocked."
       />
 
-      <div className="mt-14 grid gap-6 md:grid-cols-2">
+      <div className="mx-auto mt-8 grid max-w-6xl gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {SOLUTIONS.map((s, i) => (
-          <Reveal key={s.title} delay={i * 0.08}>
-            <motion.div
-              whileHover={{ y: -6 }}
-              className="group relative h-full overflow-hidden rounded-[1.75rem] glass p-8 sm:p-9"
-            >
-              <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-neon-cyan/0 to-neon-blue/0 opacity-0 transition-opacity duration-500 group-hover:from-neon-cyan/[0.06] group-hover:to-neon-blue/[0.04] group-hover:opacity-100" />
-              <s.icon
-                aria-hidden
-                className="pointer-events-none absolute -bottom-7 -right-7 h-40 w-40 text-fg/[0.04] transition-all duration-500 ease-out group-hover:-bottom-3 group-hover:-right-3 group-hover:rotate-6 group-hover:scale-110 group-hover:text-fg/[0.10]"
-                strokeWidth={1}
-              />
-              <div className="relative flex items-start justify-between">
-                <AnimatedIcon icon={s.icon} size="md" delay={i * 0.15} />
-                <span className="rounded-full border border-fg/10 bg-fg/5 px-3 py-1 text-[11px] text-fg/50">
-                  Problem → Outcome
-                </span>
-              </div>
-              <h3 className="relative mt-5 font-display text-xl font-semibold">
-                {s.title}
-              </h3>
-              <p className="relative mt-2 text-sm text-fg/50">{s.problem}</p>
-              <div className="relative mt-5 flex flex-wrap gap-2">
-                {s.points.map((p) => (
-                  <span
-                    key={p}
-                    className="rounded-full border border-fg/10 bg-fg/[0.03] px-3 py-1.5 text-xs text-fg/70 transition-colors group-hover:border-neon-cyan/40 group-hover:text-fg"
-                  >
-                    {p}
-                  </span>
-                ))}
-              </div>
-            </motion.div>
-          </Reveal>
+          <SolutionCard key={s.title} solution={s} index={i} />
         ))}
       </div>
     </section>

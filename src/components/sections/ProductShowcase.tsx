@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import {
   UploadCloud,
   ScanText,
@@ -34,9 +34,33 @@ const EXTRACTED = [
 type Stage = "idle" | "uploading" | "analyzing" | "done";
 
 export default function ProductShowcase() {
+  const reducedMotion = useReducedMotion();
+
   return (
-    <section id="product" className="relative section">
-      <div className="pointer-events-none absolute left-1/2 top-24 h-72 w-72 -translate-x-1/2 rounded-full bg-neon-blue/10 blur-[120px]" />
+    <section id="product" className="relative section isolate overflow-hidden">
+      {/* Document / data-extraction background video + palette-matched overlay */}
+      <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
+        {!reducedMotion ? (
+          <video
+            className="absolute left-1/2 top-1/2 h-full min-h-full w-full min-w-full -translate-x-1/2 -translate-y-1/2 object-cover"
+            autoPlay
+            loop
+            muted
+            playsInline
+            preload="metadata"
+            aria-hidden
+          >
+            <source src="/videos/data-extraction-bg.mp4" type="video/mp4" />
+          </video>
+        ) : (
+          <div className="absolute inset-0 bg-gradient-to-br from-neon-cyan/20 via-canvas to-neon-violet/20" />
+        )}
+        <div className="absolute inset-0 bg-gradient-to-br from-neon-cyan/15 via-transparent to-neon-violet/20" />
+        <div className="absolute inset-0 bg-canvas/[0.5]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-canvas/85 via-transparent to-canvas/85" />
+      </div>
+
+      <div className="pointer-events-none absolute left-1/2 top-24 -z-10 h-72 w-72 -translate-x-1/2 rounded-full bg-neon-blue/10 blur-[120px]" />
       <SectionHeading
         eyebrow="Flagship Product"
         title={

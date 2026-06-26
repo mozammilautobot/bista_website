@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import {
   BrainCircuit,
   ShieldCheck,
@@ -12,16 +12,124 @@ import {
 } from "lucide-react";
 import SectionHeading from "@/components/ui/SectionHeading";
 import Reveal from "@/components/ui/Reveal";
-import AnimatedIcon from "@/components/ui/AnimatedIcon";
 
-const REASONS: { title: string; desc: string; icon: LucideIcon }[] = [
-  { title: "AI Automation Expert", desc: "A team that builds AI products daily — not a generalist agency dabbling in ML.", icon: BrainCircuit },
-  { title: "Enterprise Security", desc: "SOC2-aligned practices, data isolation, on-prem & VPC deployment options.", icon: ShieldCheck },
-  { title: "Rapid Deployment", desc: "Production pilots in weeks, not quarters, with reusable accelerators.", icon: Zap },
-  { title: "Custom Development", desc: "Solutions shaped to your workflows and systems — never one-size-fits-all.", icon: Puzzle },
-  { title: "Scalable Architecture", desc: "Cloud-native, event-driven systems that scale from pilot to millions of docs.", icon: Layers },
-  { title: "ROI Focused", desc: "We commit to measurable outcomes and track value from day one.", icon: TrendingUp },
+type Reason = {
+  title: string;
+  category: string;
+  desc: string;
+  icon: LucideIcon;
+  image: string;
+};
+
+const REASONS: Reason[] = [
+  {
+    title: "AI Automation Expert",
+    category: "Expertise",
+    desc: "A team that ships AI products daily — not a generalist agency dabbling in ML.",
+    icon: BrainCircuit,
+    image: "/images/why/why-expertise.jpg",
+  },
+  {
+    title: "Enterprise Security",
+    category: "Security",
+    desc: "SOC2-aligned practices, data isolation and on-prem or VPC deployment options.",
+    icon: ShieldCheck,
+    image: "/images/why/why-security.jpg",
+  },
+  {
+    title: "Rapid Deployment",
+    category: "Speed",
+    desc: "Production pilots in weeks, not quarters, with reusable accelerators.",
+    icon: Zap,
+    image: "/images/why/why-speed.jpg",
+  },
+  {
+    title: "Custom Development",
+    category: "Bespoke",
+    desc: "Solutions shaped to your workflows and systems — never one-size-fits-all.",
+    icon: Puzzle,
+    image: "/images/why/why-custom.jpg",
+  },
+  {
+    title: "Scalable Architecture",
+    category: "Architecture",
+    desc: "Cloud-native, event-driven systems that scale from pilot to millions of docs.",
+    icon: Layers,
+    image: "/images/why/why-scale.jpg",
+  },
+  {
+    title: "ROI Focused",
+    category: "Outcomes",
+    desc: "We commit to measurable outcomes and track value from day one.",
+    icon: TrendingUp,
+    image: "/images/why/why-roi.jpg",
+  },
 ];
+
+function CardImage({
+  src,
+  alt,
+  Icon,
+}: {
+  src: string;
+  alt: string;
+  Icon: LucideIcon;
+}) {
+  return (
+    <div className="relative aspect-[2/1] w-full overflow-hidden">
+      <div className="absolute inset-0 bg-gradient-to-br from-[#7172da]/15 via-[#7bd3cf]/10 to-[#ab9cee]/15">
+        <div className="absolute -right-6 -top-6 h-20 w-20 rounded-full bg-white/30 blur-2xl" />
+        <Icon
+          aria-hidden
+          strokeWidth={1.25}
+          className="absolute bottom-2.5 right-2.5 h-8 w-8 text-fg/[0.10]"
+        />
+      </div>
+      <img
+        src={src}
+        alt={alt}
+        loading="lazy"
+        decoding="async"
+        onError={(e) => {
+          e.currentTarget.style.display = "none";
+        }}
+        className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.03] motion-reduce:transition-none motion-reduce:group-hover:scale-100"
+      />
+    </div>
+  );
+}
+
+function ReasonCard({ reason, index }: { reason: Reason; index: number }) {
+  const reduce = useReducedMotion();
+  const Icon = reason.icon;
+
+  return (
+    <Reveal delay={index * 0.07} className="h-full">
+      <motion.article
+        whileHover={reduce ? undefined : { y: -4 }}
+        transition={{ type: "spring", stiffness: 300, damping: 24 }}
+        className="group flex h-full flex-col overflow-hidden rounded-2xl border border-fg/[0.06] bg-white shadow-[0_1px_2px_rgba(20,24,60,0.04),0_18px_48px_-32px_rgba(20,24,60,0.22)] transition-shadow duration-300 hover:shadow-[0_1px_2px_rgba(20,24,60,0.05),0_24px_56px_-30px_rgba(69,67,217,0.28)]"
+      >
+        <CardImage src={reason.image} alt={`${reason.title} illustration`} Icon={Icon} />
+
+        <div className="flex flex-1 flex-col p-3.5">
+          <div className="flex items-center gap-1.5 text-fg/55">
+            <Icon className="h-3 w-3" strokeWidth={1.5} aria-hidden />
+            <span className="text-[10px] font-semibold uppercase tracking-[0.16em]">
+              {reason.category}
+            </span>
+          </div>
+
+          <h3 className="mt-1.5 font-display text-sm font-semibold tracking-[-0.02em] text-fg">
+            {reason.title}
+          </h3>
+
+          <p className="mt-1 text-xs leading-relaxed text-fg/55">{reason.desc}</p>
+        </div>
+      </motion.article>
+    </Reveal>
+  );
+}
 
 export default function WhyChooseUs() {
   return (
@@ -37,23 +145,9 @@ export default function WhyChooseUs() {
         }
       />
 
-      <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="mx-auto mt-8 grid max-w-5xl gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {REASONS.map((r, i) => (
-          <Reveal key={r.title} delay={i * 0.07}>
-            <motion.div
-              whileHover={{ y: -6 }}
-              className="group relative h-full overflow-hidden rounded-[1.75rem] glass p-8 transition-shadow hover:shadow-glow-violet"
-            >
-              <r.icon
-                aria-hidden
-                className="pointer-events-none absolute -bottom-7 -right-7 h-40 w-40 text-fg/[0.04] transition-all duration-500 ease-out group-hover:-bottom-3 group-hover:-right-3 group-hover:-rotate-6 group-hover:scale-110 group-hover:text-fg/[0.10]"
-                strokeWidth={1}
-              />
-              <AnimatedIcon icon={r.icon} size="md" delay={i * 0.12} />
-              <h3 className="relative mt-5 font-display text-lg font-semibold">{r.title}</h3>
-              <p className="relative mt-2 text-sm leading-relaxed text-fg/55">{r.desc}</p>
-            </motion.div>
-          </Reveal>
+          <ReasonCard key={r.title} reason={r} index={i} />
         ))}
       </div>
     </section>

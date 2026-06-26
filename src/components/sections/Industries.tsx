@@ -1,6 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
 import {
   Building2,
   Truck,
@@ -15,17 +14,16 @@ import {
 import SectionHeading from "@/components/ui/SectionHeading";
 import Reveal from "@/components/ui/Reveal";
 import IndustriesMap from "@/components/ui/IndustriesMap";
-import AnimatedIcon from "@/components/ui/AnimatedIcon";
 
-const INDUSTRIES: { name: string; icon: LucideIcon }[] = [
-  { name: "ERP", icon: Building2 },
-  { name: "Logistics", icon: Truck },
-  { name: "Shipping", icon: Ship },
-  { name: "Manufacturing", icon: Factory },
-  { name: "Banking", icon: Landmark },
-  { name: "Insurance", icon: ShieldCheck },
-  { name: "Retail", icon: ShoppingBag },
-  { name: "Legal", icon: Scale },
+const INDUSTRIES: { name: string; icon: LucideIcon; image: string; blurb: string }[] = [
+  { name: "ERP", icon: Building2, image: "/images/industries/erp.jpg", blurb: "Connected systems and records, kept clean and in sync." },
+  { name: "Logistics", icon: Truck, image: "/images/industries/logistics.jpg", blurb: "Faster fulfilment with automated docs and tracking." },
+  { name: "Shipping", icon: Ship, image: "/images/industries/shipping.jpg", blurb: "Bills of lading and customs paperwork, handled in seconds." },
+  { name: "Manufacturing", icon: Factory, image: "/images/industries/manufacturing.jpg", blurb: "Shop-floor data and orders flowing without the friction." },
+  { name: "Banking", icon: Landmark, image: "/images/industries/banking.jpg", blurb: "Reconciliation and compliance, audited and automated." },
+  { name: "Insurance", icon: ShieldCheck, image: "/images/industries/insurance.jpg", blurb: "Claims and policy intake processed end to end." },
+  { name: "Retail", icon: ShoppingBag, image: "/images/industries/retail.jpg", blurb: "Invoices, catalogues and returns, reconciled automatically." },
+  { name: "Legal", icon: Scale, image: "/images/industries/legal.jpg", blurb: "Contracts read, clauses extracted, risks surfaced." },
 ];
 
 export default function Industries() {
@@ -42,24 +40,53 @@ export default function Industries() {
         subtitle="Domain-tuned AI that understands the vocabulary, compliance and edge cases of your sector."
       />
 
-      <div className="mt-14 grid items-center gap-10 lg:grid-cols-2">
-        <Reveal>
-          <IndustriesMap />
+      <div className="mt-14 grid items-center gap-10 lg:grid-cols-2 lg:gap-12">
+        <Reveal className="w-full">
+          <div className="mx-auto w-full max-w-[440px] lg:max-w-[520px]">
+            <IndustriesMap />
+          </div>
         </Reveal>
 
-        <div className="grid grid-cols-1 gap-4 xs:grid-cols-2">
-          {INDUSTRIES.map((ind, i) => (
-            <Reveal key={ind.name} delay={i * 0.05}>
-              <motion.div
-                whileHover={{ y: -6, rotate: -1 }}
-                className="group relative flex items-center gap-4 overflow-hidden rounded-2xl glass p-4 transition-shadow hover:shadow-glow sm:p-5"
-              >
-                <AnimatedIcon icon={ind.icon} size="sm" delay={i * 0.15} className="shrink-0" />
-                <span className="font-display font-semibold">{ind.name}</span>
-                <div className="pointer-events-none absolute -right-6 -top-6 h-20 w-20 rounded-full bg-neon-cyan/10 blur-xl opacity-0 transition-opacity group-hover:opacity-100" />
-              </motion.div>
-            </Reveal>
-          ))}
+        <div className="w-full">
+          <h3 className="mb-4 font-display text-lg font-semibold tracking-[-0.02em] text-fg sm:text-xl">
+            Explore by industry
+          </h3>
+
+          <div className="group relative overflow-hidden [mask-image:linear-gradient(to_right,transparent,rgba(0,0,0,1)_6%,rgba(0,0,0,1)_94%,transparent)]">
+            <div className="flex w-max gap-4 animate-marquee group-hover:[animation-play-state:paused] motion-reduce:animate-none">
+              {[...INDUSTRIES, ...INDUSTRIES].map((ind, i) => (
+                <article
+                  key={`${ind.name}-${i}`}
+                  aria-hidden={i >= INDUSTRIES.length}
+                  className="group/card flex w-[220px] shrink-0 flex-col overflow-hidden rounded-2xl border border-fg/[0.06] bg-white shadow-[0_1px_2px_rgba(20,24,60,0.04),0_18px_48px_-32px_rgba(20,24,60,0.22)] sm:w-[240px]"
+                >
+                  <div className="relative aspect-[3/2] overflow-hidden bg-fg/[0.04]">
+                    <img
+                      src={ind.image}
+                      alt={`${ind.name} industry`}
+                      loading="lazy"
+                      decoding="async"
+                      onError={(e) => {
+                        (e.currentTarget as HTMLImageElement).style.display = "none";
+                      }}
+                      className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover/card:scale-105 motion-reduce:transition-none"
+                    />
+                    <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink-950/45 via-transparent to-transparent" />
+                    <span className="absolute left-3 top-3 inline-flex items-center gap-1.5 rounded-full bg-ink-950/55 px-2.5 py-1 text-[10px] font-medium text-white/90 backdrop-blur">
+                      <ind.icon className="h-3 w-3" strokeWidth={1.75} aria-hidden />
+                      {ind.name}
+                    </span>
+                  </div>
+                  <div className="flex flex-1 flex-col p-4">
+                    <h4 className="font-display text-sm font-semibold tracking-[-0.01em] text-fg">
+                      {ind.name}
+                    </h4>
+                    <p className="mt-1 text-xs leading-relaxed text-fg/55">{ind.blurb}</p>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </section>

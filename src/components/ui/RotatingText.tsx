@@ -24,7 +24,7 @@ export default function RotatingText({
   }, [words.length, interval]);
 
   return (
-    <span className="relative inline-flex overflow-hidden pb-[0.12em] align-bottom leading-[1.1]">
+    <span className="relative flex w-full overflow-hidden pb-[0.16em] leading-[1.1]">
       <AnimatePresence mode="wait">
         <motion.span
           key={words[index]}

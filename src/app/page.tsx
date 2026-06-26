@@ -8,7 +8,6 @@ import Industries from "@/components/sections/Industries";
 import WhyChooseUs from "@/components/sections/WhyChooseUs";
 import CaseStudies from "@/components/sections/CaseStudies";
 import ResultsBand from "@/components/sections/ResultsBand";
-import TechStack from "@/components/sections/TechStack";
 import RoiCalculator from "@/components/sections/RoiCalculator";
 import Innovation from "@/components/sections/Innovation";
 import Testimonials from "@/components/sections/Testimonials";
@@ -36,7 +35,6 @@ export default function Home() {
       <WhyChooseUs />
       <ResultsBand />
       <CaseStudies />
-      <TechStack />
       <RoiCalculator />
       <Testimonials />
       <Blog />

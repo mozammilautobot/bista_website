@@ -1,18 +1,41 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useState } from "react";
+import { motion, useReducedMotion } from "framer-motion";
+import { Landmark, FileText, Ship, type LucideIcon } from "lucide-react";
 import SectionHeading from "@/components/ui/SectionHeading";
 import Reveal from "@/components/ui/Reveal";
 import Counter from "@/components/ui/Counter";
 
-const CASES = [
+type Metric = { label: string; value: number; suffix: string };
+
+type CaseStudy = {
+  tag: string;
+  client: string;
+  icon: LucideIcon;
+  challenge: string;
+  result: string;
+  image: string;
+  logo: string;
+  logoName: string;
+  logoDark?: boolean;
+  hero: Metric;
+  metrics: Metric[];
+};
+
+const CASES: CaseStudy[] = [
   {
     tag: "Finance",
     client: "Leadway Pensure",
-    problem: "Manual banking reconcillation and validating funds.",
-    solution: "Autonomous AI Agent for reconcillation and validation",
+    icon: Landmark,
+    challenge: "Manual banking reconciliation and fund validation slowed every close.",
+    result: "An autonomous AI agent now reconciles and validates funds end to end.",
+    image: "/images/case-studies/case-finance.jpg",
+    logo: "/images/case-studies/logos/leadway.png",
+    logoName: "Leadway Pensure",
+    logoDark: true,
+    hero: { label: "Reconciliation speed", value: 99, suffix: "%" },
     metrics: [
-      { label: "Reconcillation speed", value: 99, suffix: "%" },
       { label: "Manual reviews cut", value: 85, suffix: "%" },
       { label: "Compliance score", value: 92, suffix: "%" },
     ],
@@ -20,26 +43,144 @@ const CASES = [
   {
     tag: "Banking",
     client: "Branch International",
-    problem: "Manual invoice processing across 5 Countries",
-    solution: "AI Document Intelligence",
+    icon: FileText,
+    challenge: "Invoice processing was handled by hand across five countries.",
+    result: "AI document intelligence extracts and routes every invoice automatically.",
+    image: "/images/case-studies/case-banking.jpg",
+    logo: "/images/case-studies/logos/branch.png",
+    logoName: "Branch",
+    hero: { label: "Cost reduction", value: 96, suffix: "%" },
     metrics: [
-      { label: "Accuracy", value: 90, suffix: "%" },
+      { label: "Extraction accuracy", value: 90, suffix: "%" },
       { label: "Faster processing", value: 78, suffix: "%" },
-      { label: "Cost reduction", value: 96, suffix: "%" },
     ],
   },
   {
     tag: "Shipping & Logistics",
     client: "MOL Maritime",
-    problem: "Multiple Manual work",
-    solution: "AI extraction + multi-agent workflow.",
+    icon: Ship,
+    challenge: "Fragmented manual work stretched across documents and teams.",
+    result: "AI extraction paired with a multi-agent workflow runs operations hands-free.",
+    image: "/images/case-studies/case-logistics.jpg",
+    logo: "/images/case-studies/logos/mol.png",
+    logoName: "MOL",
+    hero: { label: "Processes automated", value: 81, suffix: "%" },
     metrics: [
-      { label: "Process automated", value: 81, suffix: "%" },
       { label: "Turnaround time", value: 70, suffix: "%" },
       { label: "Cost reduction", value: 64, suffix: "%" },
     ],
   },
 ];
+
+function LogoBadge({
+  src,
+  name,
+  dark,
+}: {
+  src: string;
+  name: string;
+  dark?: boolean;
+}) {
+  const [failed, setFailed] = useState(false);
+
+  return (
+    <div
+      className={`absolute left-2.5 top-2.5 z-10 flex items-center rounded-xl px-2 py-1 shadow-[0_4px_14px_-6px_rgba(20,24,60,0.35)] backdrop-blur ${
+        dark
+          ? "bg-[#0b0b0f]/90 ring-1 ring-white/10"
+          : "bg-white/90 ring-1 ring-fg/[0.06]"
+      }`}
+    >
+      {failed ? (
+        <span
+          className={`font-display text-xs font-bold tracking-tight ${
+            dark ? "text-white" : "text-fg"
+          }`}
+        >
+          {name}
+        </span>
+      ) : (
+        <img
+          src={src}
+          alt={`${name} logo`}
+          loading="lazy"
+          decoding="async"
+          onError={() => setFailed(true)}
+          className="h-6 w-auto max-w-[104px] object-contain"
+        />
+      )}
+    </div>
+  );
+}
+
+function CaseCard({ study, index }: { study: CaseStudy; index: number }) {
+  const reduce = useReducedMotion();
+  const Icon = study.icon;
+
+  return (
+    <Reveal delay={index * 0.08} className="h-full">
+      <motion.article
+        whileHover={reduce ? undefined : { y: -4 }}
+        transition={{ type: "spring", stiffness: 300, damping: 24 }}
+        className="group flex h-full flex-col overflow-hidden rounded-2xl border border-fg/[0.06] bg-white shadow-[0_1px_2px_rgba(20,24,60,0.04),0_18px_48px_-32px_rgba(20,24,60,0.22)] transition-shadow duration-300 hover:shadow-[0_1px_2px_rgba(20,24,60,0.05),0_24px_56px_-30px_rgba(69,67,217,0.28)]"
+      >
+        <div className="relative overflow-hidden bg-fg/[0.02]">
+          <LogoBadge src={study.logo} name={study.logoName} dark={study.logoDark} />
+          <img
+            src={study.image}
+            alt={`${study.client} ${study.tag} case study illustration`}
+            loading="lazy"
+            decoding="async"
+            className="aspect-[2/1] w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.03] motion-reduce:transition-none motion-reduce:group-hover:scale-100"
+          />
+        </div>
+
+        <div className="flex flex-1 flex-col p-3.5">
+          <div className="flex items-center gap-1.5 text-fg/55">
+            <Icon className="h-3 w-3" strokeWidth={1.5} aria-hidden />
+            <span className="text-[10px] font-semibold uppercase tracking-[0.16em]">
+              {study.tag}
+            </span>
+          </div>
+
+          <h3 className="mt-1.5 font-display text-sm font-semibold tracking-[-0.02em] text-fg">
+            {study.client}
+          </h3>
+
+          <p className="mt-1 text-xs leading-relaxed text-fg/55">
+            <span className="text-fg/70">{study.challenge}</span> {study.result}
+          </p>
+
+          <div className="mt-auto pt-3.5">
+            <div className="border-t border-fg/[0.08] pt-3">
+              <div className="font-display text-2xl font-semibold leading-none tracking-[-0.03em] text-fg">
+                <span className="text-gradient">
+                  <Counter to={study.hero.value} />
+                  {study.hero.suffix}
+                </span>
+              </div>
+              <div className="mt-1 text-[11px] font-medium text-fg/55">
+                {study.hero.label}
+              </div>
+            </div>
+
+            <dl className="mt-3 grid grid-cols-2 gap-2.5">
+              {study.metrics.map((m) => (
+                <div key={m.label}>
+                  <dt className="text-[11px] leading-snug text-fg/50">{m.label}</dt>
+                  <dd className="mt-0.5 font-display text-sm font-semibold text-fg">
+                    <Counter to={m.value} />
+                    {m.suffix}
+                  </dd>
+                </div>
+              ))}
+            </dl>
+          </div>
+        </div>
+      </motion.article>
+    </Reveal>
+  );
+}
 
 export default function CaseStudies() {
   return (
@@ -54,68 +195,9 @@ export default function CaseStudies() {
         subtitle="Outcomes our clients measured after going live with Bista AI."
       />
 
-      <div className="mt-14 grid gap-6 lg:grid-cols-3">
-        {CASES.map((c, i) => (
-          <Reveal key={c.client} delay={i * 0.1}>
-            <motion.div
-              whileHover={{ y: -8 }}
-              transition={{ type: "spring", stiffness: 300, damping: 22 }}
-              className="group relative flex h-full flex-col overflow-hidden rounded-[1.75rem] glass p-8 transition-shadow duration-500 hover:shadow-glow"
-            >
-              <motion.div
-                aria-hidden
-                className="pointer-events-none absolute -right-10 -top-10 h-28 w-28 rounded-full bg-[conic-gradient(from_0deg,rgba(69,67,217,0.45),transparent_60%)] blur-md opacity-0 transition-opacity duration-500 group-hover:opacity-100"
-                animate={{ rotate: 360 }}
-                transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
-              />
-              <div className="relative flex h-full flex-col">
-              <div className="flex items-center justify-between">
-                <span className="rounded-full border border-neon-cyan/30 bg-neon-cyan/10 px-3 py-1 text-[11px] font-medium text-neon-cyan">
-                  {c.tag}
-                </span>
-              </div>
-              <h3 className="mt-4 font-display text-lg font-semibold">{c.client}</h3>
-
-              <div className="mt-4 space-y-3 text-sm">
-                <div>
-                  <div className="text-[11px] uppercase tracking-wider text-fg/40">
-                    Problem
-                  </div>
-                  <p className="text-fg/70">{c.problem}</p>
-                </div>
-                <div>
-                  <div className="text-[11px] uppercase tracking-wider text-fg/40">
-                    Solution
-                  </div>
-                  <p className="text-fg/70">{c.solution}</p>
-                </div>
-              </div>
-
-              <div className="mt-6 space-y-3.5 border-t border-fg/10 pt-5">
-                {c.metrics.map((m) => (
-                  <div key={m.label}>
-                    <div className="mb-1.5 flex items-center justify-between text-sm">
-                      <span className="text-fg/60">{m.label}</span>
-                      <span className="font-display font-bold text-fg">
-                        <Counter to={m.value} />
-                        {m.suffix}
-                      </span>
-                    </div>
-                    <div className="h-2 w-full overflow-hidden rounded-full bg-fg/10">
-                      <motion.div
-                        className="h-full rounded-full bg-gradient-to-r from-neon-cyan to-neon-blue"
-                        initial={{ width: 0 }}
-                        whileInView={{ width: `${m.value}%` }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 1.4, ease: "easeOut" }}
-                      />
-                    </div>
-                  </div>
-                ))}
-              </div>
-              </div>
-            </motion.div>
-          </Reveal>
+      <div className="mx-auto mt-8 grid max-w-5xl gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {CASES.map((study, i) => (
+          <CaseCard key={study.client} study={study} index={i} />
         ))}
       </div>
     </section>
