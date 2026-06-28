@@ -61,19 +61,19 @@ function AgentCard({ agent, index }: { agent: Agent; index: number }) {
       <motion.div
         whileHover={reduce ? undefined : { y: -4 }}
         transition={{ type: "spring", stiffness: 300, damping: 24 }}
-        className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-fg/[0.06] bg-white p-3.5 shadow-[0_1px_2px_rgba(20,24,60,0.04),0_18px_48px_-32px_rgba(20,24,60,0.22)] transition-shadow duration-300 hover:shadow-[0_1px_2px_rgba(20,24,60,0.05),0_24px_56px_-30px_rgba(69,67,217,0.28)]"
+        className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-fg/[0.06] bg-white p-4 shadow-[0_1px_2px_rgba(20,24,60,0.04),0_18px_48px_-32px_rgba(20,24,60,0.22)] transition-shadow duration-300 hover:shadow-[0_1px_2px_rgba(20,24,60,0.05),0_24px_56px_-30px_rgba(69,67,217,0.28)]"
       >
         <div className="flex items-center gap-1.5 text-fg/55">
-          <Icon className="h-3 w-3" strokeWidth={1.5} aria-hidden />
-          <span className="text-[10px] font-semibold uppercase tracking-[0.16em]">
+          <Icon className="h-3.5 w-3.5" strokeWidth={1.5} aria-hidden />
+          <span className="text-[11px] font-semibold uppercase tracking-[0.16em]">
             {agent.category}
           </span>
         </div>
 
-        <h3 className="mt-1.5 font-display text-sm font-semibold tracking-[-0.02em] text-fg">
+        <h3 className="mt-1.5 font-display text-[15px] font-semibold tracking-[-0.02em] text-fg">
           {agent.name}
         </h3>
-        <p className="mt-1 text-xs leading-relaxed text-fg/55">
+        <p className="mt-1 text-[13px] leading-relaxed text-fg/55">
           {agent.description}
         </p>
 
@@ -88,7 +88,7 @@ function AgentCard({ agent, index }: { agent: Agent; index: number }) {
               className="mt-3 space-y-1.5 overflow-hidden"
             >
               {agent.points.map((p) => (
-                <li key={p} className="flex items-center gap-2 text-xs text-fg/70">
+                <li key={p} className="flex items-center gap-2 text-[13px] text-fg/70">
                   <span className="h-1.5 w-1.5 rounded-full bg-neon-cyan" />
                   {p}
                 </li>
@@ -107,7 +107,7 @@ function AgentCard({ agent, index }: { agent: Agent; index: number }) {
               onError={(e) => {
                 (e.currentTarget as HTMLImageElement).style.display = "none";
               }}
-              className="aspect-[2/1] w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.03] motion-reduce:transition-none motion-reduce:group-hover:scale-100"
+              className="aspect-[3/2] w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.03] motion-reduce:transition-none motion-reduce:group-hover:scale-100"
             />
             <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink-950/30 via-transparent to-transparent" />
           </div>
@@ -122,7 +122,7 @@ function AgentCard({ agent, index }: { agent: Agent; index: number }) {
                 ? `Hide ${agent.name} capabilities`
                 : `Show ${agent.name} capabilities`
             }
-            className="absolute bottom-3 right-3 grid h-7 w-7 place-items-center rounded-full bg-fg text-canvas shadow-[0_8px_20px_-8px_rgba(20,24,60,0.6)] transition-transform duration-300 hover:scale-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neon-cyan/60 focus-visible:ring-offset-2 focus-visible:ring-offset-white active:scale-95"
+            className="absolute bottom-3 right-3 grid h-8 w-8 place-items-center rounded-full bg-fg text-canvas shadow-[0_8px_20px_-8px_rgba(20,24,60,0.6)] transition-transform duration-300 hover:scale-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neon-cyan/60 focus-visible:ring-offset-2 focus-visible:ring-offset-white active:scale-95"
           >
             <motion.span
               animate={{ rotate: open ? 45 : 0 }}
@@ -152,7 +152,7 @@ export default function AgentShowcase() {
           subtitle="Specialised autonomous agents that communicate, delegate, and complete real business tasks — working together around the clock."
         />
 
-        <div className="mx-auto mt-8 grid max-w-6xl gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mx-auto mt-10 grid max-w-7xl gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {AGENTS.map((agent, i) => (
             <AgentCard key={agent.name} agent={agent} index={i} />
           ))}

@@ -106,7 +106,7 @@ function LogoBadge({
           loading="lazy"
           decoding="async"
           onError={() => setFailed(true)}
-          className="h-6 w-auto max-w-[104px] object-contain"
+          className="h-7 w-auto max-w-[120px] object-contain"
         />
       )}
     </div>
@@ -131,29 +131,29 @@ function CaseCard({ study, index }: { study: CaseStudy; index: number }) {
             alt={`${study.client} ${study.tag} case study illustration`}
             loading="lazy"
             decoding="async"
-            className="aspect-[2/1] w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.03] motion-reduce:transition-none motion-reduce:group-hover:scale-100"
+            className="aspect-[3/2] w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.03] motion-reduce:transition-none motion-reduce:group-hover:scale-100"
           />
         </div>
 
-        <div className="flex flex-1 flex-col p-3.5">
+        <div className="flex flex-1 flex-col p-4">
           <div className="flex items-center gap-1.5 text-fg/55">
-            <Icon className="h-3 w-3" strokeWidth={1.5} aria-hidden />
-            <span className="text-[10px] font-semibold uppercase tracking-[0.16em]">
+            <Icon className="h-3.5 w-3.5" strokeWidth={1.5} aria-hidden />
+            <span className="text-[11px] font-semibold uppercase tracking-[0.16em]">
               {study.tag}
             </span>
           </div>
 
-          <h3 className="mt-1.5 font-display text-sm font-semibold tracking-[-0.02em] text-fg">
+          <h3 className="mt-1.5 font-display text-[15px] font-semibold tracking-[-0.02em] text-fg">
             {study.client}
           </h3>
 
-          <p className="mt-1 text-xs leading-relaxed text-fg/55">
+          <p className="mt-1 text-[13px] leading-relaxed text-fg/55">
             <span className="text-fg/70">{study.challenge}</span> {study.result}
           </p>
 
-          <div className="mt-auto pt-3.5">
+          <div className="mt-auto pt-4">
             <div className="border-t border-fg/[0.08] pt-3">
-              <div className="font-display text-2xl font-semibold leading-none tracking-[-0.03em] text-fg">
+              <div className="font-display text-3xl font-semibold leading-none tracking-[-0.03em] text-fg">
                 <span className="text-gradient">
                   <Counter to={study.hero.value} />
                   {study.hero.suffix}
@@ -168,7 +168,7 @@ function CaseCard({ study, index }: { study: CaseStudy; index: number }) {
               {study.metrics.map((m) => (
                 <div key={m.label}>
                   <dt className="text-[11px] leading-snug text-fg/50">{m.label}</dt>
-                  <dd className="mt-0.5 font-display text-sm font-semibold text-fg">
+                  <dd className="mt-0.5 font-display text-[15px] font-semibold text-fg">
                     <Counter to={m.value} />
                     {m.suffix}
                   </dd>
@@ -195,7 +195,7 @@ export default function CaseStudies() {
         subtitle="Outcomes our clients measured after going live with Bista AI."
       />
 
-      <div className="mx-auto mt-8 grid max-w-5xl gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="mx-auto mt-10 grid max-w-6xl gap-5 sm:grid-cols-2 lg:grid-cols-3">
         {CASES.map((study, i) => (
           <CaseCard key={study.client} study={study} index={i} />
         ))}

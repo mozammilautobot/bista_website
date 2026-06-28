@@ -56,7 +56,7 @@ export default function Blog() {
     const el = scrollerRef.current;
     if (!el) return;
     const card = el.querySelector<HTMLElement>("[data-card]");
-    const amount = card ? card.offsetWidth + 16 : el.clientWidth * 0.85;
+    const amount = card ? card.offsetWidth + 20 : el.clientWidth * 0.85;
     el.scrollBy({ left: dir * amount, behavior: "smooth" });
   };
 
@@ -72,7 +72,7 @@ export default function Blog() {
         subtitle="Practical, engineering-led perspectives — the kind that help you ship, not hype."
       />
 
-      <div className="mx-auto mt-8 max-w-6xl">
+      <div className="mx-auto mt-10 max-w-7xl">
         <div className="mb-4 flex items-center justify-end gap-2">
           <button
             type="button"
@@ -94,7 +94,7 @@ export default function Blog() {
 
         <div
           ref={scrollerRef}
-          className="-mx-4 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-4 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+          className="-mx-4 flex snap-x snap-mandatory gap-5 overflow-x-auto px-4 pb-4 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
         >
           {POSTS.map((p) => (
             <motion.a
@@ -103,7 +103,7 @@ export default function Blog() {
               href="#"
               whileHover={{ y: -4 }}
               transition={{ type: "spring", stiffness: 300, damping: 24 }}
-              className="group flex w-[260px] shrink-0 snap-start flex-col overflow-hidden rounded-2xl border border-fg/[0.06] bg-white shadow-[0_1px_2px_rgba(20,24,60,0.04),0_18px_48px_-32px_rgba(20,24,60,0.22)] transition-shadow duration-300 hover:shadow-[0_1px_2px_rgba(20,24,60,0.05),0_24px_56px_-30px_rgba(69,67,217,0.28)] sm:w-[300px]"
+              className="group flex w-[290px] shrink-0 snap-start flex-col overflow-hidden rounded-2xl border border-fg/[0.06] bg-white shadow-[0_1px_2px_rgba(20,24,60,0.04),0_18px_48px_-32px_rgba(20,24,60,0.22)] transition-shadow duration-300 hover:shadow-[0_1px_2px_rgba(20,24,60,0.05),0_24px_56px_-30px_rgba(69,67,217,0.28)] sm:w-[330px]"
             >
               <div className="relative aspect-[3/2] overflow-hidden bg-fg/[0.04]">
                 <img
@@ -117,15 +117,15 @@ export default function Blog() {
                   className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105 motion-reduce:transition-none motion-reduce:group-hover:scale-100"
                 />
                 <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink-950/35 via-transparent to-transparent" />
-                <span className="absolute left-3 top-3 rounded-full bg-ink-950/55 px-2.5 py-1 text-[10px] font-medium text-white/90 backdrop-blur">
+                <span className="absolute left-3 top-3 rounded-full bg-ink-950/55 px-2.5 py-1 text-[11px] font-medium text-white/90 backdrop-blur">
                   {p.category}
                 </span>
               </div>
-              <div className="flex flex-1 flex-col p-4">
-                <h3 className="font-display text-sm font-semibold leading-snug tracking-[-0.01em] text-fg transition-colors group-hover:text-neon-blue">
+              <div className="flex flex-1 flex-col p-5">
+                <h3 className="font-display text-[15px] font-semibold leading-snug tracking-[-0.01em] text-fg transition-colors group-hover:text-neon-blue">
                   {p.title}
                 </h3>
-                <div className="mt-auto flex items-center justify-between pt-4 text-[11px] text-fg/45">
+                <div className="mt-auto flex items-center justify-between pt-4 text-[13px] text-fg/45">
                   <span>{p.read}</span>
                   <span className="inline-flex items-center gap-1 text-neon-blue">
                     Read

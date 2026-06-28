@@ -53,12 +53,12 @@ export default function Industries() {
           </h3>
 
           <div className="group relative overflow-hidden [mask-image:linear-gradient(to_right,transparent,rgba(0,0,0,1)_6%,rgba(0,0,0,1)_94%,transparent)]">
-            <div className="flex w-max gap-4 animate-marquee group-hover:[animation-play-state:paused] motion-reduce:animate-none">
+            <div className="flex w-max gap-5 animate-marquee group-hover:[animation-play-state:paused] motion-reduce:animate-none">
               {[...INDUSTRIES, ...INDUSTRIES].map((ind, i) => (
                 <article
                   key={`${ind.name}-${i}`}
                   aria-hidden={i >= INDUSTRIES.length}
-                  className="group/card flex w-[220px] shrink-0 flex-col overflow-hidden rounded-2xl border border-fg/[0.06] bg-white shadow-[0_1px_2px_rgba(20,24,60,0.04),0_18px_48px_-32px_rgba(20,24,60,0.22)] sm:w-[240px]"
+                  className="group/card flex w-[250px] shrink-0 flex-col overflow-hidden rounded-2xl border border-fg/[0.06] bg-white shadow-[0_1px_2px_rgba(20,24,60,0.04),0_18px_48px_-32px_rgba(20,24,60,0.22)] sm:w-[270px]"
                 >
                   <div className="relative aspect-[3/2] overflow-hidden bg-fg/[0.04]">
                     <img
@@ -72,16 +72,16 @@ export default function Industries() {
                       className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover/card:scale-105 motion-reduce:transition-none"
                     />
                     <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink-950/45 via-transparent to-transparent" />
-                    <span className="absolute left-3 top-3 inline-flex items-center gap-1.5 rounded-full bg-ink-950/55 px-2.5 py-1 text-[10px] font-medium text-white/90 backdrop-blur">
-                      <ind.icon className="h-3 w-3" strokeWidth={1.75} aria-hidden />
+                    <span className="absolute left-3 top-3 inline-flex items-center gap-1.5 rounded-full bg-ink-950/55 px-2.5 py-1 text-[11px] font-medium text-white/90 backdrop-blur">
+                      <ind.icon className="h-3.5 w-3.5" strokeWidth={1.75} aria-hidden />
                       {ind.name}
                     </span>
                   </div>
-                  <div className="flex flex-1 flex-col p-4">
-                    <h4 className="font-display text-sm font-semibold tracking-[-0.01em] text-fg">
+                  <div className="flex flex-1 flex-col p-5">
+                    <h4 className="font-display text-[15px] font-semibold tracking-[-0.01em] text-fg">
                       {ind.name}
                     </h4>
-                    <p className="mt-1 text-xs leading-relaxed text-fg/55">{ind.blurb}</p>
+                    <p className="mt-1 text-[13px] leading-relaxed text-fg/55">{ind.blurb}</p>
                   </div>
                 </article>
               ))}

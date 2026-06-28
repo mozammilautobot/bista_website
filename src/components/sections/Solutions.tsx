@@ -58,13 +58,13 @@ function CardImage({
   Icon: LucideIcon;
 }) {
   return (
-    <div className="relative aspect-[2/1] w-full overflow-hidden">
+    <div className="relative aspect-[3/2] w-full overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-br from-[#7172da]/15 via-[#7bd3cf]/10 to-[#ab9cee]/15">
         <div className="absolute -right-6 -top-6 h-20 w-20 rounded-full bg-white/30 blur-2xl" />
         <Icon
           aria-hidden
           strokeWidth={1.25}
-          className="absolute bottom-2.5 right-2.5 h-8 w-8 text-fg/[0.10]"
+          className="absolute bottom-2.5 right-2.5 h-9 w-9 text-fg/[0.10]"
         />
       </div>
       <img
@@ -94,19 +94,19 @@ function SolutionCard({ solution, index }: { solution: Solution; index: number }
       >
         <CardImage src={solution.image} alt={`${solution.title} illustration`} Icon={Icon} />
 
-        <div className="flex flex-1 flex-col p-3.5">
+        <div className="flex flex-1 flex-col p-4">
           <div className="flex items-center gap-1.5 text-fg/55">
-            <Icon className="h-3 w-3" strokeWidth={1.5} aria-hidden />
-            <span className="text-[10px] font-semibold uppercase tracking-[0.16em]">
+            <Icon className="h-3.5 w-3.5" strokeWidth={1.5} aria-hidden />
+            <span className="text-[11px] font-semibold uppercase tracking-[0.16em]">
               {solution.category}
             </span>
           </div>
 
-          <h3 className="mt-1.5 font-display text-sm font-semibold tracking-[-0.02em] text-fg">
+          <h3 className="mt-1.5 font-display text-[15px] font-semibold tracking-[-0.02em] text-fg">
             {solution.title}
           </h3>
 
-          <p className="mt-1 text-xs leading-relaxed text-fg/55">
+          <p className="mt-1 text-[13px] leading-relaxed text-fg/55">
             {solution.description}
           </p>
         </div>
@@ -129,7 +129,7 @@ export default function Solutions() {
         subtitle="Every engagement starts from a measurable business outcome — cost saved, hours returned, revenue unlocked."
       />
 
-      <div className="mx-auto mt-8 grid max-w-6xl gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="mx-auto mt-10 grid max-w-7xl gap-5 sm:grid-cols-2 lg:grid-cols-4">
         {SOLUTIONS.map((s, i) => (
           <SolutionCard key={s.title} solution={s} index={i} />
         ))}

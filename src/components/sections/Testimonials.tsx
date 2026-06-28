@@ -82,7 +82,7 @@ function LogoBadge({
     >
       {failed ? (
         <span
-          className={`font-display text-[11px] font-bold tracking-tight ${
+          className={`font-display text-xs font-bold tracking-tight ${
             dark ? "text-white" : "text-ink-950"
           }`}
         >
@@ -95,7 +95,7 @@ function LogoBadge({
           loading="lazy"
           decoding="async"
           onError={() => setFailed(true)}
-          className="h-5 w-auto max-w-[92px] object-contain"
+          className="h-6 w-auto max-w-[104px] object-contain"
         />
       )}
     </div>
@@ -118,13 +118,13 @@ function CardImage({
   logoDark?: boolean;
 }) {
   return (
-    <div className="relative aspect-[2/1] w-full overflow-hidden rounded-t-2xl">
+    <div className="relative aspect-[3/2] w-full overflow-hidden rounded-t-2xl">
       <div className="absolute inset-0 bg-gradient-to-br from-[#7172da]/30 via-[#1f2aac]/25 to-[#7bd3cf]/25">
         <div className="absolute -left-6 -top-6 h-20 w-20 rounded-full bg-[#7bd3cf]/25 blur-2xl" />
         <Icon
           aria-hidden
           strokeWidth={1.25}
-          className="absolute bottom-2.5 right-2.5 h-8 w-8 text-white/15"
+          className="absolute bottom-2.5 right-2.5 h-9 w-9 text-white/15"
         />
       </div>
       <img
@@ -163,9 +163,9 @@ function TestimonialCard({ item, index }: { item: Testimonial; index: number }) 
           logoDark={item.logoDark}
         />
 
-        <div className="flex flex-1 flex-col p-3.5">
-          <Quote className="h-4 w-4 text-[#7bd3cf]" strokeWidth={1.5} aria-hidden />
-          <blockquote className="mt-2 flex-1 text-xs leading-relaxed text-fg/75">
+        <div className="flex flex-1 flex-col p-4">
+          <Quote className="h-5 w-5 text-[#7bd3cf]" strokeWidth={1.5} aria-hidden />
+          <blockquote className="mt-2 flex-1 text-[13px] leading-relaxed text-fg/75">
             {item.quote}
           </blockquote>
 
@@ -190,12 +190,12 @@ function TestimonialCard({ item, index }: { item: Testimonial; index: number }) 
           </div>
 
           <figcaption className="mt-3 flex items-center gap-3">
-            <span className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-gradient-to-br from-[#7bd3cf] to-[#ab9cee] font-display text-sm font-bold text-ink-950 transition-transform duration-500 group-hover:scale-110">
+            <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-gradient-to-br from-[#7bd3cf] to-[#ab9cee] font-display text-base font-bold text-ink-950 transition-transform duration-500 group-hover:scale-110">
               {item.name.charAt(0)}
             </span>
             <div>
-              <div className="text-sm font-semibold text-fg">{item.name}</div>
-              <div className="text-xs text-fg/45">{item.role}</div>
+              <div className="text-[15px] font-semibold text-fg">{item.name}</div>
+              <div className="text-[13px] text-fg/45">{item.role}</div>
             </div>
           </figcaption>
         </div>
@@ -221,7 +221,7 @@ export default function Testimonials() {
           }
         />
 
-        <div className="mx-auto mt-8 grid max-w-5xl gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mx-auto mt-10 grid max-w-6xl gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {QUOTES.map((q, i) => (
             <TestimonialCard key={q.name} item={q} index={i} />
           ))}

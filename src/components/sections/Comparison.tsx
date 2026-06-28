@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import SectionHeading from "@/components/ui/SectionHeading";
 import Reveal from "@/components/ui/Reveal";
+import PhenomFlow from "@/components/ui/PhenomFlow";
 
 const ROWS = [
   {
