@@ -1,9 +1,9 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
 import { FileText, Bot, RefreshCw, Rocket, type LucideIcon } from "lucide-react";
 import SectionHeading from "@/components/ui/SectionHeading";
 import Reveal from "@/components/ui/Reveal";
+import { useSpotlight, SpotlightOverlay } from "@/components/ui/SpotlightCard";
 
 type Solution = {
   title: string;
@@ -82,20 +82,19 @@ function CardImage({
 }
 
 function SolutionCard({ solution, index }: { solution: Solution; index: number }) {
-  const reduce = useReducedMotion();
+  const sp = useSpotlight<HTMLElement>();
   const Icon = solution.icon;
 
   return (
     <Reveal delay={index * 0.08} className="h-full">
-      <motion.article
-        whileHover={reduce ? undefined : { y: -4 }}
-        transition={{ type: "spring", stiffness: 300, damping: 24 }}
-        className="group flex h-full flex-col overflow-hidden rounded-2xl border border-fg/[0.06] bg-white shadow-[0_1px_2px_rgba(20,24,60,0.04),0_18px_48px_-32px_rgba(20,24,60,0.22)] transition-shadow duration-300 hover:shadow-[0_1px_2px_rgba(20,24,60,0.05),0_24px_56px_-30px_rgba(69,67,217,0.28)]"
+      <article
+        {...sp.spotlightProps}
+        className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-fg/[0.06] bg-white shadow-[0_1px_2px_rgba(20,24,60,0.04),0_18px_48px_-32px_rgba(20,24,60,0.22)] hover:shadow-[0_1px_2px_rgba(20,24,60,0.05),0_24px_56px_-30px_rgba(69,67,217,0.28)] dark:border-white/10 dark:bg-white/[0.04] dark:backdrop-blur-xl dark:shadow-none dark:hover:border-white/20"
       >
         <CardImage src={solution.image} alt={`${solution.title} illustration`} Icon={Icon} />
 
-        <div className="flex flex-1 flex-col p-4">
-          <div className="flex items-center gap-1.5 text-fg/55">
+        <div className="relative z-[3] flex flex-1 flex-col p-4">
+          <div className="flex items-center gap-1.5 text-fg/60">
             <Icon className="h-3.5 w-3.5" strokeWidth={1.5} aria-hidden />
             <span className="text-[11px] font-semibold uppercase tracking-[0.16em]">
               {solution.category}
@@ -106,11 +105,13 @@ function SolutionCard({ solution, index }: { solution: Solution; index: number }
             {solution.title}
           </h3>
 
-          <p className="mt-1 text-[13px] leading-relaxed text-fg/55">
+          <p className="mt-1 text-[13px] leading-relaxed text-fg/60">
             {solution.description}
           </p>
         </div>
-      </motion.article>
+
+        <SpotlightOverlay active={sp.active} />
+      </article>
     </Reveal>
   );
 }

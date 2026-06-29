@@ -5,6 +5,7 @@ import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { Search, Mail, MessageSquare, Cog, Plus, type LucideIcon } from "lucide-react";
 import SectionHeading from "@/components/ui/SectionHeading";
 import Reveal from "@/components/ui/Reveal";
+import { useSpotlight, SpotlightOverlay } from "@/components/ui/SpotlightCard";
 
 type Agent = {
   name: string;
@@ -52,28 +53,28 @@ const AGENTS: Agent[] = [
 
 function AgentCard({ agent, index }: { agent: Agent; index: number }) {
   const reduce = useReducedMotion();
+  const sp = useSpotlight<HTMLDivElement>();
   const [open, setOpen] = useState(false);
   const panelId = useId();
   const Icon = agent.icon;
 
   return (
     <Reveal delay={index * 0.08} className="h-full">
-      <motion.div
-        whileHover={reduce ? undefined : { y: -4 }}
-        transition={{ type: "spring", stiffness: 300, damping: 24 }}
-        className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-fg/[0.06] bg-white p-4 shadow-[0_1px_2px_rgba(20,24,60,0.04),0_18px_48px_-32px_rgba(20,24,60,0.22)] transition-shadow duration-300 hover:shadow-[0_1px_2px_rgba(20,24,60,0.05),0_24px_56px_-30px_rgba(69,67,217,0.28)]"
+      <div
+        {...sp.spotlightProps}
+        className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-fg/[0.06] bg-white p-4 shadow-[0_1px_2px_rgba(20,24,60,0.04),0_18px_48px_-32px_rgba(20,24,60,0.22)] hover:shadow-[0_1px_2px_rgba(20,24,60,0.05),0_24px_56px_-30px_rgba(69,67,217,0.28)] dark:border-white/10 dark:bg-white/[0.04] dark:backdrop-blur-xl dark:shadow-none dark:hover:border-white/20"
       >
-        <div className="flex items-center gap-1.5 text-fg/55">
+        <div className="relative z-[3] flex items-center gap-1.5 text-fg/60">
           <Icon className="h-3.5 w-3.5" strokeWidth={1.5} aria-hidden />
           <span className="text-[11px] font-semibold uppercase tracking-[0.16em]">
             {agent.category}
           </span>
         </div>
 
-        <h3 className="mt-1.5 font-display text-[15px] font-semibold tracking-[-0.02em] text-fg">
+        <h3 className="relative z-[3] mt-1.5 font-display text-[15px] font-semibold tracking-[-0.02em] text-fg">
           {agent.name}
         </h3>
-        <p className="mt-1 text-[13px] leading-relaxed text-fg/55">
+        <p className="relative z-[3] mt-1 text-[13px] leading-relaxed text-fg/60">
           {agent.description}
         </p>
 
@@ -85,7 +86,7 @@ function AgentCard({ agent, index }: { agent: Agent; index: number }) {
               animate={{ height: "auto", opacity: 1 }}
               exit={reduce ? { opacity: 0 } : { height: 0, opacity: 0 }}
               transition={{ duration: 0.32, ease: [0.22, 1, 0.36, 1] }}
-              className="mt-3 space-y-1.5 overflow-hidden"
+              className="relative z-[3] mt-3 space-y-1.5 overflow-hidden"
             >
               {agent.points.map((p) => (
                 <li key={p} className="flex items-center gap-2 text-[13px] text-fg/70">
@@ -97,8 +98,8 @@ function AgentCard({ agent, index }: { agent: Agent; index: number }) {
           )}
         </AnimatePresence>
 
-        <div className="relative mt-3 flex flex-1 items-end">
-          <div className="relative w-full overflow-hidden rounded-xl bg-fg/[0.02]">
+        <div className="relative z-[3] mt-3 flex flex-1 items-end">
+          <div className="relative w-full overflow-hidden rounded-xl bg-fg/[0.02] dark:bg-white/[0.03]">
             <img
               src={agent.image}
               alt={`${agent.name} illustration`}
@@ -133,7 +134,9 @@ function AgentCard({ agent, index }: { agent: Agent; index: number }) {
             </motion.span>
           </button>
         </div>
-      </motion.div>
+
+        <SpotlightOverlay active={sp.active} />
+      </div>
     </Reveal>
   );
 }

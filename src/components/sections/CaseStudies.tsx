@@ -1,11 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import { motion, useReducedMotion } from "framer-motion";
 import { Landmark, FileText, Ship, type LucideIcon } from "lucide-react";
 import SectionHeading from "@/components/ui/SectionHeading";
 import Reveal from "@/components/ui/Reveal";
 import Counter from "@/components/ui/Counter";
+import { useSpotlight, SpotlightOverlay } from "@/components/ui/SpotlightCard";
 
 type Metric = { label: string; value: number; suffix: string };
 
@@ -120,17 +120,16 @@ function LogoBadge({
 }
 
 function CaseCard({ study, index }: { study: CaseStudy; index: number }) {
-  const reduce = useReducedMotion();
+  const sp = useSpotlight<HTMLElement>();
   const Icon = study.icon;
 
   return (
     <Reveal delay={index * 0.08} className="h-full">
-      <motion.article
-        whileHover={reduce ? undefined : { y: -4 }}
-        transition={{ type: "spring", stiffness: 300, damping: 24 }}
-        className="group flex h-full flex-col overflow-hidden rounded-2xl border border-fg/[0.06] bg-white shadow-[0_1px_2px_rgba(20,24,60,0.04),0_18px_48px_-32px_rgba(20,24,60,0.22)] transition-shadow duration-300 hover:shadow-[0_1px_2px_rgba(20,24,60,0.05),0_24px_56px_-30px_rgba(69,67,217,0.28)]"
+      <article
+        {...sp.spotlightProps}
+        className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-fg/[0.06] bg-white shadow-[0_1px_2px_rgba(20,24,60,0.04),0_18px_48px_-32px_rgba(20,24,60,0.22)] hover:shadow-[0_1px_2px_rgba(20,24,60,0.05),0_24px_56px_-30px_rgba(69,67,217,0.28)] dark:border-white/10 dark:bg-white/[0.04] dark:backdrop-blur-xl dark:shadow-none dark:hover:border-white/20"
       >
-        <div className="relative overflow-hidden bg-fg/[0.02]">
+        <div className="relative overflow-hidden bg-fg/[0.02] dark:bg-white/[0.03]">
           <LogoBadge src={study.logo} name={study.logoName} dark={study.logoDark} big={study.logoBig} />
           <img
             src={study.image}
@@ -141,8 +140,8 @@ function CaseCard({ study, index }: { study: CaseStudy; index: number }) {
           />
         </div>
 
-        <div className="flex flex-1 flex-col p-4">
-          <div className="flex items-center gap-1.5 text-fg/55">
+        <div className="relative z-[3] flex flex-1 flex-col p-4">
+          <div className="flex items-center gap-1.5 text-fg/60">
             <Icon className="h-3.5 w-3.5" strokeWidth={1.5} aria-hidden />
             <span className="text-[11px] font-semibold uppercase tracking-[0.16em]">
               {study.tag}
@@ -153,8 +152,8 @@ function CaseCard({ study, index }: { study: CaseStudy; index: number }) {
             {study.client}
           </h3>
 
-          <p className="mt-1 text-[13px] leading-relaxed text-fg/55">
-            <span className="text-fg/70">{study.challenge}</span> {study.result}
+          <p className="mt-1 text-[13px] leading-relaxed text-fg/60">
+            <span className="text-fg/80">{study.challenge}</span> {study.result}
           </p>
 
           <div className="mt-auto pt-4">
@@ -183,7 +182,9 @@ function CaseCard({ study, index }: { study: CaseStudy; index: number }) {
             </dl>
           </div>
         </div>
-      </motion.article>
+
+        <SpotlightOverlay active={sp.active} />
+      </article>
     </Reveal>
   );
 }

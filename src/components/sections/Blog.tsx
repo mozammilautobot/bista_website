@@ -1,9 +1,9 @@
 "use client";
 
 import { useRef } from "react";
-import { motion } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import SectionHeading from "@/components/ui/SectionHeading";
+import { useSpotlight, SpotlightOverlay } from "@/components/ui/SpotlightCard";
 
 const POSTS: {
   category: string;
@@ -48,6 +48,50 @@ const POSTS: {
     image: "/images/blog/blog-workflow.png",
   },
 ];
+
+function PostCard({ post }: { post: (typeof POSTS)[number] }) {
+  const sp = useSpotlight<HTMLAnchorElement>();
+
+  return (
+    <a
+      {...sp.spotlightProps}
+      data-card
+      href="#"
+      className="group relative flex w-[290px] shrink-0 snap-start flex-col overflow-hidden rounded-2xl border border-fg/[0.06] bg-white shadow-[0_1px_2px_rgba(20,24,60,0.04),0_18px_48px_-32px_rgba(20,24,60,0.22)] hover:shadow-[0_1px_2px_rgba(20,24,60,0.05),0_24px_56px_-30px_rgba(69,67,217,0.28)] dark:border-white/10 dark:bg-white/[0.04] dark:backdrop-blur-xl dark:shadow-none dark:hover:border-white/20 sm:w-[330px]"
+    >
+      <div className="relative aspect-[3/2] overflow-hidden bg-fg/[0.04] dark:bg-white/[0.03]">
+        <img
+          src={post.image}
+          alt={post.title}
+          loading="lazy"
+          decoding="async"
+          onError={(e) => {
+            (e.currentTarget as HTMLImageElement).style.display = "none";
+          }}
+          className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105 motion-reduce:transition-none motion-reduce:group-hover:scale-100"
+        />
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink-950/35 via-transparent to-transparent" />
+        <span className="absolute left-3 top-3 rounded-full bg-ink-950/55 px-2.5 py-1 text-[11px] font-medium text-white/90 backdrop-blur">
+          {post.category}
+        </span>
+      </div>
+      <div className="relative z-[3] flex flex-1 flex-col p-5">
+        <h3 className="font-display text-[15px] font-semibold leading-snug tracking-[-0.01em] text-fg transition-colors group-hover:text-neon-blue dark:group-hover:text-neon-violet">
+          {post.title}
+        </h3>
+        <div className="mt-auto flex items-center justify-between pt-4 text-[13px] text-fg/55">
+          <span>{post.read}</span>
+          <span className="inline-flex items-center gap-1 text-neon-blue dark:text-neon-violet">
+            Read
+            <span className="transition-transform group-hover:translate-x-1">→</span>
+          </span>
+        </div>
+      </div>
+
+      <SpotlightOverlay active={sp.active} />
+    </a>
+  );
+}
 
 export default function Blog() {
   const scrollerRef = useRef<HTMLDivElement>(null);
@@ -97,43 +141,7 @@ export default function Blog() {
           className="-mx-4 flex snap-x snap-mandatory gap-5 overflow-x-auto px-4 pb-4 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
         >
           {POSTS.map((p) => (
-            <motion.a
-              key={p.title}
-              data-card
-              href="#"
-              whileHover={{ y: -4 }}
-              transition={{ type: "spring", stiffness: 300, damping: 24 }}
-              className="group flex w-[290px] shrink-0 snap-start flex-col overflow-hidden rounded-2xl border border-fg/[0.06] bg-white shadow-[0_1px_2px_rgba(20,24,60,0.04),0_18px_48px_-32px_rgba(20,24,60,0.22)] transition-shadow duration-300 hover:shadow-[0_1px_2px_rgba(20,24,60,0.05),0_24px_56px_-30px_rgba(69,67,217,0.28)] sm:w-[330px]"
-            >
-              <div className="relative aspect-[3/2] overflow-hidden bg-fg/[0.04]">
-                <img
-                  src={p.image}
-                  alt={p.title}
-                  loading="lazy"
-                  decoding="async"
-                  onError={(e) => {
-                    (e.currentTarget as HTMLImageElement).style.display = "none";
-                  }}
-                  className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105 motion-reduce:transition-none motion-reduce:group-hover:scale-100"
-                />
-                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink-950/35 via-transparent to-transparent" />
-                <span className="absolute left-3 top-3 rounded-full bg-ink-950/55 px-2.5 py-1 text-[11px] font-medium text-white/90 backdrop-blur">
-                  {p.category}
-                </span>
-              </div>
-              <div className="flex flex-1 flex-col p-5">
-                <h3 className="font-display text-[15px] font-semibold leading-snug tracking-[-0.01em] text-fg transition-colors group-hover:text-neon-blue">
-                  {p.title}
-                </h3>
-                <div className="mt-auto flex items-center justify-between pt-4 text-[13px] text-fg/45">
-                  <span>{p.read}</span>
-                  <span className="inline-flex items-center gap-1 text-neon-blue">
-                    Read
-                    <span className="transition-transform group-hover:translate-x-1">→</span>
-                  </span>
-                </div>
-              </div>
-            </motion.a>
+            <PostCard key={p.title} post={p} />
           ))}
         </div>
       </div>

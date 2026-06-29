@@ -31,7 +31,7 @@ export default function Hero() {
     >
       <PhenomFlow variant="hero" />
 
-      <div className="section relative z-10 grid w-full flex-1 items-center gap-10 py-0.5 lg:grid-cols-[1.35fr_1fr] lg:gap-14 xl:gap-20">
+      <div className="section relative z-10 grid w-full flex-1 items-center gap-10 py-0.5 lg:grid-cols-[1.35fr_1fr] lg:gap-14 xl:gap-20 2xl:max-w-[1600px] min-[1920px]:max-w-[1800px] min-[2560px]:max-w-[1840px]">
         <div>
           <motion.span
             initial={{ opacity: 0, y: 14 }}
@@ -168,12 +168,13 @@ export default function Hero() {
                         <motion.div
                           className="relative h-full rounded-full"
                           style={{
+                            width: fill,
                             background:
                               "linear-gradient(90deg, #ff8045 0%, #7bd3cf 50%, #ab9cee 100%)",
+                            transformOrigin: "left center",
                           }}
-                          initial={{ width: reduce ? fill : 0 }}
-                          whileInView={{ width: fill }}
-                          viewport={{ once: true, margin: "-40px" }}
+                          initial={{ scaleX: reduce ? 1 : 0 }}
+                          animate={{ scaleX: 1 }}
                           transition={{
                             duration: 1.2,
                             delay: 0.4 + i * 0.1,

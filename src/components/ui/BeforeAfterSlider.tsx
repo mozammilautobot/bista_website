@@ -44,15 +44,15 @@ function Pill({ label, after }: { label: string; after?: boolean }) {
     <div
       className={`flex shrink-0 items-center gap-2.5 rounded-2xl border px-4 py-3 text-sm font-medium shadow-sm ${
         after
-          ? "border-neon-cyan/30 bg-neon-cyan/[0.08] text-neon-blue"
-          : "border-fg/10 bg-white/85 text-ink-900/60 dark:border-white/10 dark:bg-white/[0.08] dark:text-fg/70"
+          ? "border-neon-cyan/30 bg-neon-cyan/[0.08] text-neon-blue dark:text-neon-violet"
+          : "border-fg/10 bg-white/85 text-ink-900/70 dark:border-white/15 dark:bg-white/[0.10] dark:text-fg/85"
       }`}
     >
       <span
         className={`grid h-7 w-7 shrink-0 place-items-center rounded-lg ${
           after
             ? "bg-neon-cyan/15 text-neon-cyan"
-            : "bg-ink-900/[0.06] text-ink-900/40 dark:bg-white/10 dark:text-fg/45"
+            : "bg-ink-900/[0.06] text-ink-900/50 dark:bg-white/15 dark:text-fg/70"
         }`}
       >
         <DocIcon className="h-4 w-4" />
@@ -125,7 +125,7 @@ export default function BeforeAfterSlider() {
 
       <div
         ref={wrapRef}
-        className="relative h-[300px] touch-none select-none overflow-hidden rounded-3xl border border-fg/10 bg-white/40 mask-fade-x"
+        className="relative h-[300px] touch-none select-none overflow-hidden rounded-3xl border border-fg/10 bg-white/40 mask-fade-x dark:border-white/10 dark:bg-white/[0.02]"
       >
         {/* Subtle indigo wash on the automated (after) side */}
         <div
@@ -171,7 +171,7 @@ export default function BeforeAfterSlider() {
               if (e.key === "ArrowLeft") setPos((p) => Math.max(12, p - 3));
               if (e.key === "ArrowRight") setPos((p) => Math.min(88, p + 3));
             }}
-            className="absolute left-1/2 top-3 flex -translate-x-1/2 cursor-ew-resize items-center gap-1 rounded-full border border-fg/10 bg-white px-2 py-1 text-[11px] font-semibold text-fg/60 shadow-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-neon-cyan/60"
+            className="absolute left-1/2 top-3 flex -translate-x-1/2 cursor-ew-resize items-center gap-1 rounded-full border border-fg/10 bg-white px-2 py-1 text-[11px] font-semibold text-ink-900/70 shadow-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-neon-cyan/60 dark:border-white/15 dark:bg-ink-900 dark:text-fg/80"
           >
             <span className="px-1">Before</span>
             <span className="grid h-7 w-7 place-items-center rounded-full bg-[#14141e] text-white">
@@ -185,7 +185,7 @@ export default function BeforeAfterSlider() {
                 />
               </svg>
             </span>
-            <span className="px-1 text-neon-blue">After</span>
+            <span className="px-1 text-neon-blue dark:text-neon-violet">After</span>
           </div>
 
           <div className="absolute bottom-2 left-1/2 h-2.5 w-2.5 -translate-x-1/2 rounded-full bg-neon-cyan shadow-[0_0_0_4px_rgba(69,67,217,0.18)]" />

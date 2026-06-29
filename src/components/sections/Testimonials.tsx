@@ -6,6 +6,7 @@ import { Quote, type LucideIcon, Factory, Boxes, ShieldCheck } from "lucide-reac
 import SectionHeading from "@/components/ui/SectionHeading";
 import Reveal from "@/components/ui/Reveal";
 import PhenomFlow from "@/components/ui/PhenomFlow";
+import { useSpotlight, SpotlightOverlay } from "@/components/ui/SpotlightCard";
 
 type Testimonial = {
   quote: string;
@@ -154,14 +155,14 @@ function CardImage({
 
 function TestimonialCard({ item, index }: { item: Testimonial; index: number }) {
   const reduce = useReducedMotion();
+  const sp = useSpotlight<HTMLElement>();
   const Icon = item.icon;
 
   return (
     <Reveal delay={index * 0.1} className="h-full">
-      <motion.figure
-        whileHover={reduce ? undefined : { y: -4 }}
-        transition={{ type: "spring", stiffness: 300, damping: 22 }}
-        className="group flex h-full flex-col overflow-hidden rounded-2xl border border-white/10 bg-white/[0.04] backdrop-blur-xl transition-colors duration-500 hover:border-white/20"
+      <figure
+        {...sp.spotlightProps}
+        className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-white/10 bg-white/[0.04] backdrop-blur-xl hover:border-white/20"
       >
         <CardImage
           src={item.image}
@@ -173,7 +174,7 @@ function TestimonialCard({ item, index }: { item: Testimonial; index: number }) 
           logoBig={item.logoBig}
         />
 
-        <div className="flex flex-1 flex-col p-4">
+        <div className="relative z-[3] flex flex-1 flex-col p-4">
           <Quote className="h-5 w-5 text-[#7bd3cf]" strokeWidth={1.5} aria-hidden />
           <blockquote className="mt-2 flex-1 text-[13px] leading-relaxed text-fg/75">
             {item.quote}
@@ -209,7 +210,9 @@ function TestimonialCard({ item, index }: { item: Testimonial; index: number }) 
             </div>
           </figcaption>
         </div>
-      </motion.figure>
+
+        <SpotlightOverlay active={sp.active} />
+      </figure>
     </Reveal>
   );
 }

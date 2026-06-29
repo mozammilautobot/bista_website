@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
+import ChatbotWidget from "@/components/ui/ChatbotWidget";
 
 export const viewport: Viewport = {
   width: "device-width",
@@ -38,7 +39,10 @@ export default function RootLayout({
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
-      <body>{children}</body>
+      <body>
+        {children}
+        <ChatbotWidget />
+      </body>
     </html>
   );
 }
