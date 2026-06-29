@@ -23,7 +23,7 @@ type Reason = {
 
 const REASONS: Reason[] = [
   {
-    title: "AI Automation Expert",
+    title: "AI Agent Expert",
     category: "Expertise",
     desc: "A team that ships AI products daily — not a generalist agency dabbling in ML.",
     icon: BrainCircuit,
