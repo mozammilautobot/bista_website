@@ -30,7 +30,7 @@ const REASONS: Reason[] = [
     image: "/images/why/why-expertise.jpg",
   },
   {
-    title: "Enterprise Security",
+    title: "Enterprise Security System",
     category: "Security",
     desc: "SOC2-aligned practices, data isolation and on-prem or VPC deployment options.",
     icon: ShieldCheck,
