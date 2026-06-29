@@ -97,7 +97,65 @@ function generateReply(input: string): string {
 /*  Bot mascot (pure SVG/CSS — friendly, on-brand, no asset dependency)       */
 /* -------------------------------------------------------------------------- */
 
+// transform-box keeps scale/rotate centered on each SVG element's own box.
+const PULSE_ORIGIN: React.CSSProperties = {
+  transformBox: "fill-box",
+  transformOrigin: "center",
+};
+
+// Blinking eyes kept in their own component so the frequent blink state change
+// re-renders only the eyes — never the parent <motion.svg> that carries the
+// continuous bob loop (avoids any keyframe restart/stutter on each blink).
+function MascotEyes({ reduced }: { reduced: boolean }) {
+  const [blink, setBlink] = useState(false);
+
+  // Natural, slightly randomized blink loop. Per-instance + cleaned up on
+  // unmount; fully disabled under prefers-reduced-motion.
+  useEffect(() => {
+    if (reduced) return;
+    let alive = true;
+    let t: ReturnType<typeof setTimeout>;
+    const loop = () => {
+      t = setTimeout(() => {
+        if (!alive) return;
+        setBlink(true);
+        t = setTimeout(() => {
+          if (!alive) return;
+          setBlink(false);
+          loop();
+        }, 180);
+      }, 2600 + Math.random() * 2400);
+    };
+    loop();
+    return () => {
+      alive = false;
+      clearTimeout(t);
+    };
+  }, [reduced]);
+
+  return (
+    <>
+      {/* glowing eyes — open state */}
+      <motion.g animate={{ opacity: blink ? 0 : 1 }} transition={{ duration: 0.1 }}>
+        <ellipse cx="42" cy="42" rx="6" ry="7.5" fill="#7be0ff" opacity="0.5" />
+        <ellipse cx="42" cy="42" rx="3.8" ry="5.4" fill="#f2fcff" />
+        <circle cx="43.2" cy="40" r="1.2" fill="#ffffff" />
+        <ellipse cx="58" cy="42" rx="6" ry="7.5" fill="#7be0ff" opacity="0.5" />
+        <ellipse cx="58" cy="42" rx="3.8" ry="5.4" fill="#f2fcff" />
+        <circle cx="59.2" cy="40" r="1.2" fill="#ffffff" />
+      </motion.g>
+      {/* happy "^_^" squint — shown during a blink */}
+      <motion.g animate={{ opacity: blink ? 1 : 0 }} transition={{ duration: 0.1 }}>
+        <path d="M37 44 Q42 38 47 44" fill="none" stroke="#7be0ff" strokeWidth="2.4" strokeLinecap="round" />
+        <path d="M53 44 Q58 38 63 44" fill="none" stroke="#7be0ff" strokeWidth="2.4" strokeLinecap="round" />
+      </motion.g>
+    </>
+  );
+}
+
 function BotMascot({ className = "" }: { className?: string }) {
+  const reduced = !!useReducedMotion();
+
   // Unique gradient ids per instance (the mascot renders in both the launcher
   // and the panel header, so hard-coded ids would collide).
   const rid = useId().replace(/:/g, "");
@@ -108,17 +166,27 @@ function BotMascot({ className = "" }: { className?: string }) {
   const tipG = `${rid}-tip`;
 
   return (
-    <svg viewBox="0 0 100 118" role="img" aria-hidden="true" className={className}>
+    <motion.svg
+      viewBox="0 0 100 118"
+      role="img"
+      aria-hidden="true"
+      className={className}
+      style={{ willChange: "transform", transformOrigin: "center" }}
+      animate={
+        reduced ? undefined : { y: [0, -2.5, 0], rotate: [0, 1.4, 0, -1.4, 0] }
+      }
+      transition={{ duration: 4.6, repeat: Infinity, ease: "easeInOut" }}
+    >
       <defs>
-        {/* glossy icy-blue → white → faint pink head */}
+        {/* glossy sky-blue → periwinkle → lilac head (saturated so it stays visible on light bg) */}
         <linearGradient id={headG} x1="0.25" y1="0" x2="0.6" y2="1">
-          <stop offset="0%" stopColor="#eaf7ff" />
-          <stop offset="45%" stopColor="#ffffff" />
-          <stop offset="100%" stopColor="#f6dcec" />
+          <stop offset="0%" stopColor="#d4ecff" />
+          <stop offset="45%" stopColor="#9cc6ff" />
+          <stop offset="100%" stopColor="#c3aef0" />
         </linearGradient>
         <linearGradient id={bodyG} x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor="#ffffff" />
-          <stop offset="100%" stopColor="#dcebfb" />
+          <stop offset="0%" stopColor="#e6f2ff" />
+          <stop offset="100%" stopColor="#8fbcf2" />
         </linearGradient>
         {/* dark navy face screen */}
         <linearGradient id={screenG} x1="0" y1="0" x2="0" y2="1">
@@ -139,8 +207,39 @@ function BotMascot({ className = "" }: { className?: string }) {
         </radialGradient>
       </defs>
 
-      {/* headset earpieces (behind head) */}
+      {/* headset earpieces (behind head) with softly pulsing glow */}
       <g>
+        <motion.circle
+          cx="20"
+          cy="48"
+          r="11"
+          fill="#48ccd8"
+          style={PULSE_ORIGIN}
+          animate={
+            reduced
+              ? { opacity: 0.3 }
+              : { opacity: [0.15, 0.5, 0.15], scale: [0.95, 1.18, 0.95] }
+          }
+          transition={{ duration: 2.6, repeat: Infinity, ease: "easeInOut" }}
+        />
+        <motion.circle
+          cx="80"
+          cy="48"
+          r="11"
+          fill="#48ccd8"
+          style={PULSE_ORIGIN}
+          animate={
+            reduced
+              ? { opacity: 0.3 }
+              : { opacity: [0.15, 0.5, 0.15], scale: [0.95, 1.18, 0.95] }
+          }
+          transition={{
+            duration: 2.6,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 1.3,
+          }}
+        />
         <circle cx="20" cy="48" r="9" fill={`url(#${earG})`} />
         <circle cx="20" cy="48" r="4" fill="#0e1b3a" opacity="0.55" />
         <circle cx="17.2" cy="45.2" r="1.6" fill="#ffffff" opacity="0.75" />
@@ -150,28 +249,35 @@ function BotMascot({ className = "" }: { className?: string }) {
       </g>
 
       {/* antenna */}
-      <line x1="50" y1="20" x2="50" y2="9" stroke="#cfe6f5" strokeWidth="2.6" strokeLinecap="round" />
+      <line x1="50" y1="20" x2="50" y2="9" stroke="#8fb6e8" strokeWidth="2.6" strokeLinecap="round" />
 
       {/* head */}
-      <rect x="22" y="18" width="56" height="52" rx="20" fill={`url(#${headG})`} />
+      <rect x="22" y="18" width="56" height="52" rx="20" fill={`url(#${headG})`} stroke="#6e9fe6" strokeWidth="1.5" />
       {/* glossy sheen on the head */}
       <ellipse cx="40" cy="30" rx="16" ry="8.5" fill="#ffffff" opacity="0.5" />
 
       {/* antenna tip (after head so it sits above the stalk base) */}
-      <circle cx="50" cy="7" r="6" fill={`url(#${tipG})`} opacity="0.35" />
+      <motion.circle
+        cx="50"
+        cy="7"
+        r="6"
+        fill={`url(#${tipG})`}
+        style={PULSE_ORIGIN}
+        animate={
+          reduced
+            ? { opacity: 0.35 }
+            : { opacity: [0.2, 0.6, 0.2], scale: [1, 1.3, 1] }
+        }
+        transition={{ duration: 2.2, repeat: Infinity, ease: "easeInOut" }}
+      />
       <circle cx="50" cy="7" r="3.4" fill={`url(#${tipG})`} />
       <circle cx="48.8" cy="5.8" r="1" fill="#ffffff" opacity="0.85" />
 
       {/* face screen */}
       <rect x="30" y="30" width="40" height="26" rx="12" fill={`url(#${screenG})`} />
 
-      {/* glowing eyes */}
-      <ellipse cx="42" cy="42" rx="6" ry="7.5" fill="#7be0ff" opacity="0.5" />
-      <ellipse cx="42" cy="42" rx="3.8" ry="5.4" fill="#f2fcff" />
-      <circle cx="43.2" cy="40" r="1.2" fill="#ffffff" />
-      <ellipse cx="58" cy="42" rx="6" ry="7.5" fill="#7be0ff" opacity="0.5" />
-      <ellipse cx="58" cy="42" rx="3.8" ry="5.4" fill="#f2fcff" />
-      <circle cx="59.2" cy="40" r="1.2" fill="#ffffff" />
+      {/* eyes (open ↔ happy "^_^" blink, isolated re-render) */}
+      <MascotEyes reduced={reduced} />
 
       {/* smile */}
       <path d="M45 49.5 Q50 53.5 55 49.5" fill="none" stroke="#7be0ff" strokeWidth="2" strokeLinecap="round" />
@@ -181,15 +287,15 @@ function BotMascot({ className = "" }: { className?: string }) {
       <ellipse cx="73" cy="52" rx="4" ry="2.8" fill="#ff9db4" opacity="0.8" />
 
       {/* arms (behind body) */}
-      <path d="M38 80 C30 79 24 82 21 88" fill="none" stroke="#e3f0fd" strokeWidth="6" strokeLinecap="round" />
-      <path d="M62 80 C70 79 76 82 79 88" fill="none" stroke="#e3f0fd" strokeWidth="6" strokeLinecap="round" />
+      <path d="M38 80 C30 79 24 82 21 88" fill="none" stroke="#7fb0ee" strokeWidth="6" strokeLinecap="round" />
+      <path d="M62 80 C70 79 76 82 79 88" fill="none" stroke="#7fb0ee" strokeWidth="6" strokeLinecap="round" />
 
       {/* feet */}
       <ellipse cx="44" cy="99" rx="5.5" ry="3.6" fill="#ff9db4" />
       <ellipse cx="56" cy="99" rx="5.5" ry="3.6" fill="#ff9db4" />
 
       {/* body */}
-      <rect x="36" y="72" width="28" height="26" rx="13" fill={`url(#${bodyG})`} />
+      <rect x="36" y="72" width="28" height="26" rx="13" fill={`url(#${bodyG})`} stroke="#6e9fe6" strokeWidth="1.4" />
       <ellipse cx="45" cy="78" rx="8" ry="4" fill="#ffffff" opacity="0.45" />
 
       {/* hands */}
@@ -208,7 +314,40 @@ function BotMascot({ className = "" }: { className?: string }) {
       {/* headset mic boom (curving toward the mouth) */}
       <path d="M80 55 C81.5 64 70 63 61 56" fill="none" stroke="#2f8fd6" strokeWidth="2.2" strokeLinecap="round" />
       <circle cx="60.5" cy="56" r="2.2" fill="#2f8fd6" />
-    </svg>
+
+      {/* twinkling sparkles for a magical floating feel (skipped if reduced) */}
+      {!reduced && (
+        <g>
+          <motion.circle
+            cx="18"
+            cy="26"
+            r="1.5"
+            fill="#bdecff"
+            style={PULSE_ORIGIN}
+            animate={{ opacity: [0, 1, 0], scale: [0.4, 1, 0.4] }}
+            transition={{ duration: 2.4, repeat: Infinity, ease: "easeInOut", delay: 0.2 }}
+          />
+          <motion.circle
+            cx="84"
+            cy="22"
+            r="1.3"
+            fill="#ffd6e6"
+            style={PULSE_ORIGIN}
+            animate={{ opacity: [0, 1, 0], scale: [0.4, 1, 0.4] }}
+            transition={{ duration: 2.8, repeat: Infinity, ease: "easeInOut", delay: 1.1 }}
+          />
+          <motion.circle
+            cx="74"
+            cy="13"
+            r="1.1"
+            fill="#ffffff"
+            style={PULSE_ORIGIN}
+            animate={{ opacity: [0, 1, 0], scale: [0.4, 1, 0.4] }}
+            transition={{ duration: 3.1, repeat: Infinity, ease: "easeInOut", delay: 1.9 }}
+          />
+        </g>
+      )}
+    </motion.svg>
   );
 }
 
@@ -218,13 +357,13 @@ function BotMascot({ className = "" }: { className?: string }) {
 
 const ACCENTS = [
   // blue speech bubble — top-left
-  { Icon: MessageSquare, className: "-left-3.5 -top-3", color: "bg-[#3b82f6]", delay: 0 },
+  { Icon: MessageSquare, className: "-left-3.5 -top-3", color: "#3b82f6", delay: 0 },
   // pink alert — top-right
-  { Icon: AlertCircle, className: "-right-3.5 -top-2", color: "bg-[#ec4899]", delay: 0.5 },
+  { Icon: AlertCircle, className: "-right-3.5 -top-2", color: "#ec4899", delay: 0.45 },
   // amber gear — bottom-left
-  { Icon: Settings, className: "-left-3 -bottom-3", color: "bg-[#f59e0b]", delay: 1 },
+  { Icon: Settings, className: "-left-3 -bottom-3", color: "#f59e0b", delay: 0.9 },
   // teal support/phone — bottom-right
-  { Icon: Phone, className: "-right-3 -bottom-3", color: "bg-[#14b8a6]", delay: 1.5 },
+  { Icon: Phone, className: "-right-3 -bottom-3", color: "#14b8a6", delay: 1.35 },
 ];
 
 function AccentBubbles({ reduced }: { reduced: boolean }) {
@@ -234,16 +373,10 @@ function AccentBubbles({ reduced }: { reduced: boolean }) {
         <motion.span
           key={i}
           aria-hidden="true"
-          className={`pointer-events-none absolute z-10 grid h-6 w-6 place-items-center rounded-full text-white shadow-[0_4px_10px_-2px_rgba(0,0,0,0.35)] ring-2 ring-white/80 dark:ring-white/15 ${color} ${className}`}
+          className={`pointer-events-none absolute z-10 ${className}`}
           initial={{ opacity: 0, scale: 0 }}
           animate={
-            reduced
-              ? { opacity: 1, scale: 1 }
-              : {
-                  opacity: 1,
-                  scale: 1,
-                  y: [0, -3, 0],
-                }
+            reduced ? { opacity: 1, scale: 1 } : { opacity: 1, scale: 1, y: [0, -3, 0] }
           }
           transition={
             reduced
@@ -251,16 +384,35 @@ function AccentBubbles({ reduced }: { reduced: boolean }) {
               : {
                   opacity: { delay: 0.2 + i * 0.08, duration: 0.4 },
                   scale: { delay: 0.2 + i * 0.08, duration: 0.4 },
-                  y: {
-                    duration: 2.6,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                    delay,
-                  },
+                  y: { duration: 2.6, repeat: Infinity, ease: "easeInOut", delay },
                 }
           }
         >
-          <Icon className="h-3 w-3" strokeWidth={2.4} />
+          <span className="relative grid place-items-center">
+            {/* staggered pulsing colored halo (lights up around the mascot) */}
+            <motion.span
+              aria-hidden="true"
+              className="absolute -inset-1 rounded-full blur-md"
+              style={{ backgroundColor: color, willChange: "transform, opacity" }}
+              animate={
+                reduced
+                  ? { opacity: 0.3 }
+                  : { opacity: [0.15, 0.7, 0.15], scale: [0.85, 1.25, 0.85] }
+              }
+              transition={
+                reduced
+                  ? undefined
+                  : { duration: 2.2, repeat: Infinity, ease: "easeInOut", delay }
+              }
+            />
+            {/* chip */}
+            <span
+              className="relative grid h-6 w-6 place-items-center rounded-full text-white shadow-[0_4px_10px_-2px_rgba(0,0,0,0.35)] ring-2 ring-white/80 dark:ring-white/15"
+              style={{ backgroundColor: color }}
+            >
+              <Icon className="h-3 w-3" strokeWidth={2.4} />
+            </span>
+          </span>
         </motion.span>
       ))}
     </>
@@ -565,17 +717,19 @@ export default function ChatbotWidget() {
         <div className="pointer-events-auto relative">
           {!open && <AccentBubbles reduced={reduced} />}
 
-          {/* soft glow halo */}
-          <motion.span
-            aria-hidden="true"
-            className="absolute inset-0 -z-10 rounded-full bg-gradient-to-br from-neon-violet to-neon-blue blur-xl"
-            animate={
-              reduced
-                ? { opacity: 0.5 }
-                : { opacity: [0.4, 0.75, 0.4], scale: [1, 1.12, 1] }
-            }
-            transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-          />
+          {/* soft glow halo — only behind the X (open) state; the mascot floats clean */}
+          {open && (
+            <motion.span
+              aria-hidden="true"
+              className="absolute inset-0 -z-10 rounded-full bg-gradient-to-br from-neon-violet to-neon-blue blur-xl"
+              animate={
+                reduced
+                  ? { opacity: 0.5 }
+                  : { opacity: [0.4, 0.75, 0.4], scale: [1, 1.12, 1] }
+              }
+              transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+            />
+          )}
 
           <motion.button
             ref={launcherRef}
@@ -583,9 +737,11 @@ export default function ChatbotWidget() {
             onClick={() => setOpen((v) => !v)}
             aria-label={open ? "Close chat" : "Open chat with Bista AI"}
             aria-expanded={open}
-            className="relative grid h-14 w-14 place-items-center overflow-hidden rounded-full bg-gradient-to-br from-neon-violet via-neon-cyan to-neon-blue text-white shadow-glow focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neon-cyan/70 focus-visible:ring-offset-2 focus-visible:ring-offset-canvas"
-            animate={reduced ? undefined : { y: [0, -5, 0] }}
-            transition={{ duration: 3.4, repeat: Infinity, ease: "easeInOut" }}
+            className={`relative grid h-[4.5rem] w-[4.5rem] place-items-center rounded-full text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neon-cyan/70 focus-visible:ring-offset-2 focus-visible:ring-offset-canvas ${
+              open
+                ? "overflow-hidden bg-gradient-to-br from-neon-violet via-neon-cyan to-neon-blue shadow-glow"
+                : ""
+            }`}
             whileHover={{ scale: 1.06 }}
             whileTap={{ scale: 0.92 }}
           >
@@ -609,7 +765,7 @@ export default function ChatbotWidget() {
                   transition={{ duration: 0.18 }}
                   className="grid place-items-center"
                 >
-                  <BotMascot className="h-11 w-11 drop-shadow" />
+                  <BotMascot className="h-[4.5rem] w-[4.5rem] drop-shadow-lg" />
                 </motion.span>
               )}
             </AnimatePresence>
