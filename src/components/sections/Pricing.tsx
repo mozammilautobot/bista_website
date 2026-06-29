@@ -15,15 +15,15 @@ type Plan = {
 
 const PLANS: Plan[] = [
   {
-    name: "Standard",
+    name: "Standard DOC AI Plan",
     price: "$25",
     period: "/mo",
-    features: ["Up to 1,000 pages/mo", "Basic analytics", "Email support"],
+    features: ["Up to 1,000 pages/mo", "Basic analytics", "Email support",],
     cta: "Get Started",
     href: "#contact",
   },
   {
-    name: "Premium",
+    name: "Premium DOC AI Plan",
     price: "$49",
     period: "/mo",
     features: [
@@ -38,15 +38,15 @@ const PLANS: Plan[] = [
     popular: true,
   },
   {
-    name: "Gold",
-    price: "$99",
-    period: "/mo",
+    name: "Enterprise  AI Agent Plan",
+    price: "Let's talk",
     features: [
-      "Unlimited documents",
-      "Full API access",
-      "Custom integrations",
-      "Dedicated support",
-      "SLA guarantee",
+      "BFSI AI Agent",
+      "Bank Reconcillation AI Agent",
+      "Business Process AI Agent",
+      "HR Process AI Agent",
+      "Data Migration",
+      "Custom Integrations",  
     ],
     cta: "Contact Sales",
     href: "#contact",
@@ -91,7 +91,7 @@ export default function Pricing() {
             Simple, <span className="text-gradient">transparent pricing</span>
           </>
         }
-        subtitle="Choose the plan that fits your document processing needs."
+        subtitle="Choose the plan that fits your Automation & document processing needs."
       />
 
       <div className="mt-14 grid gap-6 lg:grid-cols-4">

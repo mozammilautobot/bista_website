@@ -31,7 +31,7 @@ export default function Hero() {
     >
       <PhenomFlow variant="hero" />
 
-      <div className="section relative z-10 grid flex-1 items-center gap-10 py-0.5 sm:!px-14 lg:!px-24 lg:grid-cols-[1.4fr_1fr]">
+      <div className="section relative z-10 grid w-full flex-1 items-center gap-10 py-0.5 lg:grid-cols-[1.35fr_1fr] lg:gap-14 xl:gap-20">
         <div>
           <motion.span
             initial={{ opacity: 0, y: 14 }}
@@ -39,8 +39,8 @@ export default function Hero() {
             transition={{ duration: 0.9 }}
             className="eyebrow"
           >
-            <span className="h-1 w-1 rounded-full bg-neon-cyan animate-pulseGlow" />
-             Low-Code Implementation • No Training Required
+            <span className="h-1 w-1 shrink-0 rounded-full bg-neon-cyan animate-pulseGlow" />
+            <span>Low-Code Implementation • No Training Required</span>
           </motion.span>
 
           <motion.h1
@@ -84,7 +84,7 @@ export default function Hero() {
             </a>
           </motion.div>
 
-          <div className="mt-10 grid max-w-lg grid-cols-2 gap-x-8 gap-y-6 sm:grid-cols-4">
+          <div className="mt-10 grid max-w-lg grid-cols-2 gap-x-5 gap-y-6 xs:gap-x-8 sm:grid-cols-4">
             {STATS.map((s, i) => {
               const fill = `${s.bar}%`;
               return (

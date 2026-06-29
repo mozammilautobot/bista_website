@@ -19,6 +19,7 @@ type CaseStudy = {
   logo: string;
   logoName: string;
   logoDark?: boolean;
+  logoBig?: boolean;
   hero: Metric;
   metrics: Metric[];
 };
@@ -34,6 +35,7 @@ const CASES: CaseStudy[] = [
     logo: "/images/case-studies/logos/leadway.png",
     logoName: "Leadway Pensure",
     logoDark: true,
+    logoBig: true,
     hero: { label: "Reconciliation speed", value: 99, suffix: "%" },
     metrics: [
       { label: "Manual reviews cut", value: 85, suffix: "%" },
@@ -76,10 +78,12 @@ function LogoBadge({
   src,
   name,
   dark,
+  big,
 }: {
   src: string;
   name: string;
   dark?: boolean;
+  big?: boolean;
 }) {
   const [failed, setFailed] = useState(false);
 
@@ -106,7 +110,9 @@ function LogoBadge({
           loading="lazy"
           decoding="async"
           onError={() => setFailed(true)}
-          className="h-7 w-auto max-w-[120px] object-contain"
+          className={`w-auto object-contain ${
+            big ? "h-11 max-w-[132px]" : "h-7 max-w-[120px]"
+          }`}
         />
       )}
     </div>
@@ -125,7 +131,7 @@ function CaseCard({ study, index }: { study: CaseStudy; index: number }) {
         className="group flex h-full flex-col overflow-hidden rounded-2xl border border-fg/[0.06] bg-white shadow-[0_1px_2px_rgba(20,24,60,0.04),0_18px_48px_-32px_rgba(20,24,60,0.22)] transition-shadow duration-300 hover:shadow-[0_1px_2px_rgba(20,24,60,0.05),0_24px_56px_-30px_rgba(69,67,217,0.28)]"
       >
         <div className="relative overflow-hidden bg-fg/[0.02]">
-          <LogoBadge src={study.logo} name={study.logoName} dark={study.logoDark} />
+          <LogoBadge src={study.logo} name={study.logoName} dark={study.logoDark} big={study.logoBig} />
           <img
             src={study.image}
             alt={`${study.client} ${study.tag} case study illustration`}

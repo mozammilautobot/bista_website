@@ -73,7 +73,7 @@ export default function IndustriesMap() {
   const reduced = useReducedMotion();
 
   return (
-    <div className="relative aspect-[10/7] min-h-[260px] w-full select-none sm:min-h-[320px]">
+    <div className="relative h-[clamp(240px,70vw,340px)] w-full select-none sm:aspect-[10/7] sm:h-auto sm:min-h-[320px]">
       {/* faint floating pastel decorations */}
       {DECOR.map((d, i) => (
         <motion.span

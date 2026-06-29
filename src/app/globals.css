@@ -168,7 +168,7 @@ h3 {
     background-color: #7bd3cf;
   }
   .eyebrow {
-    @apply mb-4 inline-flex max-w-full flex-wrap items-center gap-2 rounded-full border border-neon-cyan/20 bg-neon-cyan/[0.06] px-3.5 py-1.5 text-[10px] font-semibold uppercase leading-tight tracking-[0.14em] text-neon-cyan sm:px-4 sm:text-[11px] sm:tracking-[0.22em];
+    @apply mb-4 inline-flex max-w-full flex-wrap items-center justify-center gap-x-2 gap-y-0.5 rounded-full border border-neon-cyan/20 bg-neon-cyan/[0.06] px-3 py-1.5 text-center text-[9.5px] font-semibold uppercase leading-tight tracking-[0.1em] text-neon-cyan xs:text-[10px] xs:tracking-[0.14em] sm:px-4 sm:text-[11px] sm:tracking-[0.22em];
   }
   .btn-primary {
     @apply relative inline-flex items-center justify-center gap-2 rounded-full bg-neon-cyan px-7 py-3 text-sm font-semibold text-white shadow-[0_10px_30px_-10px_rgba(69,67,217,0.55)] transition-all duration-300 hover:scale-[1.03] hover:bg-neon-blue hover:shadow-[0_18px_50px_-12px_rgba(69,67,217,0.6)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neon-cyan/60 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent active:scale-95;

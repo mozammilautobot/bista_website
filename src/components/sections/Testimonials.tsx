@@ -18,6 +18,7 @@ type Testimonial = {
   image: string;
   logo: string;
   logoDark?: boolean;
+  logoBig?: boolean;
 };
 
 const QUOTES: Testimonial[] = [
@@ -32,6 +33,7 @@ const QUOTES: Testimonial[] = [
     icon: Boxes,
     image: "/images/testimonials/testimonial-rvl.png",
     logo: "/images/testimonials/logos/rvl.png",
+    logoBig: true,
   },
   {
     quote:
@@ -58,6 +60,7 @@ const QUOTES: Testimonial[] = [
     image: "/images/testimonials/testimonial-leadway.png",
     logo: "/images/testimonials/logos/leadway.png",
     logoDark: true,
+    logoBig: true,
   },
 ];
 
@@ -65,10 +68,12 @@ function LogoBadge({
   src,
   name,
   dark,
+  big,
 }: {
   src: string;
   name: string;
   dark?: boolean;
+  big?: boolean;
 }) {
   const [failed, setFailed] = useState(false);
 
@@ -95,7 +100,9 @@ function LogoBadge({
           loading="lazy"
           decoding="async"
           onError={() => setFailed(true)}
-          className="h-6 w-auto max-w-[104px] object-contain"
+          className={`w-auto object-contain ${
+            big ? "h-10 max-w-[116px]" : "h-6 max-w-[104px]"
+          }`}
         />
       )}
     </div>
@@ -109,6 +116,7 @@ function CardImage({
   logo,
   logoName,
   logoDark,
+  logoBig,
 }: {
   src: string;
   alt: string;
@@ -116,6 +124,7 @@ function CardImage({
   logo: string;
   logoName: string;
   logoDark?: boolean;
+  logoBig?: boolean;
 }) {
   return (
     <div className="relative aspect-[3/2] w-full overflow-hidden rounded-t-2xl">
@@ -138,7 +147,7 @@ function CardImage({
         className="absolute inset-0 h-full w-full scale-105 object-cover transition-transform duration-700 ease-out will-change-transform group-hover:scale-110 motion-reduce:scale-100 motion-reduce:transition-none motion-reduce:group-hover:scale-100"
       />
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/55 via-black/10 to-transparent" />
-      <LogoBadge src={logo} name={logoName} dark={logoDark} />
+      <LogoBadge src={logo} name={logoName} dark={logoDark} big={logoBig} />
     </div>
   );
 }
@@ -161,6 +170,7 @@ function TestimonialCard({ item, index }: { item: Testimonial; index: number }) 
           logo={item.logo}
           logoName={item.role}
           logoDark={item.logoDark}
+          logoBig={item.logoBig}
         />
 
         <div className="flex flex-1 flex-col p-4">
