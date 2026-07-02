@@ -196,7 +196,8 @@ export default function CaseStudies() {
         eyebrow="Case Studies"
         title={
           <>
-            Real deployments, <span className="text-gradient">real numbers</span>
+            Real <span className="text-gradient">Deployments, </span>Real
+            <span className="text-gradient"> Numbers</span>
           </>
         }
         subtitle="Outcomes our clients measured after going live with Bista AI."

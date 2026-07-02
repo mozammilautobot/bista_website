@@ -24,8 +24,8 @@ export default function ResultsBand() {
             By the numbers
           </span>
           <h2 className="font-display text-[2rem] font-medium leading-[1.05] tracking-[-0.03em] sm:text-[2.6rem] md:text-5xl lg:text-[3.25rem]">
-            Results that{" "}
-            <span className="text-gradient-pastel">speak volumes</span>
+            Results That{" "}
+            <span className="text-gradient-pastel">Speak Volumes</span>
           </h2>
           <p className="mt-5 max-w-xl text-lg leading-relaxed text-white/55">
             Real outcomes measured across live deployments — the kind of numbers

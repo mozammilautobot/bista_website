@@ -180,7 +180,7 @@ export default function Pricing() {
           eyebrow="Pricing"
           title={
             <>
-              Simple, <span className="text-gradient">transparent pricing</span>
+              Simple <span className="text-gradient">Transparent Pricing</span>
             </>
           }
           subtitle="Choose the plan that fits your Automation & document processing needs."

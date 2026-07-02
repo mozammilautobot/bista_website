@@ -110,7 +110,7 @@ export default function Blog() {
         eyebrow="Blog / Insights"
         title={
           <>
-            Ideas on <span className="text-gradient">applied AI</span> & automation
+            Ideas on Applied<span className="text-gradient"> AI & Automation</span> 
           </>
         }
         subtitle="Practical, engineering-led perspectives — the kind that help you ship, not hype."

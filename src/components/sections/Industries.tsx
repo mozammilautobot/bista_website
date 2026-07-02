@@ -78,8 +78,8 @@ export default function Industries() {
         eyebrow="Industries"
         title={
           <>
-            Trusted across <span className="text-gradient">regulated, document-heavy</span>{" "}
-            industries
+            Trusted Across <span className="text-gradient">Regulated, </span> Document-Heavy
+            <span className="text-gradient"> Industries</span>
           </>
         }
         subtitle="Domain-tuned AI that understands the vocabulary, compliance and edge cases of your sector."

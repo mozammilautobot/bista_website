@@ -13,6 +13,7 @@ import Reveal from "@/components/ui/Reveal";
 import PhenomFlow from "@/components/ui/PhenomFlow";
 import DeploymentSnake from "@/components/ui/DeploymentSnake";
 import AnimatedIcon from "@/components/ui/AnimatedIcon";
+import { span } from "framer-motion/m";
 
 const FEATURES: { title: string; desc: string; icon: LucideIcon }[] = [
   { title: "Own Developed Model", desc: "Deep models tuned to your domain data.", icon: BrainCircuit },
@@ -31,7 +32,8 @@ export default function Innovation() {
           tone="dark"
           title={
             <>
-              Where <span className="text-gradient-violet">futurism</span> meets function
+              Where <span className="text-gradient-violet">Futurism</span> Meets 
+              <span className="text-gradient-violet"> Function</span>
             </>
           }
           subtitle="A live look at the intelligent fabric powering everything we build."

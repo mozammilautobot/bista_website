@@ -65,8 +65,8 @@ export default function ProductShowcase() {
         eyebrow="Flagship Product"
         title={
           <>
-            <span className="text-gradient">Bista Doc AI</span> — documents in, decisions
-            out
+            <span className="text-gradient">Bista Doc</span> AI — <span className="text-gradient">Documents </span> In,
+            <span className="text-gradient"> Decisions </span> Out
           </>
         }
         subtitle="Drop in any invoice, contract or form. Bista Doc AI reads it, structures it, and pushes clean data straight into your systems."

@@ -72,7 +72,7 @@ export default function RoiCalculator() {
         eyebrow="ROI Calculator"
         title={
           <>
-            See your savings <span className="text-gradient">in real time</span> 
+            See Your Savings <span className="text-gradient">In Real Time</span> 
           </>
         }
         subtitle="Adjust the sliders to your current document volume and watch the impact update instantly."

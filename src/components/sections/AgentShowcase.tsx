@@ -149,7 +149,7 @@ export default function AgentShowcase() {
           eyebrow="Agentic AI"
           title={
             <>
-              A connected workforce of <span className="text-gradient">AI agents</span>
+              A Connected Workforce Of <span className="text-gradient">AI Agents</span>
             </>
           }
           subtitle="Specialised autonomous agents that communicate, delegate, and complete real business tasks — working together around the clock."

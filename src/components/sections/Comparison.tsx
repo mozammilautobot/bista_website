@@ -73,8 +73,9 @@ export default function Comparison() {
         eyebrow="Why Bista Doc AI"
         title={
           <>
-            Why choose <span className="text-gradient">Bista Doc AI</span> over legacy
-            IDP vendors
+            Why Choose <span className="text-gradient">Bista Doc AI</span> Over Legacy
+            <span className="text-gradient"> IDP Vendors</span>
+            
           </>
         }
         subtitle="Lower cost. Faster deployment. Smarter integration."

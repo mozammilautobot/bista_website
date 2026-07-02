@@ -754,7 +754,7 @@ export default function ChatbotWidget() {
                   exit={{ opacity: 0, rotate: 90, scale: 0.6 }}
                   transition={{ duration: 0.18 }}
                 >
-                  <X className="h-6 w-6" />
+                  <X className="h-7 w-7" />
                 </motion.span>
               ) : (
                 <motion.span
@@ -765,7 +765,7 @@ export default function ChatbotWidget() {
                   transition={{ duration: 0.18 }}
                   className="grid place-items-center"
                 >
-                  <BotMascot className="h-[4.5rem] w-[4.5rem] drop-shadow-lg" />
+                  <BotMascot className="h-[5rem] w-[5rem] drop-shadow-lg" />
                 </motion.span>
               )}
             </AnimatePresence>

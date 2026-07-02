@@ -140,8 +140,8 @@ export default function WhyChooseUs() {
         eyebrow="Why Choose Bista AI?"
         title={
           <>
-            Built like a <span className="text-gradient">product company</span>, delivered
-            like a partner
+            Built Like A <span className="text-gradient">Product Company</span>, Delivered
+            Like A <span className="text-gradient">Partner</span>
           </>
         }
       />

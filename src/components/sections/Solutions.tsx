@@ -19,8 +19,16 @@ const SOLUTIONS: Solution[] = [
     category: "Documents",
     icon: FileText,
     description:
-      "OCR, classification and data extraction that turn PDFs, invoices and forms into clean, structured data.",
+      "OCR, Classification and Data extraction that turn PDFs, Invoices and Forms into clean, Structured data.",
     image: "/images/solutions/solution-idp.jpg",
+  },
+  {
+    title: "Business Process Automation",
+    category: "Automation",
+    icon: RefreshCw,
+    description:
+      "ERP, CRM, HR, Finance, Banking and Excel workflows automated to remove manual handoffs across teams.",
+    image: "/images/solutions/solution-automation.jpg",
   },
   {
     title: "Agentic AI Solutions",
@@ -30,14 +38,7 @@ const SOLUTIONS: Solution[] = [
       "Multi-agent systems, AI assistants and RAG that take on repetitive knowledge work end to end.",
     image: "/images/solutions/solution-agentic.jpg",
   },
-  {
-    title: "Business Process Automation",
-    category: "Automation",
-    icon: RefreshCw,
-    description:
-      "HR, finance, email and Excel workflows automated to remove manual handoffs across teams.",
-    image: "/images/solutions/solution-automation.jpg",
-  },
+  
   {
     title: "AI Product Development",
     category: "Engineering",
@@ -123,8 +124,8 @@ export default function Solutions() {
         eyebrow="Solutions"
         title={
           <>
-            We solve <span className="text-gradient">business problems</span>, not just
-            ship models
+            We Solve <span className="text-gradient">Business Problems</span>, Not Just
+            <span className="text-gradient"> Ship Models</span>
           </>
         }
         subtitle="Every engagement starts from a measurable business outcome — cost saved, hours returned, revenue unlocked."
