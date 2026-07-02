@@ -31,7 +31,7 @@ export default function Hero() {
     >
       <PhenomFlow variant="hero" />
 
-      <div className="section relative z-10 grid w-full flex-1 items-center gap-10 py-0.5 lg:grid-cols-[1.35fr_1fr] lg:gap-14 xl:gap-20 2xl:max-w-[1600px] min-[1920px]:max-w-[1800px] min-[2200px]:max-w-[2050px] min-[2560px]:max-w-[2250px] min-[3440px]:max-w-[2600px]">
+      <div className="section relative z-10 grid w-full flex-1 items-center gap-10 py-0.5 lg:grid-cols-[1.35fr_1fr] lg:gap-14 xl:gap-20 2xl:max-w-[1600px] min-[1920px]:max-w-[1800px] min-[2200px]:max-w-[2000px] min-[2560px]:max-w-[2250px] min-[3440px]:max-w-[2600px]">
         <div>
           <motion.span
             initial={{ opacity: 0, y: 14 }}
