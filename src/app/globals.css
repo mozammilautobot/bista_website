@@ -136,7 +136,7 @@ h3 {
     text-shadow: 0 0 26px rgba(69, 67, 217, 0.32);
   }
   .section {
-    @apply relative mx-auto w-full max-w-7xl px-6 py-7 sm:px-12 sm:py-9 lg:px-24 lg:py-11 2xl:max-w-[1440px] min-[1920px]:max-w-[1600px];
+    @apply relative mx-auto w-full max-w-7xl px-6 py-7 sm:px-12 sm:py-9 lg:px-24 lg:py-11 2xl:max-w-[1440px] min-[1920px]:max-w-[1600px] min-[2200px]:max-w-[2050px] min-[2560px]:max-w-[2250px] min-[3440px]:max-w-[2600px];
   }
   /* phenom.com-style full-bleed band wrapper. Pair `.band` (outer, full width)
      with an inner `.section` for constrained content. */
